@@ -1,0 +1,45 @@
+package den.vor.easy.object.random;
+
+
+import java.util.List;
+
+public interface CustomRandom {
+
+     int nextInt();
+     int nextInt(int bound);
+     long nextLong();
+     boolean nextBoolean();
+     float nextFloat();
+     double nextDouble();
+
+    default double nextDouble(double min, double max) {
+        return (max - min) * nextDouble() + min;
+    }
+
+    default long nextLong(long min, long max) {
+        return min + (long) (nextDouble() * (max - min));
+    }
+
+    default long nextLongInclusive(long min, long max) {
+        return nextLong(min, max + 1);
+    }
+
+    default int nextInt(int min, int max) {
+        return nextInt(max - min) + min;
+    }
+
+    default int nextIntInclusive(int min, int max) {
+        return nextInt(min, max + 1);
+    }
+
+    default boolean nextBoolean(double chances) {
+        if (chances > 1 || chances < 0) {
+            throw new IllegalArgumentException("Chances should be between 0 and 1");
+        }
+        return nextDouble() < chances;
+    }
+
+    default <T> T next(List<T> list) {
+        return list.get(nextInt(list.size()));
+    }
+}

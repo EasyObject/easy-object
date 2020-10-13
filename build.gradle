@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'den.vor'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+ext.versions = [
+        junit : '5.5.1',
+        mockitoJunit: '2.28.2',
+        apacheRng: '1.2',
+        cache: '3.8.1'
+]
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    compile("org.apache.commons:commons-rng-core:${versions.apacheRng}")
+    compile("org.ehcache:ehcache:${versions.cache}")
+
+    testCompile("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
+    testCompile("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
+    testCompile("org.mockito:mockito-junit-jupiter:${versions.mockitoJunit}")
+}
