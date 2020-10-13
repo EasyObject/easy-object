@@ -1,4 +1,7 @@
-package den.vor.easy.object.value;
+package den.vor.easy.object.value.impl;
+
+import den.vor.easy.object.value.ScalarValue;
+import den.vor.easy.object.value.StringValue;
 
 public class IntValue extends ScalarValue<Integer> {
 

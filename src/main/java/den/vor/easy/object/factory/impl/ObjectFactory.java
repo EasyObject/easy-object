@@ -3,10 +3,8 @@ package den.vor.easy.object.factory.impl;
 import den.vor.easy.object.factory.CompoundFactory;
 import den.vor.easy.object.factory.Factory;
 import den.vor.easy.object.factory.Generator;
-import den.vor.easy.object.value.MapValue;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.StringValue;
-import den.vor.easy.object.value.Value;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;

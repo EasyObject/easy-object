@@ -1,4 +1,8 @@
-package den.vor.easy.object.value;
+package den.vor.easy.object.value.impl;
+
+import den.vor.easy.object.value.CompoundValue;
+import den.vor.easy.object.value.ScalarValue;
+import den.vor.easy.object.value.Value;
 
 import java.util.Collections;
 import java.util.Map;
