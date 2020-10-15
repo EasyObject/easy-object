@@ -2,6 +2,8 @@ plugins {
     id 'java'
 }
 
+apply plugin: 'jacoco'
+
 group 'den.vor'
 version '1.0-SNAPSHOT'
 
@@ -20,6 +22,25 @@ test {
     useJUnitPlatform()
 }
 
+jacocoTestReport {
+    afterEvaluate {
+        classDirectories.from = files(classDirectories.files.collect {
+            fileTree(dir: it, excludes: [
+                    '**/*Configuration.class'
+            ])
+        })
+    }
+
+    reports {
+        xml.enabled true
+        xml.destination file("${buildDir}/reports/jacoco/report.xml")
+        html.enabled true
+//        csv.enabled false
+    }
+}
+
+test.finalizedBy(jacocoTestReport)
+
 dependencies {
     compile("org.apache.commons:commons-rng-core:${versions.apacheRng}")
     compile("org.ehcache:ehcache:${versions.cache}")
@@ -27,4 +48,6 @@ dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
     testCompile("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
     testCompile("org.mockito:mockito-junit-jupiter:${versions.mockitoJunit}")
+    testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '2.2'
+
 }

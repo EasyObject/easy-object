@@ -2,7 +2,7 @@ package den.vor.easy.object.factory;
 
 import den.vor.easy.object.random.CustomRandom;
 import den.vor.easy.object.random.RandomFactory;
-import den.vor.easy.object.value.MapValue;
+import den.vor.easy.object.value.impl.MapValue;
 
 public class GenerationContext {
 

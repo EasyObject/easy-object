@@ -1,6 +1,6 @@
 package den.vor.easy.object.value.ref;
 
-import den.vor.easy.object.value.IntValue;
+import den.vor.easy.object.value.impl.IntValue;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.StringValue;
 import den.vor.easy.object.value.Value;
