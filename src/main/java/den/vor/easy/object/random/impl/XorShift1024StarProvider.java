@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class XorShift1024StarProvider implements RandomProvider {
 
+    public static final Random RANDOM = new Random();
+
     @Override
     public CustomRandom getRandom() {
         return new Wrapper();
@@ -15,9 +17,8 @@ public class XorShift1024StarProvider implements RandomProvider {
 
     private static long[] getSeed() {
         long[] seed = new long[16];
-        Random random = new Random();
         for (int i = 0; i < 16; i++) {
-            seed[i] = random.nextLong();
+            seed[i] = RANDOM.nextLong();
         }
         return seed;
     }

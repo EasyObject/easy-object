@@ -8,6 +8,8 @@ import java.util.Random;
 
 public class MersenneTwisterRandomProvider implements RandomProvider {
 
+    public static final Random RANDOM = new Random();
+
     @Override
     public CustomRandom getRandom() {
         return new Wrapper();
@@ -15,9 +17,8 @@ public class MersenneTwisterRandomProvider implements RandomProvider {
 
     private static int[] getSeed() {
         int[] seed = new int[16];
-        Random random = new Random();
         for (int i = 0; i < 16; i++) {
-            seed[i] = random.nextInt();
+            seed[i] = RANDOM.nextInt();
         }
         return seed;
     }
