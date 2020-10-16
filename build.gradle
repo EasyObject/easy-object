@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id "org.sonarqube" version "3.0"
 }
 
 apply plugin: 'jacoco'
@@ -35,10 +36,8 @@ jacocoTestReport {
         xml.enabled true
         xml.destination file("${buildDir}/reports/jacoco/report.xml")
         html.enabled true
-//        csv.enabled false
     }
 }
-
 test.finalizedBy(jacocoTestReport)
 
 dependencies {
@@ -49,5 +48,25 @@ dependencies {
     testCompile("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
     testCompile("org.mockito:mockito-junit-jupiter:${versions.mockitoJunit}")
     testCompile group: 'org.hamcrest', name: 'hamcrest-core', version: '2.2'
+}
 
+sonarqube {
+    properties {
+        property "sonar.projectKey", "EasyObject_easy-object"
+        property "sonar.organization", "easyobject"
+        property "sonar.host.url", "https://sonarcloud.io"
+    }
+}
+
+file("sonar-project.properties").withReader {
+    Properties sonarProperties = new Properties();
+    sonarProperties.load(it)
+
+    sonarProperties.forEach { key, value ->
+        sonarqube {
+            properties {
+                property key, value
+            }
+        }
+    }
 }
