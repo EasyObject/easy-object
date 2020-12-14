@@ -26,7 +26,7 @@ public class MersenneTwisterRandomProvider implements RandomProvider {
     private static class Wrapper extends MersenneTwister implements CustomRandom {
 
         public Wrapper() {
-            super(getSeed());
+            super(MersenneTwisterRandomProvider.getSeed());
         }
     }
 }

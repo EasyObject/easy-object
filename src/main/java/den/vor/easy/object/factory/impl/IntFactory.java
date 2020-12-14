@@ -2,26 +2,34 @@ package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.ComparableFactory;
 import den.vor.easy.object.factory.GenerationContext;
+import den.vor.easy.object.factory.constraints.Bound;
+import den.vor.easy.object.value.Value;
+import den.vor.easy.object.value.impl.IntValue;
 
-public class IntFactory extends ComparableFactory<Integer> {
+public class IntFactory extends ComparableFactory<Integer, IntValue> {
 
     public IntFactory() {
-        setMin(-1_000_000);
-        setMax(1_000_000);
+        this(-1_000_000, 1_000_000);
+    }
+
+    public IntFactory(int min, int max) {
+        super(min, max);
     }
 
     @Override
-    public Integer getNext(Integer value) {
-        return value + 1;
+    protected IntValue getBetween(GenerationContext context, Bound<Integer> min, Bound<Integer> max) {
+        int minBound = min.isInclusive() ? min.getValue() : min.getValue() + 1;
+        int maxBound = max.isInclusive() ? max.getValue() : max.getValue() - 1;
+        if ((long) maxBound - minBound > Integer.MAX_VALUE) {
+            // This can be the case when generating any int
+            int value = (int) context.getRandom().nextLongInclusive(minBound, maxBound);
+            return IntValue.of(value);
+        }
+        return IntValue.of(context.getRandom().nextIntInclusive(minBound, maxBound));
     }
 
     @Override
-    public Integer getPrev(Integer value) {
-        return value - 1;
-    }
-
-    @Override
-    public Integer generate(GenerationContext context, Integer startInclusive, Integer endInclusive) {
-        return context.getRandom().nextIntInclusive(startInclusive, endInclusive);
+    protected Integer cast(Value<?> value) {
+        return value.as(Integer.class);
     }
 }

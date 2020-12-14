@@ -5,7 +5,9 @@ import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
 
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 
 public class MapValue extends CompoundValue<Map<ScalarValue<?>, Value<?>>> {
 
@@ -15,15 +17,33 @@ public class MapValue extends CompoundValue<Map<ScalarValue<?>, Value<?>>> {
         return EMPTY_MAP_VALUE;
     }
 
+    private static final Map<String, FunctionalValue<Map<ScalarValue<?>, Value<?>>>> METHODS = Map.of(
+            "size", new FunctionalValue<>((map, args) -> IntValue.of(map.getValue().size()))
+            );
+
     private final Map<ScalarValue<?>, Value<?>> map;
 
     public MapValue(Map<ScalarValue<?>, Value<?>> map) {
         this.map = map;
     }
 
+    public MapValue() {
+        this(new HashMap<>());
+    }
+
     @Override
     public Map<ScalarValue<?>, Value<?>> getValue() {
         return map;
+    }
+
+    @Override
+    public Value<?> get(ScalarValue<?> key) {
+        return map.get(key);
+    }
+
+    @Override
+    protected Map<String, FunctionalValue<Map<ScalarValue<?>, Value<?>>>> getMethods() {
+        return METHODS;
     }
 
     public void put(ScalarValue<?> key, Value<?> value) {

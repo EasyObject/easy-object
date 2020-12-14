@@ -1,7 +1,6 @@
 package den.vor.easy.object.value.impl;
 
 
-import den.vor.easy.object.value.StringValue;
 import org.junit.jupiter.api.Test;
 
 import static org.hamcrest.MatcherAssert.assertThat;

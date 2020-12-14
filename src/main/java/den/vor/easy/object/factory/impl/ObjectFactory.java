@@ -2,9 +2,12 @@ package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.CompoundFactory;
 import den.vor.easy.object.factory.Factory;
+import den.vor.easy.object.factory.GenerationContext;
 import den.vor.easy.object.factory.Generator;
 import den.vor.easy.object.value.ScalarValue;
-import den.vor.easy.object.value.StringValue;
+import den.vor.easy.object.value.Value;
+import den.vor.easy.object.value.impl.MapValue;
+import den.vor.easy.object.value.impl.StringValue;
 
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -14,35 +17,45 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
 
-public class ObjectFactory extends CompoundFactory<Map<String, Object>> {
+public class ObjectFactory extends CompoundFactory<Map<ScalarValue<?>, Value<?>>, MapValue> {
 
-    private final Map<StringValue, Factory<?>> factories = new HashMap<>();
+    private final Map<StringValue, Factory<?, ?>> factories = new HashMap<>();
 
-    public ObjectFactory and(String key, Factory<?> factory) {
+    public ObjectFactory and(String key, Factory<?, ?> factory) {
         factories.put(StringValue.of(key), factory);
         return this;
     }
 
     @Override
-    protected Map<? extends ScalarValue<?>, Factory<?>> getChildFactories() {
+    protected Map<? extends ScalarValue<?>, Factory<?, ?>> getChildFactories() {
         return factories;
     }
 
     @Override
-    protected Generator<Map<String, Object>> doGetGenerator(List<ScalarValue<?>> orderedKeys) {
-        Map<ScalarValue<?>, Generator<?>> generators = orderedKeys.stream()
+    protected Generator<MapValue> doGetGenerator(List<ScalarValue<?>> orderedKeys) {
+        Map<ScalarValue<?>, Generator<? extends Value<?>>> generators = orderedKeys.stream()
                 .collect(toMap(Function.identity(), key -> getByKey(key).getGenerator(), (a, b) -> {
                     throw new IllegalArgumentException();
                 }, LinkedHashMap::new));
         return context -> {
-            HashMap<String, Object> result = new HashMap<>();
-            generators.forEach((key, gen) -> result.put(key.toStringValue().getValue(), gen.getNext(context)));
-            return result;
+            MapValue mapValue = new MapValue();
+            mapValue.setParent(context.getParent());
+
+            GenerationContext generationContext = GenerationContext.fromParent(context)
+                    .setContext(mapValue)
+                    .setParent(mapValue);
+            for (Map.Entry<ScalarValue<?>, Generator<? extends Value<?>>> entry : generators.entrySet()) {
+                StringValue key = entry.getKey().toStringValue();
+                Value<?> value = entry.getValue().getNext(generationContext);
+                value.setParent(mapValue);
+                mapValue.put(key, value);
+            }
+            return mapValue;
         };
     }
 
-    private Factory<?> getByKey(ScalarValue<?> key) {
-        Factory<?> factory = factories.get(key.toStringValue());
+    private Factory<?, ?> getByKey(ScalarValue<?> key) {
+        Factory<?, ?> factory = factories.get(key.toStringValue());
         if (factory == null) {
             throw new IllegalArgumentException();
         }

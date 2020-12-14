@@ -12,10 +12,14 @@ public class XorShift1024StarProvider implements RandomProvider {
 
     @Override
     public CustomRandom getRandom() {
-        return new Wrapper();
+        return new Wrapper(generateSeed());
     }
 
-    private static long[] getSeed() {
+    public CustomRandom getRandom(long[] seed) {
+        return new Wrapper(seed);
+    }
+
+    private static long[] generateSeed() {
         long[] seed = new long[16];
         for (int i = 0; i < 16; i++) {
             seed[i] = RANDOM.nextLong();
@@ -25,8 +29,16 @@ public class XorShift1024StarProvider implements RandomProvider {
 
     private static class Wrapper extends XorShift1024Star implements CustomRandom {
 
-        public Wrapper() {
-            super(getSeed());
+        private final long[] seed;
+
+        public Wrapper(long[] seed) {
+            super(seed);
+            this.seed = seed;
+        }
+
+        @Override
+        public long[] getSeed() {
+            return seed;
         }
     }
 }

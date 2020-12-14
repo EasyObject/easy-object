@@ -2,8 +2,8 @@ package den.vor.easy.object.factory;
 
 import den.vor.easy.object.util.Graph;
 import den.vor.easy.object.value.ScalarValue;
+import den.vor.easy.object.ref.FieldRef;
 import den.vor.easy.object.value.Value;
-import den.vor.easy.object.value.ref.FieldRef;
 
 import java.util.Collection;
 import java.util.List;
@@ -13,9 +13,9 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 import static java.util.stream.Collectors.toMap;
 
-public abstract class CompoundFactory<T> extends Factory<T> {
+public abstract class CompoundFactory<T, R extends Value<T>> extends Factory<T, R> {
 
-    protected abstract Map<? extends ScalarValue<?>, Factory<?>> getChildFactories();
+    protected abstract Map<? extends ScalarValue<?>, Factory<?, ?>> getChildFactories();
 
     @Override
     public List<FieldRef> getDependencies() {
@@ -27,11 +27,11 @@ public abstract class CompoundFactory<T> extends Factory<T> {
     }
 
     @Override
-    public Generator<T> getGenerator() {
+    public Generator<R> getGenerator() {
         return doGetGenerator(getOrderedGenerators());
     }
 
-    protected abstract Generator<T> doGetGenerator(List<ScalarValue<?>> orderedKeys);
+    protected abstract Generator<R> doGetGenerator(List<ScalarValue<?>> orderedKeys);
 
     protected List<ScalarValue<?>> getOrderedGenerators() {
         Map<ScalarValue<?>, List<ScalarValue<?>>> childFactoriesDependencies = getChildFactories().entrySet().stream()
@@ -41,5 +41,10 @@ public abstract class CompoundFactory<T> extends Factory<T> {
                         .collect(toList())));
         Graph<ScalarValue<?>> graph = new Graph<>(childFactoriesDependencies);
         return graph.getCreationOrder();
+    }
+
+    @Override
+    protected void prepareInternal(PreparationContext preparationContext) {
+        getChildFactories().values().forEach(f -> f.prepareInternal(preparationContext));
     }
 }

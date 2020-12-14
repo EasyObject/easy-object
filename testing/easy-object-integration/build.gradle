@@ -1,0 +1,30 @@
+plugins {
+    id 'java'
+}
+
+group 'den.vor'
+version '1.0-SNAPSHOT'
+
+ext.versions = [
+        junit       : '5.7.0',
+        mockitoJunit: '3.6.0',
+        jackson     : '2.11.3',
+        easyObject  : '1.0-SNAPSHOT'
+]
+
+repositories {
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    testCompile("den.vor:easy-object:${versions.easyObject}")
+    testCompile("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
+    testCompile("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
+    testCompile("org.junit.jupiter:junit-jupiter-params:${versions.junit}")
+    testCompile("org.mockito:mockito-junit-jupiter:${versions.mockitoJunit}")
+}
+
+test {
+    useJUnitPlatform()
+}

@@ -5,12 +5,17 @@ import java.util.List;
 
 public interface CustomRandom {
 
-     int nextInt();
-     int nextInt(int bound);
-     long nextLong();
-     boolean nextBoolean();
-     float nextFloat();
-     double nextDouble();
+    int nextInt();
+
+    int nextInt(int bound);
+
+    long nextLong();
+
+    boolean nextBoolean();
+
+    float nextFloat();
+
+    double nextDouble();
 
     default double nextDouble(double min, double max) {
         return (max - min) * nextDouble() + min;
@@ -41,5 +46,24 @@ public interface CustomRandom {
 
     default <T> T next(List<T> list) {
         return list.get(nextInt(list.size()));
+    }
+
+    default <T> T next(T[] array) {
+        return array[nextInt(array.length)];
+    }
+
+    default void nextBytes(byte[] array) {
+        // see Random#nextBytes
+        for (int i = 0, len = array.length; i < len; ) {
+            for (int rnd = nextInt(),
+                 n = Math.min(len - i, Integer.SIZE / Byte.SIZE);
+                 n-- > 0; rnd >>= Byte.SIZE) {
+                array[i++] = (byte) rnd;
+            }
+        }
+    }
+
+    default long[] getSeed() {
+        throw new UnsupportedOperationException();
     }
 }
