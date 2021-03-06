@@ -1,24 +1,30 @@
 package den.vor.easy.object.parser.ast;
 
-import den.vor.easy.object.parser.ast.operator.*;
-import den.vor.easy.object.parser.ast.operator.impl.*;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
+import den.vor.easy.object.value.OperationAware;
 import den.vor.easy.object.value.Value;
+
+import java.util.function.BiFunction;
 
 public class BinaryExpression implements Expression {
 
     public enum Operation {
-        PLUS(new BinaryPlusOperator()),
-        MINUS(new BinaryMinusOperator()),
-        DIVIDE(new BinaryDivideOperator()),
-        MULTIPLY(new BinaryStarOperator()),
-        POW(new BinaryPowOperator()),
-        REMAINDER(new BinaryReminderOperator());
+        PLUS(OperationAware::plus),
+        MINUS(OperationAware::minus),
+        DIVIDE(OperationAware::divide),
+        MULTIPLY(OperationAware::multiply),
+        POW(OperationAware::pow),
+        REMAINDER(OperationAware::remainder),
+        LEFT_SHIFT(OperationAware::shiftLeft),
+        RIGHT_SHIFT(OperationAware::shiftRight),
+        AND(OperationAware::bitwiseAnd),
+        OR(OperationAware::bitwiseOr),
+        XOR(OperationAware::bitwiseXor);
 
-        private final BinaryOperator operator;
+        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
 
-        Operation(BinaryOperator operator) {
-            this.operator = operator;
+        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
+            this.function = function;
         }
     }
 
@@ -41,7 +47,7 @@ public class BinaryExpression implements Expression {
 
     @Override
     public Value<?> eval(Variables variables) {
-        return operation.operator.evaluate(left.eval(variables), right.eval(variables));
+        return operation.function.apply(left.eval(variables), right.eval(variables));
     }
 
     @Override

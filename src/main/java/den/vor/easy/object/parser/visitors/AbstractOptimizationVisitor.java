@@ -8,48 +8,48 @@ import java.util.stream.Collectors;
 public abstract class AbstractOptimizationVisitor implements OptimizationVisitor {
 
     @Override
-    public Expression visit(BinaryExpression s) {
-        return s;
+    public Expression visit(BinaryExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(ConditionalExpression s) {
-        return s;
+    public Expression visit(ConditionalExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(UnaryExpression s) {
-        return s;
+    public Expression visit(UnaryExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(ValueExpression s) {
-        return s;
+    public Expression visit(ValueExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(ContextVariableAccessExpression s) {
-        return s;
+    public Expression visit(ContextVariableAccessExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(TernaryExpression s) {
-        return s;
+    public Expression visit(TernaryExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(MethodInvocationExpression s) {
-        return s;
+    public Expression visit(MethodInvocationExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(FunctionInvocationExpression s) {
-        return s;
+    public Expression visit(FunctionInvocationExpression expression) {
+        return expression;
     }
 
     @Override
-    public Expression visit(VariableMapAccessExpression s) {
-        return s;
+    public Expression visit(VariableMapAccessExpression expression) {
+        return expression;
     }
 
     protected boolean isValue(Expression e) {

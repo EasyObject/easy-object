@@ -26,16 +26,25 @@ public class ExpressionEvaluator {
                 new ConstArgsPropagationVisitor(variables),
                 new ConstantFoldingVisitor(variables),
                 new IdempotentFunctionCallsFoldingVisitor(variables),
-                new ContextVariableAccessVisitor(variables)
+                new ContextVariableAccessVisitor(variables),
+                new ExpressionSimplifierVisitor(variables)
         ));
         this.expression = parsedExpression.accept(compositeVisitor);
         this.constParams = constParams;
         this.dependencies = this.expression.accept(NOT_EXISTING_VAR_VISITOR);
     }
 
+    public ExpressionEvaluator(String expression) {
+        this(expression, MapValue.emptyMap());
+    }
+
     public Value<?> evaluate(Value<?> context) {
         Variables variables = new Variables(constParams, context);
         return expression.eval(variables);
+    }
+
+    public Value<?> evaluate() {
+        return evaluate(NullValue.NULL);
     }
 
     public Expression getExpression() {

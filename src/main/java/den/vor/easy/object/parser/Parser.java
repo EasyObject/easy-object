@@ -3,10 +3,8 @@ package den.vor.easy.object.parser;
 import den.vor.easy.object.parser.ast.*;
 import den.vor.easy.object.parser.exception.ExpectedAnotherTokenException;
 import den.vor.easy.object.parser.exception.UnexpectedTokenException;
-import den.vor.easy.object.value.impl.BooleanValue;
-import den.vor.easy.object.value.impl.DoubleValue;
-import den.vor.easy.object.value.impl.IntValue;
-import den.vor.easy.object.value.impl.StringValue;
+import den.vor.easy.object.parser.util.PeriodParser;
+import den.vor.easy.object.value.impl.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -64,11 +62,53 @@ public final class Parser {
     }
 
     private Expression logicalAnd() {
-        Expression result = equality();
+        Expression result = bitwiseOr();
 
         while (true) {
             if (match(AMPAMP)) {
-                result = new ConditionalExpression(result, equality(), ConditionalExpression.Operation.AND);
+                result = new ConditionalExpression(result, bitwiseOr(), ConditionalExpression.Operation.AND);
+                continue;
+            }
+            break;
+        }
+
+        return result;
+    }
+
+    private Expression bitwiseOr() {
+        Expression result = bitwiseXor();
+
+        while (true) {
+            if (match(BAR)) {
+                result = new BinaryExpression(result, bitwiseXor(), BinaryExpression.Operation.OR);
+                continue;
+            }
+            break;
+        }
+
+        return result;
+    }
+
+    private Expression bitwiseXor() {
+        Expression result = bitwiseAnd();
+
+        while (true) {
+            if (match(CARET)) {
+                result = new BinaryExpression(result, bitwiseAnd(), BinaryExpression.Operation.XOR);
+                continue;
+            }
+            break;
+        }
+
+        return result;
+    }
+
+    private Expression bitwiseAnd() {
+        Expression result = equality();
+
+        while (true) {
+            if (match(AMP)) {
+                result = new BinaryExpression(result, equality(), BinaryExpression.Operation.AND);
                 continue;
             }
             break;
@@ -90,23 +130,41 @@ public final class Parser {
     }
 
     private Expression conditional() {
-        Expression result = additive();
+        Expression result = shift();
 
         while (true) {
             if (match(LT)) {
-                result = new ConditionalExpression(result, additive(), ConditionalExpression.Operation.LT);
+                result = new ConditionalExpression(result, shift(), ConditionalExpression.Operation.LT);
                 continue;
             }
             if (match(LTEQ)) {
-                result = new ConditionalExpression(result, additive(), ConditionalExpression.Operation.LTEQ);
+                result = new ConditionalExpression(result, shift(), ConditionalExpression.Operation.LTEQ);
                 continue;
             }
             if (match(GT)) {
-                result = new ConditionalExpression(result, additive(), ConditionalExpression.Operation.GT);
+                result = new ConditionalExpression(result, shift(), ConditionalExpression.Operation.GT);
                 continue;
             }
             if (match(GTEQ)) {
-                result = new ConditionalExpression(result, additive(), ConditionalExpression.Operation.GTEQ);
+                result = new ConditionalExpression(result, shift(), ConditionalExpression.Operation.GTEQ);
+                continue;
+            }
+            break;
+        }
+
+        return result;
+    }
+
+    private Expression shift() {
+        Expression result = additive();
+
+        while (true) {
+            if (match(LSHIFT)) {
+                result = new BinaryExpression(result, additive(), BinaryExpression.Operation.LEFT_SHIFT);
+                continue;
+            }
+            if (match(RSHIFT)) {
+                result = new BinaryExpression(result, additive(), BinaryExpression.Operation.RIGHT_SHIFT);
                 continue;
             }
             break;
@@ -134,26 +192,32 @@ public final class Parser {
     }
 
     private Expression multiplicative() {
-        Expression result = unary();
+        Expression result = power();
 
         while (true) {
             if (match(STAR)) {
-                result = new BinaryExpression(result, unary(), BinaryExpression.Operation.MULTIPLY);
-                continue;
-            }
-            if (match(POW)) {
-                result = new BinaryExpression(result, unary(), BinaryExpression.Operation.POW);
+                result = new BinaryExpression(result, power(), BinaryExpression.Operation.MULTIPLY);
                 continue;
             }
             if (match(SLASH)) {
-                result = new BinaryExpression(result, unary(), BinaryExpression.Operation.DIVIDE);
+                result = new BinaryExpression(result, power(), BinaryExpression.Operation.DIVIDE);
                 continue;
             }
             if (match(PERCENT)) {
-                result = new BinaryExpression(result, unary(), BinaryExpression.Operation.REMAINDER);
+                result = new BinaryExpression(result, power(), BinaryExpression.Operation.REMAINDER);
                 continue;
             }
             break;
+        }
+
+        return result;
+    }
+
+    private Expression power() {
+        Expression result = unary();
+
+        while (match(POW)) {
+            result = new BinaryExpression(result, unary(), BinaryExpression.Operation.POW);
         }
 
         return result;
@@ -175,25 +239,22 @@ public final class Parser {
     private Expression literal() {
         final Token current = get(0);
 
-        Expression expression = null;
+        Expression expression;
         if (match(INT_NUMBER)) {
             IntValue intValue = IntValue.of(Integer.parseInt(current.getText()));
             expression = new ValueExpression(intValue);
         } else if (match(DOUBLE_NUMBER)) {
             DoubleValue doubleValue = DoubleValue.of(Double.parseDouble(current.getText()));
             expression = new ValueExpression(doubleValue);
+        } else if (match(PERIOD)) {
+            PeriodValue periodValue = PeriodValue.of(PeriodParser.parse(current.getText()));
+            expression = new ValueExpression(periodValue);
         } else if (match(BOOLEAN)) {
             BooleanValue booleanValue = BooleanValue.of(Boolean.parseBoolean(current.getText()));
             expression = new ValueExpression(booleanValue);
         } else if (match(TEXT)) {
             StringValue stringValue = StringValue.of(current.getText());
             expression = new ValueExpression(stringValue);
-//        } else if (lookMatch(LBRACKET)) {
-//            Expression array = array();
-//            value = lookMatch(LBRACKET) ? element(array) : array;
-//        } else if (lookMatch(LBRACE)) {
-//            Expression mapOrSet = mapOrSet();
-//            value = lookMatch(LBRACKET) ? element(mapOrSet) : mapOrSet;
         } else if (lookMatch(WORD)) {
             if (lookMatch(1, LPAREN)) {
                 expression = functionCall();
@@ -221,6 +282,7 @@ public final class Parser {
             }
             arguments.add(expression());
         }
+        consume(RPAREN);
         List<Expression> keys = List.of(new ValueExpression(StringValue.of(methodName)));
         Expression functionName = new VariableMapAccessExpression(keys);
         return rec(new FunctionInvocationExpression(functionName, arguments));

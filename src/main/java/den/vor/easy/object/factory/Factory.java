@@ -10,6 +10,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
+import static den.vor.easy.object.factory.FactoryConstants.COUNT_STRING_VALUE;
+
 public abstract class Factory<T, R extends Value<T>> {
 
     private boolean visible = true;
@@ -34,7 +36,7 @@ public abstract class Factory<T, R extends Value<T>> {
     }
 
     public RootFactory<R> prepare(int count) {
-        MapValue globalParams = new MapValue(Map.of(StringValue.of("count"), IntValue.of(count)));
+        MapValue globalParams = new MapValue(Map.of(COUNT_STRING_VALUE, IntValue.of(count)));
         PreparationContext context = new PreparationContext().setGlobalParams(globalParams);
         prepareInternal(context);
         return new RootFactory<>(this, count);

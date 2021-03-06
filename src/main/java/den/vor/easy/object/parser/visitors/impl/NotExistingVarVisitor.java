@@ -7,6 +7,10 @@ import den.vor.easy.object.value.ScalarValue;
 
 import java.util.List;
 
+/**
+ * AST nodes visitor that returns the list of variables that should be present in context on the evaluation moment.
+ * It's required to build a dependencies graph and calculate field creation order.
+ */
 public class NotExistingVarVisitor extends AbstractResultVisitor<FieldRef> {
 
     @Override

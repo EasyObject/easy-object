@@ -1,5 +1,9 @@
 package den.vor.easy.object.factory.constraints;
 
+/**
+ * Specifies both bounds (upper and lower) for {@link den.vor.easy.object.factory.ComparableFactory}
+ * @param <T> type of bound value
+ */
 public class SequenceConstraintsValues<T> {
 
     private Bound<T> min;

@@ -9,6 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+/**
+ * Consumer that formats all values to string and prints them to console.
+ * Mainly for development purposes.
+ */
 public class StdConsumer extends Consumer<String> {
 
     public StdConsumer(int batchSize, Formatter<String>... formatters) {

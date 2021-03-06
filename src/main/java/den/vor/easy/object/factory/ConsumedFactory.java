@@ -4,14 +4,11 @@ import den.vor.easy.object.consumer.Consumer;
 import den.vor.easy.object.value.Value;
 
 import java.util.List;
-import java.util.stream.Stream;
-
-import static java.util.stream.Collectors.toList;
 
 public class ConsumedFactory<R extends Value<?>> {
 
-   private RootFactory<R> rootFactory;
-   private List<Consumer<?>> consumers;
+    private RootFactory<R> rootFactory;
+    private List<Consumer<?>> consumers;
 
     public ConsumedFactory(RootFactory<R> rootFactory, List<Consumer<?>> consumers) {
         this.rootFactory = rootFactory;
@@ -19,7 +16,7 @@ public class ConsumedFactory<R extends Value<?>> {
     }
 
     public void generate() {
-       rootFactory.stream().forEach(this::consumeValue);
+        rootFactory.stream().forEach(this::consumeValue);
         for (Consumer<?> consumer : consumers) {
             consumer.flush();
         }

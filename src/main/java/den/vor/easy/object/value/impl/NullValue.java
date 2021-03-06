@@ -13,6 +13,6 @@ public class NullValue extends Value<Object> {
 
     @Override
     public String toString() {
-        return "NullValue}";
+        return "NullValue{}";
     }
 }

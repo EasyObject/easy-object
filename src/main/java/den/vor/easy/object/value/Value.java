@@ -2,13 +2,11 @@ package den.vor.easy.object.value;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import den.vor.easy.object.value.impl.FunctionalValue;
-import den.vor.easy.object.value.impl.StringValue;
 
 import java.util.Collections;
 import java.util.Map;
-import java.util.function.Function;
 
-public abstract class Value<T> {
+public abstract class Value<T> implements OperationAware, ComparisonAware {
 
     private CompoundValue<?> parent;
 

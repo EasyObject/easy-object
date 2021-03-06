@@ -10,6 +10,9 @@ import den.vor.easy.object.value.Value;
 
 import java.util.List;
 
+/**
+ * AST nodes visitor that replaces variable references with actual values, if they are known on the compile time
+ */
 public class ConstArgsPropagationVisitor extends AbstractOptimizationVisitor {
 
     private final Variables variables;
@@ -19,26 +22,26 @@ public class ConstArgsPropagationVisitor extends AbstractOptimizationVisitor {
     }
 
     @Override
-    public Expression visit(VariableMapAccessExpression s) {
-        Expression firstKey = s.getKeys().get(0);
+    public Expression visit(VariableMapAccessExpression expression) {
+        Expression firstKey = expression.getKeys().get(0);
         if (firstKey instanceof ValueExpression) {
             Value<?> firstKeyValue = ((ValueExpression) firstKey).getValue();
             if (!(firstKeyValue instanceof ScalarValue)) {
                 throw new RuntimeException();
             }
-            Value<?> variable = variables.getNullableVariable(((ScalarValue<?>) firstKeyValue).toStringValue());
+            Value<?> variable = variables.getNullableConst(((ScalarValue<?>) firstKeyValue).toStringValue());
             if (variable == null) {
-                return s;
+                return expression;
             }
-            List<Expression> keys = s.getKeys();
+            List<Expression> keys = expression.getKeys();
             for (int i = 1; i < keys.size(); i++) {
                 if (!(keys instanceof ValueExpression)) {
                     // TODO replace first key with actual value
-                    return s;
+                    return expression;
                 }
             }
-            return new ValueExpression(s.eval(variables));
+            return new ValueExpression(expression.eval(variables));
         }
-        return s;
+        return expression;
     }
 }

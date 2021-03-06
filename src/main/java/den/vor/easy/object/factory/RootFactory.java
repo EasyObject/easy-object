@@ -8,8 +8,11 @@ import den.vor.easy.object.value.impl.StringValue;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Spliterator;
 import java.util.stream.Stream;
+import java.util.stream.StreamSupport;
 
+import static java.util.Spliterator.*;
 import static java.util.stream.Collectors.toList;
 
 public class RootFactory<R extends Value<?>> {

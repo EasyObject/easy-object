@@ -50,6 +50,10 @@ public class MapValue extends CompoundValue<Map<ScalarValue<?>, Value<?>>> {
         map.put(key, value);
     }
 
+    public void remove(ScalarValue<?> key) {
+        map.remove(key);
+    }
+
     @Override
     public String toString() {
         return "MapValue{" + map + '}';

@@ -3,6 +3,7 @@ package den.vor.easy.object.parser.ast;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.*;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,6 +32,13 @@ public class Variables {
             }
             throw new UnsupportedOperationException();
         }, true));
+        consts.put(StringValue.of("now"), new FunctionalValue<>((context, args) -> {
+            if (args.size() != 0) {
+                throw new RuntimeException();
+            }
+            return DateTimeValue.of(LocalDateTime.now());
+        }, true));
+
         CONST_VALUES = Map.copyOf(consts);
     }
 
@@ -43,7 +51,7 @@ public class Variables {
     }
 
     public Value<?> getVariable(StringValue key) {
-        Value<?> value = getNullableVariable(key);
+        Value<?> value = getNullableConst(key);
         if (value == null) {
             value = context.get(key);
         }
@@ -53,7 +61,7 @@ public class Variables {
         return value;
     }
 
-    public Value<?> getNullableVariable(StringValue key) {
+    public Value<?> getNullableConst(StringValue key) {
         Value<?> value = CONST_VALUES.get(key);
         if (value == null) {
             value = globalVariables.get(key);

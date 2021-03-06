@@ -5,10 +5,7 @@ import den.vor.easy.object.enums.impl.EnumEnumValuesProvider;
 import den.vor.easy.object.factory.EnumFactory;
 import den.vor.easy.object.factory.Factory;
 import den.vor.easy.object.factory.RootFactory;
-import den.vor.easy.object.factory.impl.IntFactory;
-import den.vor.easy.object.factory.impl.ObjectFactory;
-import den.vor.easy.object.factory.impl.SupplierFactory;
-import den.vor.easy.object.value.ConstValue;
+import den.vor.easy.object.factory.impl.*;
 import den.vor.easy.object.value.Value;
 
 import java.util.Collection;
@@ -36,6 +33,14 @@ public class EasyObject {
         return new IntFactory(min, max);
     }
 
+    public static ElFactory<Integer> isInt(String expression) {
+        return ElFactory.factory(expression, Integer.class);
+    }
+
+    public static ElFactory<Object> isExpression(String expression) {
+        return ElFactory.factory(expression);
+    }
+
     public static <T, R extends Value<T>> SupplierFactory<T, R> fromSupplier(Supplier<R> supplier) {
         return new SupplierFactory<>(supplier);
     }
@@ -46,5 +51,13 @@ public class EasyObject {
 
     public static <T extends Enum<T>> EnumFactory<T, ?> isEnum(Class<T> enumClass) {
         return new EnumFactory<>(new EnumEnumValuesProvider<>(enumClass));
+    }
+
+    public static <T> ConstFactory<T> isConst(Value<T> value) {
+        return new ConstFactory<>(value);
+    }
+
+    public static UUIDFactory isUUID() {
+        return new UUIDFactory();
     }
 }

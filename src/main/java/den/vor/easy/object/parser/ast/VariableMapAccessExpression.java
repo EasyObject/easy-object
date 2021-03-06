@@ -8,6 +8,9 @@ import den.vor.easy.object.value.impl.StringValue;
 
 import java.util.List;
 
+import static den.vor.easy.object.parser.ExpressionConstants.PARENT_REF;
+import static den.vor.easy.object.parser.ExpressionConstants.THIS_REF;
+
 public class VariableMapAccessExpression implements Expression {
 
     private final List<Expression> keys;
@@ -39,11 +42,11 @@ public class VariableMapAccessExpression implements Expression {
             } else {
                 StringValue stringValue = (StringValue) scalarValue;
                 String string = stringValue.getValue();
-                if (!thisEscaped && "this".equals(string)) {
+                if (!thisEscaped && THIS_REF.equals(string)) {
                     result = variables.getContext();
                     thisEscaped = true;
                     parentEscaped = true;
-                } else if (!parentEscaped && "parent".equals(string)) {
+                } else if (!parentEscaped && PARENT_REF.equals(string)) {
                     result = (result == null ? variables.getContext() : result).getParent();
                     thisEscaped = true;
                 } else {

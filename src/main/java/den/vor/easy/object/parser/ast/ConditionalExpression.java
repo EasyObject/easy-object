@@ -1,27 +1,28 @@
 package den.vor.easy.object.parser.ast;
 
-import den.vor.easy.object.parser.ast.operator.*;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
+
+import java.util.function.BiFunction;
 
 public final class ConditionalExpression implements Expression {
 
     public enum Operation {
-        EQUALS(new BinaryEqOperator()),
-        NOT_EQUALS(new BinaryNotEqOperator()),
+        EQUALS(Value::equalTo),
+        NOT_EQUALS(Value::notEqualTo),
 
-        LT(new BinaryComparisonOperator.BinaryLtOperator()),
-        LTEQ(new BinaryComparisonOperator.BinaryLteOperator()),
-        GT(new BinaryComparisonOperator.BinaryGtOperator()),
-        GTEQ(new BinaryComparisonOperator.BinaryGteOperator()),
+        LT(Value::lt),
+        LTEQ(Value::lte),
+        GT(Value::gt),
+        GTEQ(Value::gte),
 
-        AND(new BinaryLogicalOperator.LogicalAndOperator()),
-        OR(new BinaryLogicalOperator.LogicalOrOperator());
+        AND(Value::and),
+        OR(Value::or);
 
-        private final BinaryOperator operator;
+        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
 
-        Operation(BinaryOperator operator) {
-            this.operator = operator;
+        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
+            this.function = function;
         }
     }
 
@@ -39,7 +40,7 @@ public final class ConditionalExpression implements Expression {
     public Value<?> eval(Variables variables) {
         final Value<?> value1 = left.eval(variables);
         final Value<?> value2 = right.eval(variables);
-        return operation.operator.evaluate(value1, value2);
+        return operation.function.apply(value1, value2);
     }
 
     @Override

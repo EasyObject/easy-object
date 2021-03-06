@@ -12,7 +12,7 @@ import static java.util.Map.entry;
 
 public final class Lexer {
 
-    private static final String OPERATOR_CHARS = "?+-*/()[]{}=<>!&|,:.%";
+    private static final String OPERATOR_CHARS = "^?+-*/()[]{}=<>!&|,:.%";
 
     private static final Map<String, TokenType> OPERATORS;
 
@@ -41,12 +41,15 @@ public final class Lexer {
                 entry("!", TokenType.EXCL),
                 entry("&", TokenType.AMP),
                 entry("|", TokenType.BAR),
+                entry("^", TokenType.CARET),
                 entry("==", TokenType.EQEQ),
                 entry("!=", TokenType.EXCLEQ),
                 entry("<=", TokenType.LTEQ),
                 entry(">=", TokenType.GTEQ),
                 entry("&&", TokenType.AMPAMP),
-                entry("||", TokenType.BARBAR));
+                entry("||", TokenType.BARBAR),
+                entry("<<", TokenType.LSHIFT),
+                entry(">>", TokenType.RSHIFT));
     }
 
     private final String input;

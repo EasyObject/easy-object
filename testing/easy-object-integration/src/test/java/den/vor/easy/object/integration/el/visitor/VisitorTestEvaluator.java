@@ -17,7 +17,7 @@ public class VisitorTestEvaluator {
     public static VisitorTestEvaluator evaluate(String expression) {
         return new VisitorTestEvaluator(expression);
     }
-    
+
     private VisitorTestEvaluator(String expression) {
         this.expression = expression;
     }
@@ -34,7 +34,7 @@ public class VisitorTestEvaluator {
                 "optimized to ValueExpression, but got " + optimized);
         Value<?> value = ((ValueExpression) optimized).getValue();
         Object valueObject = value.getValue();
-        assertTrue(expected.getClass().isInstance(valueObject), () -> "Expected " + expression 
+        assertTrue(expected.getClass().isInstance(valueObject), () -> "Expected " + expression
                 + " to return a result of Integer, got " + valueObject);
         assertEquals(expected, valueObject, () -> "Expected=" + expected + " when evaluating expression='" +
                 expression + "', got " + valueObject);

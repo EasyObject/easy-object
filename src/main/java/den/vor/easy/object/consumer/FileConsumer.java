@@ -9,6 +9,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 
+/**
+ * Consumer that writes formatted to string values to the file.
+ * Creates output stream on each write operation. Should be used without batch with great caution
+ */
 public class FileConsumer extends Consumer<String> {
 
     private final String fileName;

@@ -8,6 +8,10 @@ import den.vor.easy.object.value.impl.UUIDValue;
 import java.nio.ByteBuffer;
 import java.util.UUID;
 
+/**
+ * Factory that generates UUIDv4 values.
+ * Due to performance concerns default Java {@link UUID#randomUUID()} is not used
+ */
 public class UUIDFactory extends Factory<UUID, UUIDValue> {
 
     @Override

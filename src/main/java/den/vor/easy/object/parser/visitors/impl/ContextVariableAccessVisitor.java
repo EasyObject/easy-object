@@ -10,6 +10,9 @@ import den.vor.easy.object.value.impl.StringValue;
 import java.util.ArrayList;
 import java.util.List;
 
+import static den.vor.easy.object.parser.ExpressionConstants.PARENT_REF;
+import static den.vor.easy.object.parser.ExpressionConstants.THIS_REF;
+
 public class ContextVariableAccessVisitor extends AbstractOptimizationVisitor {
 
     private final Variables variables;
@@ -19,15 +22,10 @@ public class ContextVariableAccessVisitor extends AbstractOptimizationVisitor {
     }
 
     @Override
-    public Expression visit(VariableMapAccessExpression s) {
-        Expression expression = super.visit(s);
-
-        if (expression instanceof VariableMapAccessExpression) {
-            VariableMapAccessExpression variableMapAccessExpression = (VariableMapAccessExpression) expression;
-            List<Expression> keys = variableMapAccessExpression.getKeys();
-            if (keys.stream().allMatch(k -> k instanceof ValueExpression)) {
-                return getContextVariableAccessExpression(keys);
-            }
+    public Expression visit(VariableMapAccessExpression expression) {
+        List<Expression> keys = expression.getKeys();
+        if (keys.stream().allMatch(k -> k instanceof ValueExpression)) {
+            return getContextVariableAccessExpression(keys);
         }
         return expression;
     }
@@ -53,10 +51,10 @@ public class ContextVariableAccessVisitor extends AbstractOptimizationVisitor {
             } else {
                 StringValue stringValue = (StringValue) scalarValue;
                 String string = stringValue.getValue();
-                if (!thisEscaped && "this".equals(string)) {
+                if (!thisEscaped && THIS_REF.equals(string)) {
                     thisEscaped = true;
                     parentEscaped = true;
-                } else if (!parentEscaped && "parent".equals(string)) {
+                } else if (!parentEscaped && PARENT_REF.equals(string)) {
                     parentHops++;
                     thisEscaped = true;
                 } else {

@@ -6,12 +6,20 @@ import den.vor.easy.object.factory.constraints.Bound;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.IntValue;
 
+/**
+ * Factory, which {@link den.vor.easy.object.factory.Generator} returns 4-byte signed numbers
+ */
 public class IntFactory extends ComparableFactory<Integer, IntValue> {
 
     public IntFactory() {
         this(-1_000_000, 1_000_000);
     }
 
+    /**
+     * Creates a new factory instance.
+     * @param min lower inclusive bound for returned values
+     * @param max upper inclusive bound for returned values
+     */
     public IntFactory(int min, int max) {
         super(min, max);
     }

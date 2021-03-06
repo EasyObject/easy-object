@@ -4,20 +4,27 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import den.vor.easy.object.parser.ExpressionEvaluator;
 import den.vor.easy.object.value.Value;
-import den.vor.easy.object.value.impl.MapValue;
 
 import java.io.UncheckedIOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Formatter that transforms values into string in json format.
+ */
 public class JsonFormatter implements Formatter<String> {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     private ExpressionEvaluator expressionEvaluator;
 
-    public JsonFormatter(String path) {
-        this.expressionEvaluator = new ExpressionEvaluator(path, MapValue.emptyMap());
+    /**
+     * Creates a new formatter that transforms a result of expression evaluation on values
+     *
+     * @param expression expression to evaluate on each object formatted
+     */
+    public JsonFormatter(String expression) {
+        this.expressionEvaluator = new ExpressionEvaluator(expression);
     }
 
     public JsonFormatter() {

@@ -37,6 +37,7 @@ public enum TokenType {
     BARBAR,
     AMP,
     AMPAMP,
+    CARET,
 
     LPAREN, // (
     RPAREN, // )
@@ -46,6 +47,9 @@ public enum TokenType {
     RBRACE, // }
     COMMA, // ,
     ARG, // ${
+
+    LSHIFT, // <<
+    RSHIFT, // >>
 
     EOF
 }

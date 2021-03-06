@@ -4,21 +4,21 @@ import den.vor.easy.object.parser.ast.*;
 
 public interface OptimizationVisitor extends ResultVisitor<Expression> {
 
-    Expression visit(BinaryExpression s);
+    Expression visit(BinaryExpression expression);
 
-    Expression visit(ConditionalExpression s);
+    Expression visit(ConditionalExpression expression);
 
-    Expression visit(ContextVariableAccessExpression s);
+    Expression visit(ContextVariableAccessExpression expression);
 
-    Expression visit(TernaryExpression s);
+    Expression visit(TernaryExpression expression);
 
-    Expression visit(UnaryExpression s);
+    Expression visit(UnaryExpression expression);
 
-    Expression visit(ValueExpression s);
+    Expression visit(ValueExpression expression);
 
-    Expression visit(MethodInvocationExpression s);
+    Expression visit(MethodInvocationExpression expression);
 
-    Expression visit(FunctionInvocationExpression s);
+    Expression visit(FunctionInvocationExpression expression);
 
-    Expression visit(VariableMapAccessExpression s);
+    Expression visit(VariableMapAccessExpression expression);
 }

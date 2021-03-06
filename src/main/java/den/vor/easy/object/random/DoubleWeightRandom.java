@@ -16,7 +16,7 @@ public final class DoubleWeightRandom {
 
     public DoubleWeightRandom(List<? extends Number> weights){
         if(weights.isEmpty()){
-            throw new RuntimeException("Not empty collection expected");
+            throw new IllegalArgumentException("Non-empty collection expected");
         }
         int size = weights.size();
         this.accumulatedWeights = new double[size];

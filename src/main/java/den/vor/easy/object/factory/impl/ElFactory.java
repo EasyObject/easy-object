@@ -10,13 +10,34 @@ import den.vor.easy.object.value.impl.MapValue;
 
 import java.util.List;
 
-public class ElFactory extends Factory<Object, Value<Object>> {
+/**
+ * Factory, which {@link Generator} evaluates passed string expression for every object
+ * @param <T> type of returned value
+ */
+public class ElFactory<T> extends Factory<T, Value<T>> {
 
     private ExpressionEvaluator expressionEvaluator;
-    private String expression;
+    private final String expression;
+    private final Class<T> tClass;
 
-    public ElFactory(String expression) {
+    /**
+     * Creates a new instance of factory
+     * @param expression string to evaluate
+     * @param tClass class object that specifies of generated value
+     * @param <T> type of generated value
+     * @return new factory instance
+     */
+    public static <T> ElFactory<T> factory(String expression, Class<T> tClass) {
+        return new ElFactory<>(expression, tClass);
+    }
+
+    public static ElFactory<Object> factory(String expression) {
+        return new ElFactory<>(expression, Object.class);
+    }
+
+    private ElFactory(String expression, Class<T> tClass) {
         this.expression = expression;
+        this.tClass = tClass;
     }
 
     @Override
@@ -26,12 +47,25 @@ public class ElFactory extends Factory<Object, Value<Object>> {
 
     @Override
     @SuppressWarnings("unchecked")
-    public Generator<Value<Object>> getGenerator() {
-        return context -> (Value<Object>) expressionEvaluator.evaluate(context.getContext());
+    public Generator<Value<T>> getGenerator() {
+        if (tClass.equals(Object.class)) {
+            return context -> (Value<T>) expressionEvaluator.evaluate(context.getContext());
+        }
+        return context -> checkAndCast(expressionEvaluator.evaluate(context.getContext()));
     }
 
     @Override
     public List<FieldRef> getDependencies() {
         return expressionEvaluator.getDependencies();
+    }
+
+    @SuppressWarnings("unchecked")
+    private Value<T> checkAndCast(Value<?> value) {
+        Object expressionResult = value.getValue();
+
+        if (!tClass.isInstance(expressionResult)) {
+            throw new RuntimeException("Expected result of type " + tClass + ", got " + expressionResult);
+        }
+        return (Value<T>) value;
     }
 }

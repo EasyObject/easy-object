@@ -1,7 +1,6 @@
 package den.vor.easy.object.fuzzy;
 
 import den.vor.easy.object.random.DoubleWeightRandom;
-import den.vor.easy.object.value.Value;
 
 import java.util.List;
 

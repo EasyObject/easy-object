@@ -4,6 +4,9 @@ package den.vor.easy.object.parser.visitors.impl;
 import den.vor.easy.object.parser.ast.*;
 import den.vor.easy.object.parser.visitors.AbstractOptimizationVisitor;
 
+/**
+ * AST nodes visitor that folds constant expressions, if they can be calculated on the compile time
+ */
 public class ConstantFoldingVisitor extends AbstractOptimizationVisitor {
 
     private final Variables variables;
@@ -13,33 +16,26 @@ public class ConstantFoldingVisitor extends AbstractOptimizationVisitor {
     }
 
     @Override
-    public Expression visit(UnaryExpression unaryExpression) {
-        unaryExpression = (UnaryExpression) super.visit(unaryExpression);
-        if (isValue(unaryExpression.getExpression())) {
-            return new ValueExpression(unaryExpression.eval(variables));
+    public Expression visit(UnaryExpression expression) {
+        if (isValue(expression.getExpression())) {
+            return new ValueExpression(expression.eval(variables));
         }
-        return super.visit(unaryExpression);
+        return expression;
     }
 
     @Override
-    public Expression visit(BinaryExpression s) {
-        Expression visited = super.visit(s);
-        if (!(visited instanceof BinaryExpression)) {
-            return visited;
+    public Expression visit(BinaryExpression expression) {
+        if (isValue(expression.getLeft()) && isValue(expression.getRight())) {
+            return new ValueExpression(expression.eval(variables));
         }
-        s = (BinaryExpression) visited;
-        if (isValue(s.getLeft()) && isValue(s.getRight())) {
-            return new ValueExpression(s.eval(variables));
-        }
-        return super.visit(s);
+        return expression;
     }
 
     @Override
-    public Expression visit(ConditionalExpression s) {
-        s = (ConditionalExpression) super.visit(s);
-        if (isValue(s.getLeft()) && isValue(s.getRight())) {
-            return new ValueExpression(s.eval(variables));
+    public Expression visit(ConditionalExpression expression) {
+        if (isValue(expression.getLeft()) && isValue(expression.getRight())) {
+            return new ValueExpression(expression.eval(variables));
         }
-        return super.visit(s);
+        return expression;
     }
 }

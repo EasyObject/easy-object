@@ -26,6 +26,10 @@ public class ObjectFactory extends CompoundFactory<Map<ScalarValue<?>, Value<?>>
         return this;
     }
 
+    public ObjectFactory and(String key, Value<?> value) {
+        return and(key, new ConstFactory<>(value));
+    }
+
     @Override
     protected Map<? extends ScalarValue<?>, Factory<?, ?>> getChildFactories() {
         return factories;

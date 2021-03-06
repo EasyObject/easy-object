@@ -8,6 +8,10 @@ import den.vor.easy.object.value.impl.FunctionalValue;
 
 import java.util.Collection;
 
+/**
+ * AST nodes visitor that replaces function invocation with it's result if the function is
+ * {@link FunctionalValue#isIdempotent()} and all arguments are constants
+ */
 public class IdempotentFunctionCallsFoldingVisitor extends AbstractOptimizationVisitor {
 
     private final Variables variables;
@@ -17,25 +21,21 @@ public class IdempotentFunctionCallsFoldingVisitor extends AbstractOptimizationV
     }
 
     @Override
-    public Expression visit(FunctionInvocationExpression s) {
-        s = (FunctionInvocationExpression) super.visit(s);
-
-        if (isExpressionIdempotentFunction(s.getExpression()) && allArgsAreValues(s.getArgs())) {
-            return new ValueExpression(s.eval(variables));
+    public Expression visit(FunctionInvocationExpression expression) {
+        if (isExpressionIdempotentFunction(expression.getExpression()) && allArgsAreValues(expression.getArgs())) {
+            return new ValueExpression(expression.eval(variables));
         }
-        return s;
+        return expression;
     }
 
     @Override
-    public Expression visit(MethodInvocationExpression s) {
-        s = (MethodInvocationExpression) super.visit(s);
-
-        if (isValue(s.getExpression()) &&
-                isExpressionIdempotentFunction(s.getMethod()) &&
-                allArgsAreValues(s.getArgs())) {
-            return new ValueExpression(s.eval(variables));
+    public Expression visit(MethodInvocationExpression expression) {
+        if (isValue(expression.getExpression()) &&
+                isExpressionIdempotentFunction(expression.getMethod()) &&
+                allArgsAreValues(expression.getArgs())) {
+            return new ValueExpression(expression.eval(variables));
         }
-        return s;
+        return expression;
     }
 
     private boolean allArgsAreValues(Collection<Expression> arguments) {

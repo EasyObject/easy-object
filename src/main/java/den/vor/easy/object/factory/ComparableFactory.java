@@ -3,6 +3,9 @@ package den.vor.easy.object.factory;
 import den.vor.easy.object.factory.constraints.Bound;
 import den.vor.easy.object.factory.constraints.SequenceConstraint;
 import den.vor.easy.object.factory.constraints.SequenceConstraintsValues;
+import den.vor.easy.object.factory.constraints.impl.GeConstraint;
+import den.vor.easy.object.factory.constraints.impl.GtConstraint;
+import den.vor.easy.object.factory.constraints.impl.LeConstraint;
 import den.vor.easy.object.factory.constraints.impl.LtConstraint;
 import den.vor.easy.object.parser.ExpressionEvaluator;
 import den.vor.easy.object.ref.FieldRef;
@@ -13,7 +16,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public abstract class ComparableFactory<T extends Comparable<T>, R extends Value<T>> extends Factory<T, R> {
+public abstract class ComparableFactory<T extends Comparable<? super T>, R extends Value<T>> extends Factory<T, R> {
 
     private Bound<T> min;
     private Bound<T> max;
@@ -49,6 +52,21 @@ public abstract class ComparableFactory<T extends Comparable<T>, R extends Value
 
     public ComparableFactory<T, R> lt(String path) {
         constraints.add(new LtConstraint<>(path));
+        return this;
+    }
+
+    public ComparableFactory<T, R> le(String path) {
+        constraints.add(new LeConstraint<>(path));
+        return this;
+    }
+
+    public ComparableFactory<T, R> gt(String path) {
+        constraints.add(new GtConstraint<>(path));
+        return this;
+    }
+
+    public ComparableFactory<T, R> ge(String path) {
+        constraints.add(new GeConstraint<>(path));
         return this;
     }
 

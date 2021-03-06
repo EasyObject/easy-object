@@ -8,45 +8,45 @@ import java.util.stream.Collectors;
 public abstract class DelegatingOptimizationVisitor extends AbstractOptimizationVisitor {
 
     @Override
-    public Expression visit(BinaryExpression s) {
-        Expression leftVisited = s.getLeft().accept(this);
-        Expression rightVisited = s.getRight().accept(this);
-        if (leftVisited != s.getLeft() || rightVisited != s.getRight()) {
-            return new BinaryExpression(leftVisited, rightVisited, s.getOperation());
+    public Expression visit(BinaryExpression expression) {
+        Expression leftVisited = expression.getLeft().accept(this);
+        Expression rightVisited = expression.getRight().accept(this);
+        if (leftVisited != expression.getLeft() || rightVisited != expression.getRight()) {
+            return new BinaryExpression(leftVisited, rightVisited, expression.getOperation());
         }
-        return s;
+        return expression;
     }
 
     @Override
-    public Expression visit(ConditionalExpression s) {
-        Expression leftVisited = s.getLeft().accept(this);
-        Expression rightVisited = s.getRight().accept(this);
-        if (leftVisited != s.getLeft() || rightVisited != s.getRight()) {
-            return new ConditionalExpression(leftVisited, rightVisited, s.getOperation());
+    public Expression visit(ConditionalExpression expression) {
+        Expression leftVisited = expression.getLeft().accept(this);
+        Expression rightVisited = expression.getRight().accept(this);
+        if (leftVisited != expression.getLeft() || rightVisited != expression.getRight()) {
+            return new ConditionalExpression(leftVisited, rightVisited, expression.getOperation());
         }
-        return s;
+        return expression;
     }
 
     @Override
-    public Expression visit(UnaryExpression s) {
-        Expression visitedExpression = s.getExpression().accept(this);
-        if (visitedExpression != s.getExpression()) {
-            return new UnaryExpression(visitedExpression, s.getOperation());
+    public Expression visit(UnaryExpression expression) {
+        Expression visitedExpression = expression.getExpression().accept(this);
+        if (visitedExpression != expression.getExpression()) {
+            return new UnaryExpression(visitedExpression, expression.getOperation());
         }
-        return s;
+        return expression;
     }
 
     @Override
-    public Expression visit(TernaryExpression s) {
-        Expression condition = s.getCondition().accept(this);
-        Expression thenExpression = s.getThenExpression().accept(this);
-        Expression elseExpression = s.getElseExpression().accept(this);
-        if (condition != s.getCondition() ||
-                thenExpression != s.getThenExpression() ||
-                elseExpression != s.getElseExpression()) {
+    public Expression visit(TernaryExpression expression) {
+        Expression condition = expression.getCondition().accept(this);
+        Expression thenExpression = expression.getThenExpression().accept(this);
+        Expression elseExpression = expression.getElseExpression().accept(this);
+        if (condition != expression.getCondition() ||
+                thenExpression != expression.getThenExpression() ||
+                elseExpression != expression.getElseExpression()) {
             return new TernaryExpression(condition, thenExpression, elseExpression);
         }
-        return s;
+        return expression;
     }
 
     @Override
@@ -81,14 +81,14 @@ public abstract class DelegatingOptimizationVisitor extends AbstractOptimization
     }
 
     @Override
-    public Expression visit(VariableMapAccessExpression s) {
-        List<Expression> keys = s.getKeys();
+    public Expression visit(VariableMapAccessExpression expression) {
+        List<Expression> keys = expression.getKeys();
         List<Expression> visitedKeys = keys.stream().map(a -> a.accept(this)).collect(Collectors.toList());
         for (int i = 0; i < visitedKeys.size(); i++) {
             if (keys.get(i) != visitedKeys.get(i)) {
                 return new VariableMapAccessExpression(visitedKeys);
             }
         }
-        return s;
+        return expression;
     }
 }

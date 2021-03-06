@@ -15,7 +15,7 @@ public final class IntWeightRandom {
 
     public IntWeightRandom(List<Integer> weights){
         if(weights.isEmpty()){
-            throw new RuntimeException("Not empty collection expected");
+            throw new IllegalArgumentException("Non-empty collection expected");
         }
         int size = weights.size();
         this.accumulatedWeights = new int[size];

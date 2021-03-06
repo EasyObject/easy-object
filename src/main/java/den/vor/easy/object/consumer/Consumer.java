@@ -5,10 +5,16 @@ import den.vor.easy.object.value.Value;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+/**
+ * Consumer of generated objects. First formats values with {@link Formatter}
+ * @param <T> return type of underlying {@link Formatter}
+ */
 public abstract class Consumer<T> {
 
-    public static final int DEFAULT_BATCH_SIZE = 10_000;
+    public static final int DEFAULT_BATCH_SIZE = 1_000;
     private Formatter<T>[] formatters;
     private InternalConsumer internalConsumer;
 
@@ -20,13 +26,13 @@ public abstract class Consumer<T> {
         this(DEFAULT_BATCH_SIZE, useBatch, formatters);
     }
 
+    public Consumer(Formatter<T>... formatters) {
+        this(DEFAULT_BATCH_SIZE, formatters);
+    }
+
     private Consumer(int batchSize, boolean useBatch, Formatter<T>... formatters) {
         this.formatters = formatters;
         this.internalConsumer = useBatch ? new BatchConsumer(batchSize) : new SimpleConsumer();
-    }
-
-    public Consumer(Formatter<T>... formatters) {
-        this(DEFAULT_BATCH_SIZE, formatters);
     }
 
     public void consume(Value<?> value) {

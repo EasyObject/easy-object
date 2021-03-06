@@ -1,44 +1,65 @@
 package den.vor.easy.object.integration.el;
 
-import den.vor.easy.object.integration.util.random.RandomProviderExtension;
-import den.vor.easy.object.integration.util.repeat.RepeatedElTest;
-import den.vor.easy.object.integration.util.repeat.RepeatedTestExtension;
-import den.vor.easy.object.random.CustomRandom;
 import org.junit.jupiter.api.Nested;
-import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.Test;
 
-@ExtendWith({RepeatedTestExtension.class, RandomProviderExtension.class})
 public class ArithmeticalOperationsTest {
 
     @Nested
     public class SumTest {
 
-        @RepeatedElTest
-        public void shouldSumTwoIntsWithoutOverflow(CustomRandom random) {
-            int firstInt = random.nextInt(-1_000_000_000, 1_000_000_000);
-            int secondInt = random.nextInt(-1_000_000_000, 1_000_000_000);
-            TestEvaluator.evaluate(firstInt + " + " + secondInt).assertEquals(firstInt + secondInt);
+        @Test
+        public void shouldReturnInt_whenSummingTwoIntsWithoutOverflow() {
+            TestEvaluator.evaluate("5 + 10").assertEquals(15);
         }
 
-        @RepeatedElTest
-        public void shouldSumTwoIntsWithPositiveOverflow(CustomRandom random) {
-            int firstInt = random.nextInt(1_500_000_000, 2_000_000_000);
-            int secondInt = random.nextInt(1_500_000_000, 2_000_000_000);
-            TestEvaluator.evaluate(firstInt + " + " + secondInt).assertEquals(firstInt + secondInt);
+        @Test
+        public void shouldReturnInt_whenSummingTwoIntsWithPositiveOverflow() {
+            TestEvaluator.evaluate("1500000000 + 1500000001").assertEquals(-1294967295);
         }
 
-        @RepeatedElTest
-        public void shouldSumTwoIntsWithNegativeOverflow(CustomRandom random) {
-            int firstInt = random.nextInt(-2_000_000_000, -1_500_000_000);
-            int secondInt = random.nextInt(-2_000_000_000, -1_500_000_000);
-            TestEvaluator.evaluate(firstInt + " + " + secondInt).assertEquals(firstInt + secondInt);
+        @Test
+        public void shouldReturnPositiveInt_whenSummingTwoNegativeIntsWithOverflow() {
+            TestEvaluator.evaluate("-2000000000 + -1500000000").assertEquals(794967296);
         }
 
-        @RepeatedElTest
-        public void shouldSumTwoDoubles(CustomRandom random) {
-            double firstInt = random.nextDouble();
-            double secondInt = random.nextDouble();
-            TestEvaluator.evaluate(firstInt + " + " + secondInt).assertEquals(firstInt + secondInt);
+        @Test
+        public void shouldReturnDouble_whenSummingTwoDoubles() {
+            TestEvaluator.evaluate("0.25 + 0.5").assertEquals(0.75);
+        }
+
+        @Test
+        public void shouldReturnDouble_whenSummingIntAndDouble() {
+            TestEvaluator.evaluate("0.25 + 2").assertEquals(2.25);
+        }
+
+        @Test
+        public void shouldReturnString_whenAddingStringAndInt() {
+            TestEvaluator.evaluate("'a' + 2").assertEquals("a2");
+        }
+
+        @Test
+        public void shouldReturnString_whenAddingDoubleAndString() {
+            TestEvaluator.evaluate("10.0 + 'a'").assertEquals("10.0a");
+        }
+    }
+
+    @Nested
+    public class MultiplicationTest {
+
+        @Test
+        public void shouldReturnInt_whenMultiplyingInts() {
+            TestEvaluator.evaluate("10 * 3").assertEquals(30);
+        }
+
+        @Test
+        public void shouldReturnDouble_whenMultiplyingIntAndDouble() {
+            TestEvaluator.evaluate("10 * 3.").assertEquals(30.);
+        }
+
+        @Test
+        public void shouldReturnString_whenMultiplyingStringByInt() {
+            TestEvaluator.evaluate("'ab' * 3").assertEquals("ababab");
         }
     }
 }
