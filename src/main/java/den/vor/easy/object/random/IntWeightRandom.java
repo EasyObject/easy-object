@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.random;
 
 import java.util.List;
@@ -8,31 +17,30 @@ import java.util.stream.IntStream;
 public final class IntWeightRandom {
 
     private final CustomRandom random = RandomFactory.getRandom();
-
+    private final int totalWeight;
     private int[] accumulatedWeights;
     private boolean isSingleValue;
-    private final int totalWeight;
 
-    public IntWeightRandom(List<Integer> weights){
-        if(weights.isEmpty()){
+    public IntWeightRandom(List<Integer> weights) {
+        if (weights.isEmpty()) {
             throw new IllegalArgumentException("Non-empty collection expected");
         }
         int size = weights.size();
         this.accumulatedWeights = new int[size];
         this.isSingleValue = size == 1;
         accumulatedWeights[0] = weights.get(0);
-        for(int i = 1; i < weights.size(); ++i){
+        for (int i = 1; i < weights.size(); ++i) {
             accumulatedWeights[i] = accumulatedWeights[i - 1] + weights.get(i);
         }
         totalWeight = accumulatedWeights[accumulatedWeights.length - 1];
     }
 
-    public IntWeightRandom(IntFunction<Integer> weightFunc, int count){
+    public IntWeightRandom(IntFunction<Integer> weightFunc, int count) {
         this(IntStream.range(1, count + 1).mapToObj(weightFunc).collect(Collectors.toList()));
     }
 
-    public int getNext(){
-        if(isSingleValue){
+    public int getNext() {
+        if (isSingleValue) {
             return 0;
         }
         int generated = random.nextInt(totalWeight);
@@ -43,11 +51,11 @@ public final class IntWeightRandom {
     }
 
     private int process(int left, int right, int generated) {
-        if(left + 1 == right) {
+        if (left + 1 == right) {
             return right;
         }
         int current = (left + right) >> 1;
-        if(accumulatedWeights[current] <= generated) {
+        if (accumulatedWeights[current] <= generated) {
             if (accumulatedWeights[current + 1] > generated) {
                 return current + 1;
             }

@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.parser.ast;
 
 import den.vor.easy.object.value.Value;
@@ -27,7 +36,7 @@ public class Variables {
                 return IntValue.of((int) value);
             }
             if (param instanceof StringValue) {
-                int value = Integer.parseInt(((StringValue)param).getValue());
+                int value = Integer.parseInt(((StringValue) param).getValue());
                 return IntValue.of(value);
             }
             throw new UnsupportedOperationException();

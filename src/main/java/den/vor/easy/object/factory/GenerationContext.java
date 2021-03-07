@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory;
 
 import den.vor.easy.object.random.CustomRandom;
@@ -13,17 +22,17 @@ public class GenerationContext {
     private Value<?> context = MapValue.emptyMap();
     private CompoundValue<?> parent = MapValue.emptyMap();
 
-    public static GenerationContext fromParent(GenerationContext parentContext) {
-        return new GenerationContext(parentContext.getRandom())
-                .setGlobalParams(parentContext.getGlobalParams());
-    }
-
     public GenerationContext() {
         this(RandomFactory.getRandom());
     }
 
     public GenerationContext(CustomRandom random) {
         this.random = random;
+    }
+
+    public static GenerationContext fromParent(GenerationContext parentContext) {
+        return new GenerationContext(parentContext.getRandom())
+                .setGlobalParams(parentContext.getGlobalParams());
     }
 
     public MapValue getGlobalParams() {

@@ -1,10 +1,18 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.value.impl;
 
 import den.vor.easy.object.value.ComparableValue;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.operator.impl.TimeOperations;
 
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -15,12 +23,12 @@ public class TimeValue extends ComparableValue<LocalTime> {
 
     private final LocalTime value;
 
-    public static TimeValue of(LocalTime value) {
-        return new TimeValue(value);
-    }
-
     private TimeValue(LocalTime value) {
         this.value = value;
+    }
+
+    public static TimeValue of(LocalTime value) {
+        return new TimeValue(value);
     }
 
     @Override

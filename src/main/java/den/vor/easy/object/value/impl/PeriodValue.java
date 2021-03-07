@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.value.impl;
 
 import den.vor.easy.object.bean.Period;
@@ -9,12 +18,12 @@ public class PeriodValue extends Value<Period> {
 
     private final Period period;
 
-    public static PeriodValue of(Period period) {
-        return new PeriodValue(period);
-    }
-
     private PeriodValue(Period period) {
         this.period = period;
+    }
+
+    public static PeriodValue of(Period period) {
+        return new PeriodValue(period);
     }
 
     @Override

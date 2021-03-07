@@ -1,18 +1,20 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory;
 
 import den.vor.easy.object.consumer.Consumer;
 import den.vor.easy.object.value.Value;
-import den.vor.easy.object.value.impl.IntValue;
-import den.vor.easy.object.value.impl.MapValue;
-import den.vor.easy.object.value.impl.StringValue;
 
 import java.util.List;
-import java.util.Map;
-import java.util.Spliterator;
 import java.util.stream.Stream;
-import java.util.stream.StreamSupport;
 
-import static java.util.Spliterator.*;
 import static java.util.stream.Collectors.toList;
 
 public class RootFactory<R extends Value<?>> {

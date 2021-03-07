@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.parser.ast;
 
 import den.vor.easy.object.parser.visitors.ResultVisitor;
@@ -42,7 +51,7 @@ public class TernaryExpressionTest {
         Value<?> result = ternaryExpression.eval(params);
 
         assertEquals(expected, result, () -> "Expected conditional expression to return thenExpression result (" +
-                expected + "), got "+ result);
+                expected + "), got " + result);
         verify(condition, only()).eval(params);
         verify(thenExpression, only()).eval(params);
         verifyNoInteractions(elseExpression);
@@ -58,7 +67,7 @@ public class TernaryExpressionTest {
         Value<?> result = ternaryExpression.eval(params);
 
         assertEquals(expected, result, () -> "Expected conditional expression to return elseExpression result (" +
-                expected + "), got "+ result);
+                expected + "), got " + result);
         verify(condition, only()).eval(params);
         verify(elseExpression, only()).eval(params);
         verifyNoInteractions(thenExpression);

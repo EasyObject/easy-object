@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.consumer.formatter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -24,9 +33,10 @@ public class CsvFormatter implements Formatter<String> {
     private NestedFormat nestedFormat;
 
     /**
-     * Creates a new formatter instance
-     * @param headers flag that indicates whether to use headers row
-     * @param delimiter delimiter to use
+     * Creates a new formatter instance.
+     *
+     * @param headers      flag that indicates whether to use headers row
+     * @param delimiter    delimiter to use
      * @param nestedFormat formatter for nested objects, such as maps and lists
      */
     public CsvFormatter(boolean headers, String delimiter, NestedFormat nestedFormat) {

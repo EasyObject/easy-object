@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.Factory;
@@ -23,10 +32,10 @@ public class UUIDFactory extends Factory<UUID, UUIDValue> {
         byte[] bytes = new byte[16];
 
         random.nextBytes(bytes);
-        bytes[6]  &= 0x0f;  /* clear version        */
-        bytes[6]  |= 0x40;  /* set to version 4     */
-        bytes[8]  &= 0x3f;  /* clear variant        */
-        bytes[8]  |= 0x80;  /* set to IETF variant  */
+        bytes[6] &= 0x0f;  /* clear version        */
+        bytes[6] |= 0x40;  /* set to version 4     */
+        bytes[8] &= 0x3f;  /* clear variant        */
+        bytes[8] |= 0x80;  /* set to IETF variant  */
 
         long msb = ByteBuffer.wrap(bytes).getLong(0);
         long lsb = ByteBuffer.wrap(bytes).getLong(1);

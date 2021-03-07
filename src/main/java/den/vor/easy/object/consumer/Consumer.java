@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.consumer;
 
 import den.vor.easy.object.consumer.formatter.Formatter;
@@ -5,11 +14,10 @@ import den.vor.easy.object.value.Value;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Consumer of generated objects. First formats values with {@link Formatter}
+ *
  * @param <T> return type of underlying {@link Formatter}
  */
 public abstract class Consumer<T> {
@@ -48,7 +56,7 @@ public abstract class Consumer<T> {
     private interface InternalConsumer {
         void consume(Value<?> toConsume);
 
-        default void flush(){
+        default void flush() {
 
         }
     }

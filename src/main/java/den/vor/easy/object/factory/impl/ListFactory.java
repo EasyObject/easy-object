@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.Factory;
@@ -13,6 +22,7 @@ import java.util.stream.Stream;
 /**
  * Factory that generates a list of values. Length of list is controlled by {@link ListFactory#lengthFactory},
  * elements generated - by {@link ListFactory#elementFactory}
+ *
  * @param <T> type of elements in the list
  */
 public class ListFactory<T> extends Factory<List<T>, ListValue<T>> {
@@ -41,9 +51,9 @@ public class ListFactory<T> extends Factory<List<T>, ListValue<T>> {
     @Override
     public List<FieldRef> getDependencies() {
         List<FieldRef> dependencies = elementFactory.getDependencies().stream()
-            .filter(s -> s.getParentLinks() != 0)
-            .map(FieldRef::getReferenceForParentFactory)
-            .collect(Collectors.toList());
+                .filter(s -> s.getParentLinks() != 0)
+                .map(FieldRef::getReferenceForParentFactory)
+                .collect(Collectors.toList());
         dependencies.addAll(lengthFactory.getDependencies());
         return dependencies;
     }

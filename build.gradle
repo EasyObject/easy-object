@@ -1,7 +1,17 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ *  Licensed under the MIT License (the "License");
+ *  you may not use this file except in compliance with the License.
+ *  See the License for the specific language governing permissions and
+ *  limitations under the License.
+ */
+
 plugins {
     id 'java'
     id 'maven-publish'
     id "org.sonarqube" version "3.0"
+    id 'checkstyle'
 }
 
 apply plugin: 'jacoco'
@@ -83,4 +93,16 @@ publishing {
             from components.java
         }
     }
+}
+
+checkstyleMain {
+    configProperties = [
+            'checkstyle.header.file': project.projectDir.toString() + "/config/java.header",
+    ]
+}
+
+checkstyleTest {
+    configProperties = [
+            'checkstyle.header.file': project.projectDir.toString() + "/config/java.header",
+    ]
 }

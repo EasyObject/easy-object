@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.ComparableFactory;
@@ -6,7 +15,6 @@ import den.vor.easy.object.factory.constraints.Bound;
 import den.vor.easy.object.random.CustomRandom;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.BigIntValue;
-import den.vor.easy.object.value.impl.IntValue;
 
 import java.math.BigInteger;
 
@@ -42,14 +50,14 @@ public class BigIntFactory extends ComparableFactory<BigInteger, BigIntValue> {
     }
 
     private BigInteger generateRandom(int numBits, CustomRandom random) {
-        int numBytes = (int)(((long)numBits+7)/8); // avoid overflow
+        int numBytes = (int) (((long) numBits + 7) / 8); // avoid overflow
         byte[] randomBits = new byte[numBytes];
 
         // Generate random bytes and mask out any excess bits
         if (numBytes > 0) {
             random.nextBytes(randomBits);
-            int excessBits = 8*numBytes - numBits;
-            randomBits[0] &= (1 << (8-excessBits)) - 1;
+            int excessBits = 8 * numBytes - numBits;
+            randomBits[0] &= (1 << (8 - excessBits)) - 1;
         }
         return new BigInteger(randomBits);
     }

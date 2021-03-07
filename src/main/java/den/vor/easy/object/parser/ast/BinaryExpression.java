@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.parser.ast;
 
 import den.vor.easy.object.parser.visitors.ResultVisitor;
@@ -8,30 +17,9 @@ import java.util.function.BiFunction;
 
 public class BinaryExpression implements Expression {
 
-    public enum Operation {
-        PLUS(OperationAware::plus),
-        MINUS(OperationAware::minus),
-        DIVIDE(OperationAware::divide),
-        MULTIPLY(OperationAware::multiply),
-        POW(OperationAware::pow),
-        REMAINDER(OperationAware::remainder),
-        LEFT_SHIFT(OperationAware::shiftLeft),
-        RIGHT_SHIFT(OperationAware::shiftRight),
-        AND(OperationAware::bitwiseAnd),
-        OR(OperationAware::bitwiseOr),
-        XOR(OperationAware::bitwiseXor);
-
-        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
-
-        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
-            this.function = function;
-        }
-    }
-
     private final Expression left;
     private final Expression right;
     private final Operation operation;
-
     public BinaryExpression(Expression left,
                             Expression right,
                             Operation operation) {
@@ -65,5 +53,25 @@ public class BinaryExpression implements Expression {
 
     public Operation getOperation() {
         return operation;
+    }
+
+    public enum Operation {
+        PLUS(OperationAware::plus),
+        MINUS(OperationAware::minus),
+        DIVIDE(OperationAware::divide),
+        MULTIPLY(OperationAware::multiply),
+        POW(OperationAware::pow),
+        REMAINDER(OperationAware::remainder),
+        LEFT_SHIFT(OperationAware::shiftLeft),
+        RIGHT_SHIFT(OperationAware::shiftRight),
+        AND(OperationAware::bitwiseAnd),
+        OR(OperationAware::bitwiseOr),
+        XOR(OperationAware::bitwiseXor);
+
+        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
+
+        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
+            this.function = function;
+        }
     }
 }

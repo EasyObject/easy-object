@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.consumer.formatter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -28,6 +37,17 @@ public class SqlFormatter implements Formatter<String> {
 
     public SqlFormatter(String tableName) {
         this(tableName, new JsonNestedFormat());
+    }
+
+    private static String formatField(Value<?> value) {
+        if (value instanceof StringValue) {
+            return formatString(((StringValue) value).getValue());
+        }
+        return value.getValue().toString();
+    }
+
+    private static String formatString(String str) {
+        return '"' + str.replaceAll("\"", "\\\\\"") + '"';
     }
 
     @Override
@@ -177,7 +197,6 @@ public class SqlFormatter implements Formatter<String> {
         }
     }
 
-
     public static class JsonNestedFormat implements NestedFormat {
 
         private final ObjectMapper objectMapper = new ObjectMapper();
@@ -213,16 +232,5 @@ public class SqlFormatter implements Formatter<String> {
             String headerSql = "INSERT INTO " + tableName + " (" + columns + ")\nVALUES\n";
             return headerSql + valuesSql + ";";
         }
-    }
-
-    private static String formatField(Value<?> value) {
-        if (value instanceof StringValue) {
-            return formatString(((StringValue) value).getValue());
-        }
-        return value.getValue().toString();
-    }
-
-    private static String formatString(String str) {
-        return '"' + str.replaceAll("\"", "\\\\\"") + '"';
     }
 }

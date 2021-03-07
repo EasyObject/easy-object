@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.ComparableFactory;
@@ -7,7 +16,7 @@ import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.IntValue;
 
 /**
- * Factory, which {@link den.vor.easy.object.factory.Generator} returns 4-byte signed numbers
+ * Factory, which {@link den.vor.easy.object.factory.Generator} returns 4-byte signed numbers.
  */
 public class IntFactory extends ComparableFactory<Integer, IntValue> {
 
@@ -17,6 +26,7 @@ public class IntFactory extends ComparableFactory<Integer, IntValue> {
 
     /**
      * Creates a new factory instance.
+     *
      * @param min lower inclusive bound for returned values
      * @param max upper inclusive bound for returned values
      */

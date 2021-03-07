@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.parser.visitors.impl;
 
 
@@ -5,7 +14,7 @@ import den.vor.easy.object.parser.ast.*;
 import den.vor.easy.object.parser.visitors.AbstractOptimizationVisitor;
 
 /**
- * AST nodes visitor that folds constant expressions, if they can be calculated on the compile time
+ * AST nodes visitor that folds constant expressions, if they can be calculated on the compile time.
  */
 public class ConstantFoldingVisitor extends AbstractOptimizationVisitor {
 

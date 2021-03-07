@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.parser;
 
 import den.vor.easy.object.parser.exception.FloatNumberException;
@@ -184,7 +193,7 @@ public final class Lexer {
 
     private void tokenizeText() {
         char start = peek(0);
-        next();// skip quote
+        next(); // skip quote
         StringBuilder buffer = new StringBuilder();
         char current = peek(0);
         while (true) {

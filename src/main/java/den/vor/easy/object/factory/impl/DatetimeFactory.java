@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.ComparableFactory;
@@ -11,7 +20,7 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Factory for {@link LocalDateTime} type
+ * Factory for {@link LocalDateTime} type.
  */
 public class DatetimeFactory extends ComparableFactory<LocalDateTime, DateTimeValue> {
 
@@ -27,6 +36,7 @@ public class DatetimeFactory extends ComparableFactory<LocalDateTime, DateTimeVa
 
     /**
      * Creates a new factory instance.
+     *
      * @param min lower inclusive bound for returned values
      * @param max upper inclusive bound for returned values
      */

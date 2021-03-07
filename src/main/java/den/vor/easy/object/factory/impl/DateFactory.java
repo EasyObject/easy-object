@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.ComparableFactory;
@@ -10,7 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Factory for {@link LocalDate} type
+ * Factory for {@link LocalDate} type.
  */
 public class DateFactory extends ComparableFactory<LocalDate, DateValue> {
 
@@ -20,6 +29,7 @@ public class DateFactory extends ComparableFactory<LocalDate, DateValue> {
 
     /**
      * Creates a new factory instance.
+     *
      * @param min lower inclusive bound for returned values
      * @param max upper inclusive bound for returned values
      */

@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.parser.ast;
 
 import den.vor.easy.object.parser.visitors.ResultVisitor;
@@ -5,31 +14,11 @@ import den.vor.easy.object.value.Value;
 
 import java.util.function.BiFunction;
 
-public final class ConditionalExpression implements Expression {
-
-    public enum Operation {
-        EQUALS(Value::equalTo),
-        NOT_EQUALS(Value::notEqualTo),
-
-        LT(Value::lt),
-        LTEQ(Value::lte),
-        GT(Value::gt),
-        GTEQ(Value::gte),
-
-        AND(Value::and),
-        OR(Value::or);
-
-        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
-
-        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
-            this.function = function;
-        }
-    }
+public class ConditionalExpression implements Expression {
 
     private final Expression left;
     private final Expression right;
     private final Operation operation;
-
     public ConditionalExpression(Expression left, Expression right, Operation operation) {
         this.left = left;
         this.right = right;
@@ -63,5 +52,24 @@ public final class ConditionalExpression implements Expression {
 
     public Operation getOperation() {
         return operation;
+    }
+
+    public enum Operation {
+        EQUALS(Value::equalTo),
+        NOT_EQUALS(Value::notEqualTo),
+
+        LT(Value::lt),
+        LTEQ(Value::lte),
+        GT(Value::gt),
+        GTEQ(Value::gte),
+
+        AND(Value::and),
+        OR(Value::or);
+
+        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
+
+        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
+            this.function = function;
+        }
     }
 }

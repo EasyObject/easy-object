@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.Factory;
@@ -6,25 +15,31 @@ import den.vor.easy.object.factory.PreparationContext;
 import den.vor.easy.object.parser.ExpressionEvaluator;
 import den.vor.easy.object.ref.FieldRef;
 import den.vor.easy.object.value.Value;
-import den.vor.easy.object.value.impl.MapValue;
 
 import java.util.List;
 
 /**
- * Factory, which {@link Generator} evaluates passed string expression for every object
+ * Factory, which {@link Generator} evaluates passed string expression for every object.
+ *
  * @param <T> type of returned value
  */
 public class ElFactory<T> extends Factory<T, Value<T>> {
 
-    private ExpressionEvaluator expressionEvaluator;
     private final String expression;
     private final Class<T> tClass;
+    private ExpressionEvaluator expressionEvaluator;
+
+    private ElFactory(String expression, Class<T> tClass) {
+        this.expression = expression;
+        this.tClass = tClass;
+    }
 
     /**
-     * Creates a new instance of factory
+     * Creates a new instance of factory.
+     *
      * @param expression string to evaluate
-     * @param tClass class object that specifies of generated value
-     * @param <T> type of generated value
+     * @param tClass     class object that specifies of generated value
+     * @param <T>        type of generated value
      * @return new factory instance
      */
     public static <T> ElFactory<T> factory(String expression, Class<T> tClass) {
@@ -33,11 +48,6 @@ public class ElFactory<T> extends Factory<T, Value<T>> {
 
     public static ElFactory<Object> factory(String expression) {
         return new ElFactory<>(expression, Object.class);
-    }
-
-    private ElFactory(String expression, Class<T> tClass) {
-        this.expression = expression;
-        this.tClass = tClass;
     }
 
     @Override

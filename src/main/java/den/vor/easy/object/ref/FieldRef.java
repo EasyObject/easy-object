@@ -1,15 +1,18 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.ref;
 
 import den.vor.easy.object.value.ScalarValue;
-import den.vor.easy.object.value.Value;
-import den.vor.easy.object.value.impl.IntValue;
-import den.vor.easy.object.value.impl.StringValue;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Class that stores reference path in the object tree.
@@ -20,8 +23,9 @@ public class FieldRef {
     private final List<ScalarValue<?>> keys;
 
     /**
-     * Creates a new class instance
-     * @param keys collection of references down the tree. Applied after parentLinks
+     * Creates a new class instance.
+     *
+     * @param keys        collection of references down the tree. Applied after parentLinks
      * @param parentLinks number of leaps up in the tree. Applied before keys
      */
     public FieldRef(List<ScalarValue<?>> keys, int parentLinks) {

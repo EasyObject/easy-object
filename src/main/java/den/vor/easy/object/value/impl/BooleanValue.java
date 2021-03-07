@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.value.impl;
 
 import den.vor.easy.object.value.ScalarValue;
@@ -9,15 +18,14 @@ public class BooleanValue extends ScalarValue<Boolean> {
 
     public static final BooleanValue TRUE = new BooleanValue(true);
     public static final BooleanValue FALSE = new BooleanValue(false);
-
-    public static BooleanValue of(boolean value) {
-        return value ? TRUE : FALSE;
-    }
-
     private final boolean value;
 
     public BooleanValue(boolean value) {
         this.value = value;
+    }
+
+    public static BooleanValue of(boolean value) {
+        return value ? TRUE : FALSE;
     }
 
     @Override

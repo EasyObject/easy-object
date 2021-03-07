@@ -1,10 +1,18 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.factory;
 
 import den.vor.easy.object.ref.FieldRef;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.IntValue;
 import den.vor.easy.object.value.impl.MapValue;
-import den.vor.easy.object.value.impl.StringValue;
 
 import java.util.Collections;
 import java.util.List;

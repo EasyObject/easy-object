@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.value.impl;
 
 import den.vor.easy.object.value.NumberValue;
@@ -9,12 +18,12 @@ public class IntValue extends NumberValue<Integer> {
 
     private final int value;
 
-    public static IntValue of(int value) {
-        return new IntValue(value);
-    }
-
     public IntValue(int value) {
         this.value = value;
+    }
+
+    public static IntValue of(int value) {
+        return new IntValue(value);
     }
 
     @Override

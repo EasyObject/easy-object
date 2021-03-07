@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.consumer.formatter;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -19,9 +28,9 @@ public class JsonFormatter implements Formatter<String> {
     private ExpressionEvaluator expressionEvaluator;
 
     /**
-     * Creates a new formatter that transforms a result of expression evaluation on values
+     * Creates a new formatter that transforms a result of expression evaluation on values.
      *
-     * @param expression expression to evaluate on each object formatted
+     * @param expression expression to evaluate on each object formatted.
      */
     public JsonFormatter(String expression) {
         this.expressionEvaluator = new ExpressionEvaluator(expression);
