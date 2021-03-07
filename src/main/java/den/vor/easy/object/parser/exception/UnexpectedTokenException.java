@@ -23,4 +23,11 @@ public class UnexpectedTokenException extends ParserException {
     public String getUserMessage() {
         return "Didn't expect token " + token.getType() + " (" + token.getText() + ")";
     }
+
+    @Override
+    public String toString() {
+        return "UnexpectedTokenException{" +
+                "token=" + token +
+                '}';
+    }
 }

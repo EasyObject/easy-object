@@ -28,8 +28,8 @@ public class ExpressionEvaluator {
     private final List<FieldRef> dependencies;
 
     public ExpressionEvaluator(String expression, MapValue constParams) {
-        List<Token> tokens = new Lexer(expression).tokenize();
-        Expression parsedExpression = new Parser(tokens).parse();
+        TokenHolder tokenHolder = new Lexer(expression).tokenize();
+        Expression parsedExpression = new Parser(tokenHolder).parse();
         Variables variables = new Variables(constParams, NullValue.NULL);
         CompositeVisitor compositeVisitor = new CompositeVisitor(List.of(
                 new ConstArgsPropagationVisitor(variables),
