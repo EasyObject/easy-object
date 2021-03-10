@@ -12,6 +12,8 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.bean.Period;
 import den.vor.easy.object.value.Value;
 
+import java.util.Objects;
+
 import static den.vor.easy.object.value.operator.impl.PeriodOperations.*;
 
 public class PeriodValue extends Value<Period> {
@@ -72,5 +74,18 @@ public class PeriodValue extends Value<Period> {
     @Override
     public Value<?> plus() {
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PeriodValue that = (PeriodValue) o;
+        return Objects.equals(period, that.period);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(period);
     }
 }

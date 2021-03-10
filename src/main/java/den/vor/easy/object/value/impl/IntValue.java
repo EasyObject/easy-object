@@ -12,6 +12,8 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.value.NumberValue;
 import den.vor.easy.object.value.Value;
 
+import java.util.Objects;
+
 import static den.vor.easy.object.value.operator.impl.IntOperations.*;
 
 public class IntValue extends NumberValue<Integer> {
@@ -104,5 +106,18 @@ public class IntValue extends NumberValue<Integer> {
     @Override
     public String toString() {
         return "IntValue{" + value + '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        IntValue intValue = (IntValue) o;
+        return value == intValue.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }

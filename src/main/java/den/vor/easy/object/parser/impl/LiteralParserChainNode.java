@@ -102,18 +102,7 @@ public class LiteralParserChainNode extends ParserChainNode {
     private Expression rec(TokenHolder tokenHolder, Expression expression) {
         if (tokenHolder.lookMatch(DOT) && tokenHolder.lookMatch(1, WORD)) {
             if (tokenHolder.lookMatch(2, LPAREN)) {
-                tokenHolder.consume(DOT);
-                String methodName = tokenHolder.consume(WORD).getText();
-                tokenHolder.consume(LPAREN);
-                List<Expression> arguments = new ArrayList<>();
-                while (!tokenHolder.lookMatch(RPAREN)) {
-                    if (!arguments.isEmpty()) {
-                        tokenHolder.consume(COMMA);
-                    }
-                    arguments.add(getRoot().parse(tokenHolder));
-                }
-                ValueExpression method = new ValueExpression(StringValue.of(methodName));
-                return rec(tokenHolder, new MethodInvocationExpression(expression, method, arguments));
+                return getMethodInvocationExpression(tokenHolder, expression);
             } else {
                 tokenHolder.consume(DOT);
                 String key = tokenHolder.consume(WORD).getText();
@@ -128,6 +117,21 @@ public class LiteralParserChainNode extends ParserChainNode {
             return rec(tokenHolder, mapAccessExpression);
         }
         return expression;
+    }
+
+    private Expression getMethodInvocationExpression(TokenHolder tokenHolder, Expression expression) {
+        tokenHolder.consume(DOT);
+        String methodName = tokenHolder.consume(WORD).getText();
+        tokenHolder.consume(LPAREN);
+        List<Expression> arguments = new ArrayList<>();
+        while (!tokenHolder.lookMatch(RPAREN)) {
+            if (!arguments.isEmpty()) {
+                tokenHolder.consume(COMMA);
+            }
+            arguments.add(getRoot().parse(tokenHolder));
+        }
+        ValueExpression method = new ValueExpression(StringValue.of(methodName));
+        return rec(tokenHolder, new MethodInvocationExpression(expression, method, arguments));
     }
 
 }

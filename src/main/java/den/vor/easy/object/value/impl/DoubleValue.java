@@ -12,6 +12,8 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.value.NumberValue;
 import den.vor.easy.object.value.Value;
 
+import java.util.Objects;
+
 import static den.vor.easy.object.value.operator.impl.DoubleOperations.*;
 
 public class DoubleValue extends NumberValue<Double> {
@@ -71,5 +73,18 @@ public class DoubleValue extends NumberValue<Double> {
     @Override
     public Value<?> plus() {
         return this;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        DoubleValue that = (DoubleValue) o;
+        return Objects.equals(value, that.value);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
