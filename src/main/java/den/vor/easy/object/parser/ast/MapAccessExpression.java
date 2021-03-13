@@ -47,6 +47,10 @@ public class MapAccessExpression implements Expression {
         return value;
     }
 
+    public List<Expression> getKeys() {
+        return keys;
+    }
+
     @Override
     public <T> T accept(ResultVisitor<T> visitor) {
         throw new UnsupportedOperationException();

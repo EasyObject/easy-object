@@ -73,7 +73,7 @@ public final class Lexer {
         tokens = new ArrayList<>();
     }
 
-    public List<Token> tokenize() {
+    public TokenHolder tokenize() {
         while (pos < length) {
             final char current = peek(0);
             if (Character.isDigit(current)) {
@@ -91,7 +91,7 @@ public final class Lexer {
                 next();
             }
         }
-        return tokens;
+        return new TokenHolder(tokens);
     }
 
     private void tokenizeNumber() {

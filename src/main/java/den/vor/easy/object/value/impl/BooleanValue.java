@@ -12,6 +12,8 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
 
+import java.util.Objects;
+
 import static den.vor.easy.object.value.operator.impl.BooleanOperations.*;
 
 public class BooleanValue extends ScalarValue<Boolean> {
@@ -58,5 +60,18 @@ public class BooleanValue extends ScalarValue<Boolean> {
     @Override
     public Value<?> not() {
         return of(!value);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BooleanValue that = (BooleanValue) o;
+        return value == that.value;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(value);
     }
 }
