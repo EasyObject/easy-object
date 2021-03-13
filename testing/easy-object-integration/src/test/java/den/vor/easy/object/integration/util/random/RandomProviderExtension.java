@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.integration.util.random;
 
 import den.vor.easy.object.random.CustomRandom;
@@ -19,12 +28,14 @@ public class RandomProviderExtension implements ParameterResolver, AfterTestExec
 
 
     @Override
-    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext context) throws ParameterResolutionException {
+    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext context)
+            throws ParameterResolutionException {
         return parameterContext.getParameter().getType().isAssignableFrom(CustomRandom.class);
     }
 
     @Override
-    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext context) throws ParameterResolutionException {
+    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext context)
+            throws ParameterResolutionException {
         Method testMethod = context.getTestMethod().orElseThrow();
         Class<?> testClass = context.getTestClass().orElseThrow();
         long[] seed;

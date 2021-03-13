@@ -1,3 +1,12 @@
+/*
+ * Copyright (c) 2020-2021 Danila Varatyntsev
+ *
+ * Licensed under the MIT License (the "License");
+ * you may not use this file except in compliance with the License.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package den.vor.easy.object.fuzzy.factory;
 
 import den.vor.easy.object.fuzzy.GenerationContext;
@@ -14,7 +23,7 @@ public class IntExpressionFactory {
 
     private static final int MAX_DEPTH = 10;
 
-    private final static MapWeightRandom<BiFunction<GenerationContext, CustomRandom, IntExpression>> EXPRESSIONS =
+    private static final MapWeightRandom<BiFunction<GenerationContext, CustomRandom, IntExpression>> EXPRESSIONS =
             new MapWeightRandom<>(
                     Map.of(
                             0.51, IntValueExpression::new,
