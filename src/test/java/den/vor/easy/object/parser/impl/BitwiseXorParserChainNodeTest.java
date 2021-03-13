@@ -49,7 +49,7 @@ class BitwiseXorParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.CARET)).thenReturn(false);
 
@@ -60,7 +60,7 @@ class BitwiseXorParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithAndOperator() {
+    void shouldReturnBinaryExpressionWithAndOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.CARET)).thenReturn(true).thenReturn(false);
 
@@ -73,7 +73,7 @@ class BitwiseXorParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNestedBinaryExpressions() {
+    void shouldReturnNestedBinaryExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.CARET)).thenReturn(true).thenReturn(true).thenReturn(false);
 

@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UnaryExpressionTest {
+class UnaryExpressionTest {
 
     @Mock
     private Value<Object> value;
@@ -32,7 +32,7 @@ public class UnaryExpressionTest {
     private Variables variables;
 
     @Test
-    public void shouldEvaluateChildExpressionsAndCallPlusMethodOnFirst() {
+    void shouldEvaluateChildExpressionsAndCallPlusMethodOnFirst() {
         doReturn(value).when(expression).eval(variables);
 
         UnaryExpression unaryExpression = new UnaryExpression(expression, UnaryExpression.Operation.MINUS);
@@ -48,7 +48,7 @@ public class UnaryExpressionTest {
     }
 
     @Test
-    public void shouldCallVisitMethodOnVisitor_whenAccepted(@Mock ResultVisitor<Object> visitor,
+    void shouldCallVisitMethodOnVisitor_whenAccepted(@Mock ResultVisitor<Object> visitor,
                                                             @Mock UnaryExpression expression) {
         Object expected = new Object();
         when(visitor.visit(any(UnaryExpression.class))).thenReturn(expected);

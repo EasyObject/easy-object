@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
+class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -44,7 +44,7 @@ public class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.MINUS)).thenReturn(false);
         when(tokenHolder.match(TokenType.NOT)).thenReturn(false);
@@ -57,7 +57,7 @@ public class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnUnaryExpressionWithPlusOperator() {
+    void shouldReturnUnaryExpressionWithPlusOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.MINUS)).thenReturn(false);
         when(tokenHolder.match(TokenType.NOT)).thenReturn(false);
@@ -72,7 +72,7 @@ public class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnUnaryExpressionWithMinusOperator() {
+    void shouldReturnUnaryExpressionWithMinusOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.MINUS)).thenReturn(true);
 
@@ -85,7 +85,7 @@ public class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnUnaryExpressionWithNotOperator() {
+    void shouldReturnUnaryExpressionWithNotOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.MINUS)).thenReturn(false);
         when(tokenHolder.match(TokenType.NOT)).thenReturn(true);

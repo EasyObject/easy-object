@@ -10,7 +10,6 @@
 package den.vor.easy.object.integration.factory;
 
 import den.vor.easy.object.factory.Factory;
-import den.vor.easy.object.factory.GenerationContext;
 import den.vor.easy.object.value.Value;
 
 import java.util.function.Consumer;

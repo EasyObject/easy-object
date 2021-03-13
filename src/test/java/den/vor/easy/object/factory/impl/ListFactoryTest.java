@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ListFactoryTest {
+class ListFactoryTest {
 
     @Mock
     private Factory<String, Value<String>> elementFactory;
@@ -47,7 +47,7 @@ public class ListFactoryTest {
     private StringValue secondString;
 
     @Test
-    public void shouldCallElementFactoryGeneratorTimesReturnedByLengthFactory() {
+    void shouldCallElementFactoryGeneratorTimesReturnedByLengthFactory() {
         when(elementFactory.getGenerator()).thenReturn(elementGenerator);
         when(lengthFactory.getGenerator()).thenReturn(lengthGenerator);
         when(lengthGenerator.getNext(any(GenerationContext.class))).thenReturn(of(2));
@@ -68,7 +68,7 @@ public class ListFactoryTest {
     }
 
     @Test
-    public void shouldReturnDependenciesFromElementAndLengthFactories() {
+    void shouldReturnDependenciesFromElementAndLengthFactories() {
         FieldRef elementFirstDependency = new FieldRef(List.of(of("key1")), 1);
         FieldRef elementSecondDependency = new FieldRef(List.of(of("key2")), 0);
         FieldRef lengthFirstDependency = new FieldRef(List.of(of("key3")), 1);

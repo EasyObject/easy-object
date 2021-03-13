@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class LogicalOrParserChainNodeTest extends ParserChainNodeTestBase {
+class LogicalOrParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -49,7 +49,7 @@ public class LogicalOrParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.BARBAR)).thenReturn(false);
 
@@ -60,7 +60,7 @@ public class LogicalOrParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnConditionalExpressionWithOrOperator() {
+    void shouldReturnConditionalExpressionWithOrOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.BARBAR)).thenReturn(true).thenReturn(false);
 
@@ -74,7 +74,7 @@ public class LogicalOrParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNestedConditionalExpressions() {
+    void shouldReturnNestedConditionalExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.BARBAR)).thenReturn(true).thenReturn(true).thenReturn(false);
 

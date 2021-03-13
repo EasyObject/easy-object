@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
+class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -48,7 +48,7 @@ public class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
 
         Expression expression = multiplicativeParserChainNode.parse(tokenHolder);
@@ -58,7 +58,7 @@ public class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithMultiplyOperator() {
+    void shouldReturnBinaryExpressionWithMultiplyOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.STAR)).thenReturn(true).thenReturn(false);
         when(tokenHolder.match(TokenType.SLASH)).thenReturn(false);
@@ -73,7 +73,7 @@ public class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithDivideOperator() {
+    void shouldReturnBinaryExpressionWithDivideOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.SLASH)).thenReturn(true).thenReturn(false);
         when(tokenHolder.match(TokenType.STAR)).thenReturn(false);
@@ -88,7 +88,7 @@ public class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithRemainderOperator() {
+    void shouldReturnBinaryExpressionWithRemainderOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.PERCENT)).thenReturn(true).thenReturn(false);
         when(tokenHolder.match(TokenType.STAR)).thenReturn(false);
@@ -103,7 +103,7 @@ public class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNestedBinaryExpressions() {
+    void shouldReturnNestedBinaryExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.STAR)).thenReturn(true).thenReturn(true).thenReturn(false);
 

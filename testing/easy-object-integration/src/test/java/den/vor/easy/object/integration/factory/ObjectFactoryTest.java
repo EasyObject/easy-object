@@ -19,10 +19,10 @@ import static den.vor.easy.object.facade.ValueFacade.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ObjectFactoryTest {
+class ObjectFactoryTest {
 
     @Test
-    public void shouldCopySiblingNode_whenExpressionReferencesIt() {
+    void shouldCopySiblingNode_whenExpressionReferencesIt() {
         ObjectFactory factory = isObject("a", isInt(10, 20)).and("b", isExpression("a"));
         FactoryTestHelper.of(factory)
                 .withAssertionRunner(map -> {
@@ -34,7 +34,7 @@ public class ObjectFactoryTest {
     }
 
     @Test
-    public void shouldCopySiblingNodeWithNameThis_whenExpressionReferencesIt() {
+    void shouldCopySiblingNodeWithNameThis_whenExpressionReferencesIt() {
         ObjectFactory factory = isObject("this", isInt(10, 20)).and("b", isExpression("this.this"));
         FactoryTestHelper.of(factory)
                 .withAssertionRunner(map -> {
@@ -45,7 +45,7 @@ public class ObjectFactoryTest {
                 }).test();
     }
     @Test
-    public void shouldCopySiblingNodeWithNameParent_whenExpressionReferencesIt() {
+    void shouldCopySiblingNodeWithNameParent_whenExpressionReferencesIt() {
         ObjectFactory factory = isObject("parent", isInt(10, 20)).and("b", isExpression("this.parent"));
         FactoryTestHelper.of(factory)
                 .withAssertionRunner(map -> {
@@ -57,7 +57,7 @@ public class ObjectFactoryTest {
     }
 
     @Test
-    public void shouldCopySiblingNode_whenExpressionReferencesItWithExplicitThisReference() {
+    void shouldCopySiblingNode_whenExpressionReferencesItWithExplicitThisReference() {
         ObjectFactory factory = isObject("a", isInt(10, 20)).and("b", isExpression("this.a"));
         FactoryTestHelper.of(factory)
                 .withAssertionRunner(map -> {
@@ -70,7 +70,7 @@ public class ObjectFactoryTest {
 
 
     @Test
-    public void shouldCopyParentsSiblingNode_whenExpressionReferencesIt() {
+    void shouldCopyParentsSiblingNode_whenExpressionReferencesIt() {
         ObjectFactory factory = isObject("a", isInt(10, 20))
                 .and("b", isObject("c", isExpression("parent.a")));
         FactoryTestHelper.of(factory)
@@ -84,5 +84,4 @@ public class ObjectFactoryTest {
                     assertEquals(a, c, () -> "Expected node " + c + " to copy parent's sibling (" + a + ") value");
                 }).test();
     }
-
 }

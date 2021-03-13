@@ -29,7 +29,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class MappingFactoryTest {
+class MappingFactoryTest {
 
     @Mock
     private Factory<String, StringValue> factory;
@@ -39,7 +39,7 @@ public class MappingFactoryTest {
     private Function<StringValue, IntValue> function;
 
     @Test
-    public void shouldReturnFactoryDependencies() {
+    void shouldReturnFactoryDependencies() {
         FieldRef dependency = new FieldRef(List.of(StringValue.of("key")), 0);
         List<FieldRef> dependencies = List.of(dependency);
         when(factory.getDependencies()).thenReturn(dependencies);
@@ -51,7 +51,7 @@ public class MappingFactoryTest {
     }
 
     @Test
-    public void shouldCallGeneratorAndApplyFunctionOnResult() {
+    void shouldCallGeneratorAndApplyFunctionOnResult() {
         StringValue value = StringValue.of("a");
         IntValue intValue = IntValue.of(1);
         when(factory.getGenerator()).thenReturn(generator);

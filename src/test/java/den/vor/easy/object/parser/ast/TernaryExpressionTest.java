@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TernaryExpressionTest {
+class TernaryExpressionTest {
 
     @Mock
     private Expression condition;
@@ -42,7 +42,7 @@ public class TernaryExpressionTest {
     }
 
     @Test
-    public void shouldEvalConditionAndThenExpr_whenConditionIsTrue() {
+    void shouldEvalConditionAndThenExpr_whenConditionIsTrue() {
         IntValue expected = IntValue.of(1);
 
         doReturn(BooleanValue.TRUE).when(condition).eval(params);
@@ -58,7 +58,7 @@ public class TernaryExpressionTest {
     }
 
     @Test
-    public void shouldEvalConditionAndElseExpr_whenConditionIsFalse() {
+    void shouldEvalConditionAndElseExpr_whenConditionIsFalse() {
         IntValue expected = IntValue.of(1);
 
         doReturn(BooleanValue.FALSE).when(condition).eval(params);
@@ -74,14 +74,14 @@ public class TernaryExpressionTest {
     }
 
     @Test
-    public void shouldThrowException_whenCanNotCastConditionToBoolean() {
+    void shouldThrowException_whenCanNotCastConditionToBoolean() {
         doReturn(IntValue.of(1)).when(condition).eval(params);
 
         assertThrows(ClassCastException.class, () -> ternaryExpression.eval(params));
     }
 
     @Test
-    public void shouldCallVisitorVisitMethod_whenAcceptCalled(@Mock ResultVisitor<Object> resultVisitor) {
+    void shouldCallVisitorVisitMethod_whenAcceptCalled(@Mock ResultVisitor<Object> resultVisitor) {
         Object visitorResponse = new Object();
         when(resultVisitor.visit(ternaryExpression)).thenReturn(visitorResponse);
 

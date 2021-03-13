@@ -24,10 +24,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CollectionEnumValuesProviderTest {
+class CollectionEnumValuesProviderTest {
 
     @Test
-    public void shouldReturnRandomCollectionElement(@Mock CustomRandom random) {
+    void shouldReturnRandomCollectionElement(@Mock CustomRandom random) {
         StringValue b = of("b");
         List<StringValue> values = List.of(of("a"), b, of("c"));
 

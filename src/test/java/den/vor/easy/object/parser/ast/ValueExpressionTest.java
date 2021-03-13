@@ -21,13 +21,13 @@ import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.only;
 
 @ExtendWith(MockitoExtension.class)
-public class ValueExpressionTest {
+class ValueExpressionTest {
 
     @Mock
     private Value<?> value;
 
     @Test
-    public void shouldReturnPassedValue_whenEvalCalled() {
+    void shouldReturnPassedValue_whenEvalCalled() {
         ValueExpression valueExpression = new ValueExpression(value);
 
         Value<?> result = valueExpression.getValue();
@@ -38,7 +38,7 @@ public class ValueExpressionTest {
     }
 
     @Test
-    public void shouldCallVisitorVisitMethod_whenAcceptCalled(@Mock ResultVisitor<Object> resultVisitor) {
+    void shouldCallVisitorVisitMethod_whenAcceptCalled(@Mock ResultVisitor<Object> resultVisitor) {
         ValueExpression valueExpression = new ValueExpression(value);
 
         Object visitorResponse = new Object();

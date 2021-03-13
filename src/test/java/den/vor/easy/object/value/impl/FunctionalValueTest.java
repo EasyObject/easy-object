@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class FunctionalValueTest {
+class FunctionalValueTest {
 
     @Mock
     private BiFunction<Value<Object>, List<Value<?>>, Value<?>> biFunction;
@@ -32,7 +32,7 @@ public class FunctionalValueTest {
     private List<Value<?>> args;
 
     @Test
-    public void shouldApplyFunction_whenInvokeCalled() {
+    void shouldApplyFunction_whenInvokeCalled() {
         FunctionalValue<Object> functionalValue = new FunctionalValue<>(biFunction);
 
         functionalValue.invoke(context, args);
@@ -42,7 +42,7 @@ public class FunctionalValueTest {
     }
 
     @Test
-    public void shouldReturnIsIdempotentFlag() {
+    void shouldReturnIsIdempotentFlag() {
         FunctionalValue<Object> functionalValue = new FunctionalValue<>(biFunction, true);
 
         assertTrue(functionalValue.isIdempotent(), "Expected function to return idempotent flag=true");

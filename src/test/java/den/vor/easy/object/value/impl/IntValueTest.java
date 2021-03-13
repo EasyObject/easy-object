@@ -20,10 +20,10 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class IntValueTest {
+class IntValueTest {
 
     @Test
-    public void shouldReturnStringValueContainingInt() {
+    void shouldReturnStringValueContainingInt() {
         IntValue intValue = IntValue.of(10);
         StringValue stringValue = intValue.toStringValue();
 
@@ -31,9 +31,9 @@ public class IntValueTest {
     }
 
     @Nested
-    public class SumTest {
+    class SumTest {
         @Test
-        public void shouldReturnInt_whenAddingTwoIntValues() {
+        void shouldReturnInt_whenAddingTwoIntValues() {
             test(IntValue.of(5), IntValue.of(10))
                     .withFunction(OperationAware::plus)
                     .withFunctionSymbol("+")
@@ -41,7 +41,7 @@ public class IntValueTest {
         }
 
         @Test
-        public void shouldReturnDouble_whenAddingIntAndDoubleValues() {
+        void shouldReturnDouble_whenAddingIntAndDoubleValues() {
             test(IntValue.of(5), DoubleValue.of(10.0))
                     .withFunction(OperationAware::plus)
                     .withFunctionSymbol("+")
@@ -49,7 +49,7 @@ public class IntValueTest {
         }
 
         @Test
-        public void shouldReturnString_whenAddingIntAndStringValues() {
+        void shouldReturnString_whenAddingIntAndStringValues() {
             test(IntValue.of(5), StringValue.of("a"))
                     .withFunction(OperationAware::plus)
                     .withFunctionSymbol("+")
@@ -58,9 +58,9 @@ public class IntValueTest {
     }
 
     @Nested
-    public class SubtractionTest {
+    class SubtractionTest {
         @Test
-        public void shouldReturnInt_whenSubtractingTwoIntValues() {
+        void shouldReturnInt_whenSubtractingTwoIntValues() {
             test(IntValue.of(5), IntValue.of(10))
                     .withFunction(OperationAware::minus)
                     .withFunctionSymbol("-")
@@ -68,7 +68,7 @@ public class IntValueTest {
         }
 
         @Test
-        public void shouldReturnDouble_whenSubtractingIntAndDoubleValues() {
+        void shouldReturnDouble_whenSubtractingIntAndDoubleValues() {
             test(IntValue.of(5), DoubleValue.of(10.0))
                     .withFunction(OperationAware::minus)
                     .withFunctionSymbol("-")
@@ -77,9 +77,9 @@ public class IntValueTest {
     }
 
     @Nested
-    public class MultiplicationTest {
+    class MultiplicationTest {
         @Test
-        public void shouldReturnInt_whenMultiplyingTwoIntValues() {
+        void shouldReturnInt_whenMultiplyingTwoIntValues() {
             test(IntValue.of(5), IntValue.of(10))
                     .withFunction(OperationAware::multiply)
                     .withFunctionSymbol("*")
@@ -87,7 +87,7 @@ public class IntValueTest {
         }
 
         @Test
-        public void shouldReturnDouble_whenMultiplyingIntAndDoubleValues() {
+        void shouldReturnDouble_whenMultiplyingIntAndDoubleValues() {
             test(IntValue.of(5), DoubleValue.of(10.0))
                     .withFunction(OperationAware::multiply)
                     .withFunctionSymbol("*")
@@ -96,9 +96,9 @@ public class IntValueTest {
     }
 
     @Nested
-    public class DivisionTest {
+    class DivisionTest {
         @Test
-        public void shouldReturnInt_whenDividingTwoIntValues() {
+        void shouldReturnInt_whenDividingTwoIntValues() {
             test(IntValue.of(5), IntValue.of(2))
                     .withFunction(OperationAware::divide)
                     .withFunctionSymbol("/")
@@ -106,7 +106,7 @@ public class IntValueTest {
         }
 
         @Test
-        public void shouldReturnDouble_whenDividingIntAndDoubleValues() {
+        void shouldReturnDouble_whenDividingIntAndDoubleValues() {
             test(IntValue.of(5), DoubleValue.of(10.0))
                     .withFunction(OperationAware::divide)
                     .withFunctionSymbol("/")
@@ -115,9 +115,9 @@ public class IntValueTest {
     }
 
     @Nested
-    public class PowerTest {
+    class PowerTest {
         @Test
-        public void shouldReturnInt_whenTakingPowerFromTwoIntValues() {
+        void shouldReturnInt_whenTakingPowerFromTwoIntValues() {
             test(IntValue.of(5), IntValue.of(3))
                     .withFunction(OperationAware::pow)
                     .withFunctionSymbol("**")
@@ -125,7 +125,7 @@ public class IntValueTest {
         }
 
         @Test
-        public void shouldReturnDouble_whenTakingPowerFromIntAndDoubleValues() {
+        void shouldReturnDouble_whenTakingPowerFromIntAndDoubleValues() {
             test(IntValue.of(2), DoubleValue.of(10.0))
                     .withFunction(OperationAware::pow)
                     .withFunctionSymbol("**")
@@ -134,7 +134,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnInt_whenTakingRemainderFromTwoIntValues() {
+    void shouldReturnInt_whenTakingRemainderFromTwoIntValues() {
         test(IntValue.of(5), IntValue.of(2))
                 .withFunction(OperationAware::remainder)
                 .withFunctionSymbol("%")
@@ -142,7 +142,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnInt_whenShiftingLeftIntValueByIntValue() {
+    void shouldReturnInt_whenShiftingLeftIntValueByIntValue() {
         test(IntValue.of(5), IntValue.of(2))
                 .withFunction(OperationAware::shiftLeft)
                 .withFunctionSymbol("<<")
@@ -150,7 +150,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnInt_whenShiftingRightIntValueByIntValue() {
+    void shouldReturnInt_whenShiftingRightIntValueByIntValue() {
         test(IntValue.of(10), IntValue.of(2))
                 .withFunction(OperationAware::shiftRight)
                 .withFunctionSymbol(">>")
@@ -158,7 +158,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnInt_whenTakingBitwiseAndBetweenTwoIntValues() {
+    void shouldReturnInt_whenTakingBitwiseAndBetweenTwoIntValues() {
         test(IntValue.of(3), IntValue.of(2))
                 .withFunction(OperationAware::bitwiseAnd)
                 .withFunctionSymbol("&")
@@ -166,7 +166,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnInt_whenTakingBitwiseOrBetweenTwoIntValues() {
+    void shouldReturnInt_whenTakingBitwiseOrBetweenTwoIntValues() {
         test(IntValue.of(3), IntValue.of(2))
                 .withFunction(OperationAware::bitwiseOr)
                 .withFunctionSymbol("|")
@@ -174,7 +174,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnInt_whenTakingBitwiseXorBetweenTwoIntValues() {
+    void shouldReturnInt_whenTakingBitwiseXorBetweenTwoIntValues() {
         test(IntValue.of(3), IntValue.of(2))
                 .withFunction(OperationAware::bitwiseXor)
                 .withFunctionSymbol("^")
@@ -182,7 +182,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnIntWithNegativeValue_whenCalledMinusMethod() {
+    void shouldReturnIntWithNegativeValue_whenCalledMinusMethod() {
         IntValue value = IntValue.of(3);
 
         Value<?> negative = value.minus();
@@ -194,7 +194,7 @@ public class IntValueTest {
     }
 
     @Test
-    public void shouldReturnSameInstance_whenCalledPlusMethod() {
+    void shouldReturnSameInstance_whenCalledPlusMethod() {
         IntValue value = IntValue.of(3);
 
         Value<?> plusValue = value.plus();

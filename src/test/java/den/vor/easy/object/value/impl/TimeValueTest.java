@@ -19,12 +19,12 @@ import java.time.format.DateTimeFormatter;
 
 import static den.vor.easy.object.value.impl.OperatorTestHelper.test;
 
-public class TimeValueTest {
+class TimeValueTest {
 
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ISO_TIME;
 
     @Test
-    public void shouldReturnTime_whenAddingPeriodToTime() {
+    void shouldReturnTime_whenAddingPeriodToTime() {
         LocalTime initial = LocalTime.parse("13:10:15", FORMATTER);
         LocalTime expected = LocalTime.parse("10:15:10", FORMATTER);
         Period period = new Period().setHours(21).setMinutes(4).setSeconds(55);
@@ -35,7 +35,7 @@ public class TimeValueTest {
     }
 
     @Test
-    public void shouldReturnTime_whenSubtractingPeriodFromDate() {
+    void shouldReturnTime_whenSubtractingPeriodFromDate() {
         LocalTime initial = LocalTime.parse("10:15:10", FORMATTER);
         LocalTime expected = LocalTime.parse("13:10:15", FORMATTER);
         Period period = new Period().setHours(21).setMinutes(4).setSeconds(55);

@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class VariablesTest {
+class VariablesTest {
 
     @Mock
     private MapValue globalVariables;
@@ -43,7 +43,7 @@ public class VariablesTest {
     }
 
     @Test
-    public void shouldReturnValueFromGlobalVariables_whenCalledGetNullable() {
+    void shouldReturnValueFromGlobalVariables_whenCalledGetNullable() {
         doReturn(value).when(globalVariables).get(key);
 
         Value<?> actual = variables.getNullableConst(key);
@@ -54,7 +54,7 @@ public class VariablesTest {
     }
 
     @Test
-    public void shouldReturnValueFromConstValues_whenCalledGetNullable() {
+    void shouldReturnValueFromConstValues_whenCalledGetNullable() {
         Value<?> actual = variables.getNullableConst(of("pi"));
 
         assertNotNull(actual, () -> "Expected Variables to return pi, got" + actual);
@@ -62,7 +62,7 @@ public class VariablesTest {
     }
 
     @Test
-    public void shouldReturnNull_whenCalledGetNullableAndVariableDoesNotExist() {
+    void shouldReturnNull_whenCalledGetNullableAndVariableDoesNotExist() {
         Value<?> actual = variables.getNullableConst(key);
 
         assertNull(actual, () -> "Expected Variables to return null on non-existing value, got" + actual);
@@ -70,7 +70,7 @@ public class VariablesTest {
     }
 
     @Test
-    public void shouldReturnNullValue_whenCalledGetVariableAndVariableDoesNotExist() {
+    void shouldReturnNullValue_whenCalledGetVariableAndVariableDoesNotExist() {
         Value<?> actual = variables.getVariable(key);
 
         assertEquals(NullValue.NULL, actual,
@@ -80,7 +80,7 @@ public class VariablesTest {
     }
 
     @Test
-    public void shouldReturnValueFromContext_whenCalledGetVariableAndVariableDoesNotExist() {
+    void shouldReturnValueFromContext_whenCalledGetVariableAndVariableDoesNotExist() {
         doReturn(value).when(context).get(key);
 
         Value<?> actual = variables.getVariable(key);

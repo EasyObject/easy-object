@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class LogicalAndParserChainNodeTest extends ParserChainNodeTestBase {
+class LogicalAndParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -48,7 +48,7 @@ public class LogicalAndParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.AMPAMP)).thenReturn(false);
 
@@ -59,7 +59,7 @@ public class LogicalAndParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnConditionalExpressionWithAndOperator() {
+    void shouldReturnConditionalExpressionWithAndOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.AMPAMP)).thenReturn(true).thenReturn(false);
 
@@ -73,7 +73,7 @@ public class LogicalAndParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNestedConditionalExpressions() {
+    void shouldReturnNestedConditionalExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.AMPAMP)).thenReturn(true).thenReturn(true).thenReturn(false);
 

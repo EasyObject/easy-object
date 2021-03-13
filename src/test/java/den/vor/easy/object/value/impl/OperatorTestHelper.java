@@ -15,18 +15,18 @@ import java.util.function.BiFunction;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class OperatorTestHelper {
+class OperatorTestHelper {
 
     private Value<?> left;
     private Value<?> right;
     private BiFunction<Value<?>, Value<?>, Value<?>> function;
     private String functionSymbol;
 
-    public static OperatorTestHelper test(Value<?> left, Value<?> right) {
+    static OperatorTestHelper test(Value<?> left, Value<?> right) {
         return new OperatorTestHelper().withLeft(left).withRight(right);
     }
 
-    public void verifyEquals(Value<?> expected) {
+    void verifyEquals(Value<?> expected) {
         Value<?> result = function.apply(left, right);
         Object value = result.getValue();
 
@@ -37,7 +37,7 @@ public class OperatorTestHelper {
                 expected.getValue() + ", got - " + value);
     }
 
-    public <T extends Exception> T verifyThrows(Class<T> exceptionClass) {
+    <T extends Exception> T verifyThrows(Class<T> exceptionClass) {
         return assertThrows(exceptionClass, () -> function.apply(left, right));
     }
 

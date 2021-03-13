@@ -15,7 +15,7 @@ import den.vor.easy.object.value.Value;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public abstract class ParserChainNodeTestBase {
+abstract class ParserChainNodeTestBase {
 
     protected BinaryExpression assertBinaryExpressionWithChildren(Expression expression,
                                                                   Expression left,
