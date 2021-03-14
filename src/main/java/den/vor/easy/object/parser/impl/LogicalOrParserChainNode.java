@@ -14,7 +14,6 @@ import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
-import static den.vor.easy.object.parser.TokenType.AMPAMP;
 import static den.vor.easy.object.parser.TokenType.BARBAR;
 
 public class LogicalOrParserChainNode extends ParserChainNode {

@@ -18,15 +18,6 @@ import java.util.Random;
 public class MersenneTwisterRandomProvider implements RandomProvider {
 
     public static final Random RANDOM = new Random();
-
-    private static int[] getSeed() {
-        int[] seed = new int[16];
-        for (int i = 0; i < 16; i++) {
-            seed[i] = RANDOM.nextInt();
-        }
-        return seed;
-    }
-
     @Override
     public CustomRandom getRandom() {
         return new Wrapper();
@@ -35,7 +26,16 @@ public class MersenneTwisterRandomProvider implements RandomProvider {
     private static class Wrapper extends MersenneTwister implements CustomRandom {
 
         public Wrapper() {
-            super(MersenneTwisterRandomProvider.getSeed());
+            super(generateSeed());
         }
+
+        private static int[] generateSeed() {
+            int[] seed = new int[16];
+            for (int i = 0; i < 16; i++) {
+                seed[i] = RANDOM.nextInt();
+            }
+            return seed;
+        }
+
     }
 }

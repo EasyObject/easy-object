@@ -13,14 +13,14 @@ import den.vor.easy.object.bean.Period;
 
 import java.util.Map;
 import java.util.Optional;
-import java.util.function.BiConsumer;
+import java.util.function.ObjIntConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PeriodParser {
 
     private static final Pattern CHUNK_PATTERN = Pattern.compile("(\\d+)([ymdhMsnw])");
-    private static final Map<String, BiConsumer<Period, Integer>> PERIOD_SETTER;
+    private static final Map<String, ObjIntConsumer<Period>> PERIOD_SETTER;
 
     static {
         PERIOD_SETTER = Map.of(
@@ -40,11 +40,16 @@ public class PeriodParser {
         Matcher matcher = CHUNK_PATTERN.matcher(input);
 
         while (matcher.find()) {
-            Integer count = Integer.parseInt(matcher.group(1));
+            int count = Integer.parseInt(matcher.group(1));
             String unit = matcher.group(2);
-            BiConsumer<Period, Integer> biConsumer = Optional.ofNullable(PERIOD_SETTER.get(unit)).orElseThrow();
+            ObjIntConsumer<Period> biConsumer = Optional.ofNullable(PERIOD_SETTER.get(unit)).orElseThrow();
             biConsumer.accept(period, count);
         }
         return period;
+    }
+
+    public PeriodParser() {
+        // This is a class with static members only. There is no need to create instances of this class
+
     }
 }

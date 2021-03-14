@@ -87,4 +87,8 @@ public class TimeUtil {
 
         return DateValue.of(result);
     }
+
+    private TimeUtil() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

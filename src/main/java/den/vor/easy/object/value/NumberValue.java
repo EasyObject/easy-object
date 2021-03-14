@@ -11,6 +11,7 @@ package den.vor.easy.object.value;
 
 public abstract class NumberValue<T extends Number & Comparable<T>> extends ComparableValue<T> {
 
+    @Override
     @SuppressWarnings("unchecked")
     protected int compareTo(Value<?> value) {
         Object second = value.getValue();

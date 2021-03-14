@@ -12,7 +12,6 @@ package den.vor.easy.object.parser.ast;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
 
-import java.util.function.Function;
 import java.util.function.UnaryOperator;
 
 public class UnaryExpression implements Expression {

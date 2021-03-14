@@ -17,7 +17,6 @@ import den.vor.easy.object.parser.exception.UnexpectedTokenException;
 import den.vor.easy.object.parser.util.PeriodParser;
 import den.vor.easy.object.value.impl.*;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,7 +51,7 @@ public class LiteralParserChainNode extends ParserChainNode {
                 expression = getVarAccessChain(tokenHolder);
             }
         } else if (tokenHolder.match(LPAREN)) {
-            Expression result = getRoot().parse(tokenHolder); // expression();
+            Expression result = getRoot().parse(tokenHolder);
             tokenHolder.match(RPAREN);
             return result;
         } else {

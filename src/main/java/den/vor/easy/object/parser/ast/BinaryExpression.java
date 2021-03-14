@@ -13,7 +13,6 @@ import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.OperationAware;
 import den.vor.easy.object.value.Value;
 
-import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
 public class BinaryExpression implements Expression {

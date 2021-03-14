@@ -11,11 +11,11 @@ package den.vor.easy.object.parser.impl;
 
 import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.TokenHolder;
-import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 import den.vor.easy.object.parser.ast.TernaryExpression;
 
-import static den.vor.easy.object.parser.TokenType.*;
+import static den.vor.easy.object.parser.TokenType.COLON;
+import static den.vor.easy.object.parser.TokenType.QUESTION_SIGN;
 
 public class TernaryParserChainNode extends ParserChainNode {
 

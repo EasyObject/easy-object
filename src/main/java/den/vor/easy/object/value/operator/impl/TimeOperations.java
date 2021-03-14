@@ -26,4 +26,8 @@ public class TimeOperations {
     public static final Operator<LocalTime> MINUS_OPERATOR = Operator.operator(
             operator(Period.class, TimeUtil::subtractPeriodFromTime)
     );
+
+    private TimeOperations() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

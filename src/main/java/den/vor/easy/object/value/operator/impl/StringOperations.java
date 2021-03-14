@@ -23,4 +23,8 @@ public class StringOperations {
     public static final Operator<String> MULTIPLY_OPERATOR = Operator.operator(
             operator(Integer.class, (a, b) -> StringValue.of(a.repeat(b)))
     );
+
+    private StringOperations() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

@@ -12,7 +12,6 @@ package den.vor.easy.object.parser.ast;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
 
-import java.util.function.BiFunction;
 import java.util.function.BinaryOperator;
 
 public class ConditionalExpression implements Expression {

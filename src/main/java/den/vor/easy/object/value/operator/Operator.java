@@ -13,21 +13,21 @@ import den.vor.easy.object.value.Value;
 
 import java.util.List;
 
-public abstract class Operator<T> {
+public interface Operator<T> {
 
-    public static <T> Operator<T> operator(OperatorImpl<T, ?> operator) {
+    static <T> Operator<T> operator(OperatorImpl<T, ?> operator) {
         return new SingleOperator<>(operator);
     }
 
     @SafeVarargs
-    public static <T> Operator<T> operator(OperatorImpl<T, ?>... operators) {
+    static <T> Operator<T> operator(OperatorImpl<T, ?>... operators) {
         return new MultiOperator<>(operators);
     }
 
-    public abstract Value<?> apply(T t, Value<?> value);
+    Value<?> apply(T t, Value<?> value);
 
 
-    private static class MultiOperator<T> extends Operator<T> {
+    class MultiOperator<T> implements Operator<T> {
         private final List<OperatorImpl<T, ?>> classToOperators;
 
         @SafeVarargs
@@ -47,7 +47,7 @@ public abstract class Operator<T> {
         }
     }
 
-    private static class SingleOperator<T> extends Operator<T> {
+    class SingleOperator<T> implements Operator<T> {
         private final OperatorImpl<T, ?> operator;
 
         public SingleOperator(OperatorImpl<T, ?> operator) {
