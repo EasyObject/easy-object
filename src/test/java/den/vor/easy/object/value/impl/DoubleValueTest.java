@@ -17,12 +17,12 @@ import org.junit.jupiter.api.Test;
 import static den.vor.easy.object.value.impl.OperatorTestHelper.test;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DoubleValueTest {
+class DoubleValueTest {
 
     @Nested
-    public class SumTest {
+    class SumTest {
         @Test
-        public void shouldReturnDouble_whenAddingIntToDouble() {
+        void shouldReturnDouble_whenAddingIntToDouble() {
             test(DoubleValue.of(5.0), IntValue.of(10))
                     .withFunction(OperationAware::plus)
                     .withFunctionSymbol("+")
@@ -30,7 +30,7 @@ public class DoubleValueTest {
         }
 
         @Test
-        public void shouldReturnDouble_whenAddingIntAndDoubleValues() {
+        void shouldReturnDouble_whenAddingIntAndDoubleValues() {
             test(DoubleValue.of(5.0), DoubleValue.of(10.0))
                     .withFunction(OperationAware::plus)
                     .withFunctionSymbol("+")
@@ -38,7 +38,7 @@ public class DoubleValueTest {
         }
 
         @Test
-        public void shouldReturnString_whenAddingIntAndStringValues() {
+        void shouldReturnString_whenAddingIntAndStringValues() {
             test(DoubleValue.of(5.0), StringValue.of("a"))
                     .withFunction(OperationAware::plus)
                     .withFunctionSymbol("+")
@@ -47,7 +47,7 @@ public class DoubleValueTest {
     }
 
     @Test
-    public void shouldReturnDouble_whenSubtractingNumberFromDoubleValues() {
+    void shouldReturnDouble_whenSubtractingNumberFromDoubleValues() {
         test(DoubleValue.of(5.0), IntValue.of(10))
                 .withFunction(OperationAware::minus)
                 .withFunctionSymbol("-")
@@ -55,7 +55,7 @@ public class DoubleValueTest {
     }
 
     @Test
-    public void shouldReturnDouble_whenMultiplyingDoubleByNumber() {
+    void shouldReturnDouble_whenMultiplyingDoubleByNumber() {
         test(DoubleValue.of(5.0), IntValue.of(10))
                 .withFunction(OperationAware::multiply)
                 .withFunctionSymbol("*")
@@ -63,7 +63,7 @@ public class DoubleValueTest {
     }
 
     @Test
-    public void shouldReturnDouble_whenDividingDobuleByNumber() {
+    void shouldReturnDouble_whenDividingDobuleByNumber() {
         test(DoubleValue.of(5.0), IntValue.of(2))
                 .withFunction(OperationAware::divide)
                 .withFunctionSymbol("/")
@@ -71,7 +71,7 @@ public class DoubleValueTest {
     }
 
     @Test
-    public void shouldReturnDouble_whenTakingPowerDoubleAndNumber() {
+    void shouldReturnDouble_whenTakingPowerDoubleAndNumber() {
         test(DoubleValue.of(5.0), IntValue.of(3))
                 .withFunction(OperationAware::pow)
                 .withFunctionSymbol("**")
@@ -79,7 +79,7 @@ public class DoubleValueTest {
     }
 
     @Test
-    public void shouldReturnDoubleWithNegativeValue_whenCalledMinusMethod() {
+    void shouldReturnDoubleWithNegativeValue_whenCalledMinusMethod() {
         DoubleValue value = DoubleValue.of(3.0);
 
         Value<?> negative = value.minus();
@@ -91,7 +91,7 @@ public class DoubleValueTest {
     }
 
     @Test
-    public void shouldReturnSameInstance_whenCalledPlusMethod() {
+    void shouldReturnSameInstance_whenCalledPlusMethod() {
         DoubleValue value = DoubleValue.of(3.0);
 
         Value<?> plusValue = value.plus();

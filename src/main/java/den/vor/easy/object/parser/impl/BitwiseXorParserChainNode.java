@@ -14,7 +14,6 @@ import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
-import static den.vor.easy.object.parser.TokenType.AMP;
 import static den.vor.easy.object.parser.TokenType.CARET;
 
 public class BitwiseXorParserChainNode extends ParserChainNode {

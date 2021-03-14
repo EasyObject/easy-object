@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class BitwiseAndParserChainNodeTest extends ParserChainNodeTestBase {
+class BitwiseAndParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -48,7 +48,7 @@ public class BitwiseAndParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.AMP)).thenReturn(false);
 
@@ -59,7 +59,7 @@ public class BitwiseAndParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithAndOperator() {
+    void shouldReturnBinaryExpressionWithAndOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.AMP)).thenReturn(true).thenReturn(false);
 
@@ -72,7 +72,7 @@ public class BitwiseAndParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNestedBinaryExpressions() {
+    void shouldReturnNestedBinaryExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.AMP)).thenReturn(true).thenReturn(true).thenReturn(false);
 

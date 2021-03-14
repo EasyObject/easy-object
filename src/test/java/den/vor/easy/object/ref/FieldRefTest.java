@@ -20,10 +20,10 @@ import static den.vor.easy.object.facade.ValueFacade.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-public class FieldRefTest {
+class FieldRefTest {
 
     @Test
-    public void shouldReturnReferenceWithParentLinksOneLess_whenGetReferenceForParentFactoryCalled() {
+    void shouldReturnReferenceWithParentLinksOneLess_whenGetReferenceForParentFactoryCalled() {
         FieldRef fieldRef = new FieldRef(Collections.emptyList(), 1);
 
         FieldRef expected = new FieldRef(Collections.emptyList(), 0);
@@ -34,7 +34,7 @@ public class FieldRefTest {
     }
 
     @Test
-    public void shouldThrowUnsupportedOperation_whenGetReferenceForParentFactoryCalledOnRefWithZeroParentLinks() {
+    void shouldThrowUnsupportedOperation_whenGetReferenceForParentFactoryCalledOnRefWithZeroParentLinks() {
         FieldRef fieldRef = new FieldRef(Collections.emptyList(), 0);
 
         assertThrows(IllegalArgumentException.class, fieldRef::getReferenceForParentFactory,
@@ -42,7 +42,7 @@ public class FieldRefTest {
     }
 
     @Test
-    public void shouldThrowUnsupportedOperation_whenGetFirstPathRefWithNonZeroParentLinks() {
+    void shouldThrowUnsupportedOperation_whenGetFirstPathRefWithNonZeroParentLinks() {
         FieldRef fieldRef = new FieldRef(List.of(of("str")), 1);
 
         assertThrows(IllegalArgumentException.class, fieldRef::getFirstPath,
@@ -50,7 +50,7 @@ public class FieldRefTest {
     }
 
     @Test
-    public void shouldThrowUnsupportedOperation_whenGetFirstPathRefWithEmptyLinks() {
+    void shouldThrowUnsupportedOperation_whenGetFirstPathRefWithEmptyLinks() {
         FieldRef fieldRef = new FieldRef(Collections.emptyList(), 0);
 
         assertThrows(IllegalArgumentException.class, fieldRef::getFirstPath,
@@ -58,7 +58,7 @@ public class FieldRefTest {
     }
 
     @Test
-    public void shouldReturnFirstKey_whenGetFirstPath() {
+    void shouldReturnFirstKey_whenGetFirstPath() {
         StringValue key = of("str");
         FieldRef fieldRef = new FieldRef(List.of(key), 0);
 

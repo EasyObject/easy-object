@@ -67,4 +67,8 @@ public class IntOperations {
     public static final Operator<Integer> BITWISE_XOR_OPERATOR = Operator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a ^ b))
     );
+
+    private IntOperations() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

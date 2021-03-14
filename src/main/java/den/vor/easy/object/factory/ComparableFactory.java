@@ -31,7 +31,7 @@ public abstract class ComparableFactory<T extends Comparable<? super T>, R exten
     private Bound<T> max;
     private List<SequenceConstraint<T>> constraints = new ArrayList<>();
 
-    public ComparableFactory(T min, T max) {
+    protected ComparableFactory(T min, T max) {
         this.min = new Bound<>(min, true);
         this.max = new Bound<>(max, true);
         if (min.compareTo(max) > 0) {

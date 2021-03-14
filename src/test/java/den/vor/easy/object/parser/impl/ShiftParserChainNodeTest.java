@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
+class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -49,7 +49,7 @@ public class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.LSHIFT)).thenReturn(false);
         when(tokenHolder.match(TokenType.RSHIFT)).thenReturn(false);
@@ -61,7 +61,7 @@ public class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithLShiftOperator() {
+    void shouldReturnBinaryExpressionWithLShiftOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.LSHIFT)).thenReturn(true).thenReturn(false);
         when(tokenHolder.match(TokenType.RSHIFT)).thenReturn(false);
@@ -76,7 +76,7 @@ public class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithRShiftOperator() {
+    void shouldReturnBinaryExpressionWithRShiftOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.LSHIFT)).thenReturn(false);
         when(tokenHolder.match(TokenType.RSHIFT)).thenReturn(true).thenReturn(false);
@@ -91,7 +91,7 @@ public class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNestedBinaryExpressions() {
+    void shouldReturnNestedBinaryExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.LSHIFT)).thenReturn(true).thenReturn(true).thenReturn(false);
 

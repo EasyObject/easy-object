@@ -21,10 +21,10 @@ import java.util.List;
 import static den.vor.easy.object.value.impl.StringValue.of;
 import static org.junit.jupiter.api.Assertions.*;
 
-public class RoundRobinFactoryTest {
+class RoundRobinFactoryTest {
 
     @Test
-    public void shouldReturnAllValuesOneByOneInCircle() {
+    void shouldReturnAllValuesOneByOneInCircle() {
         StringValue a = of("a");
         StringValue b = of("b");
         StringValue c = of("c");
@@ -41,7 +41,7 @@ public class RoundRobinFactoryTest {
     }
 
     @Test
-    public void shouldReturnEmptyDependenciesArray() {
+    void shouldReturnEmptyDependenciesArray() {
         List<FieldRef> dependencies = new RoundRobinFactory<>(List.of(of("a"))).getDependencies();
 
         assertTrue(dependencies.isEmpty(), "Expected RoundRobin factory to have empty dependencies list");

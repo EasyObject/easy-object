@@ -24,7 +24,7 @@ public abstract class ParserChainNode {
 
     protected ParserChainNode getNext() {
         if (next == null) {
-            throw new RuntimeException("Last node in chain");
+            throw new NullPointerException("Last node in chain tried to get next");
         }
         return next;
     }

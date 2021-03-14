@@ -23,7 +23,7 @@ import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class SupplierFactoryTest {
+class SupplierFactoryTest {
 
     @Mock
     private GenerationContext generationContext;
@@ -36,7 +36,7 @@ public class SupplierFactoryTest {
 
 
     @Test
-    public void shouldCallSupplierAndReturnItsValue_whenSupplierCalled() {
+    void shouldCallSupplierAndReturnItsValue_whenSupplierCalled() {
         when(supplier.get()).thenReturn(firstResult).thenReturn(secondResult);
 
         SupplierFactory<Integer, IntValue> factory = new SupplierFactory<>(supplier);

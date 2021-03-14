@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TernaryParserChainNodeTest extends ParserChainNodeTestBase {
+class TernaryParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -50,7 +50,7 @@ public class TernaryParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.QUESTION_SIGN)).thenReturn(false);
 
@@ -61,7 +61,7 @@ public class TernaryParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnTernaryExpression() {
+    void shouldReturnTernaryExpression() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(root.parse(tokenHolder)).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.QUESTION_SIGN)).thenReturn(true);

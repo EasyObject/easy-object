@@ -27,4 +27,8 @@ public class BooleanOperations {
     public static final Operator<Boolean> XOR_OPERATOR = Operator.operator(
             operator(Boolean.class, (a, b) -> BooleanValue.of(a ^ b))
     );
+
+    private BooleanOperations() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

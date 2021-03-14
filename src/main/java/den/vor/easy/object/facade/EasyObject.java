@@ -69,4 +69,8 @@ public class EasyObject {
     public static UUIDFactory isUUID() {
         return new UUIDFactory();
     }
+
+    private EasyObject() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

@@ -14,10 +14,10 @@ import org.junit.jupiter.api.Test;
 import static den.vor.easy.object.facade.EasyObject.isInt;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class IntFactoryTest {
+class IntFactoryTest {
 
     @Test
-    public void shouldReturnNumbersBetweenMinAndMax() {
+    void shouldReturnNumbersBetweenMinAndMax() {
         FactoryTestHelper
                 .of(isInt(10, 20))
                 .withAssertionRunner(i -> {
@@ -27,7 +27,7 @@ public class IntFactoryTest {
     }
 
     @Test
-    public void shouldReturnNumbersBetweenMinAndHighConstraintExcluding_whenLtConstraintLessThatMax() {
+    void shouldReturnNumbersBetweenMinAndHighConstraintExcluding_whenLtConstraintLessThatMax() {
         FactoryTestHelper
                 .of(isInt(10, 20).lt("18"))
                 .withAssertionRunner(i -> {
@@ -37,7 +37,7 @@ public class IntFactoryTest {
     }
 
     @Test
-    public void shouldReturnNumbersBetweenMinAndHighConstraintIncluding_whenLeConstraintLessThatMax() {
+    void shouldReturnNumbersBetweenMinAndHighConstraintIncluding_whenLeConstraintLessThatMax() {
         FactoryTestHelper
                 .of(isInt(10, 20).le("18"))
                 .withAssertionRunner(i -> {
@@ -47,7 +47,7 @@ public class IntFactoryTest {
     }
 
     @Test
-    public void shouldReturnNumbersBetweenLowConstraintIncludingAndMax_whenGeConstraintLessThatMax() {
+    void shouldReturnNumbersBetweenLowConstraintIncludingAndMax_whenGeConstraintLessThatMax() {
         FactoryTestHelper
                 .of(isInt(10, 20).ge("12"))
                 .withAssertionRunner(i -> {
@@ -57,7 +57,7 @@ public class IntFactoryTest {
     }
 
     @Test
-    public void shouldReturnNumbersBetweenLowConstraintExcludingAndMax_whenGtConstraintLessThatMax() {
+    void shouldReturnNumbersBetweenLowConstraintExcludingAndMax_whenGtConstraintLessThatMax() {
         FactoryTestHelper
                 .of(isInt(10, 20).gt("12"))
                 .withAssertionRunner(i -> {
@@ -65,6 +65,4 @@ public class IntFactoryTest {
                     assertTrue(i <= 20, "Expected generated value to be lt high constraint bound");
                 }).test();
     }
-
-
 }

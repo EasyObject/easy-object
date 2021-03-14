@@ -11,12 +11,10 @@ package den.vor.easy.object.parser.impl;
 
 import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.TokenHolder;
-import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.AMPAMP;
-import static den.vor.easy.object.parser.TokenType.BAR;
 
 public class LogicalAndParserChainNode extends ParserChainNode {
 

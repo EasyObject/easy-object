@@ -12,7 +12,7 @@ package den.vor.easy.object.parser.ast;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
 
-import java.util.function.Function;
+import java.util.function.UnaryOperator;
 
 public class UnaryExpression implements Expression {
 
@@ -51,9 +51,9 @@ public class UnaryExpression implements Expression {
         MINUS(Value::minus),
         PLUS(Value::plus);
 
-        private final Function<Value<?>, Value<?>> function;
+        private final UnaryOperator<Value<?>> function;
 
-        Operation(Function<Value<?>, Value<?>> function) {
+        Operation(UnaryOperator<Value<?>> function) {
             this.function = function;
         }
     }

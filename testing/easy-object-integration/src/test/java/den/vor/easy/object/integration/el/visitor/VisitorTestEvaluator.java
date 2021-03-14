@@ -18,12 +18,12 @@ import den.vor.easy.object.value.impl.MapValue;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class VisitorTestEvaluator {
+class VisitorTestEvaluator {
 
     private final String expression;
     private MapValue constParams = MapValue.emptyMap();
 
-    public static VisitorTestEvaluator evaluate(String expression) {
+    static VisitorTestEvaluator evaluate(String expression) {
         return new VisitorTestEvaluator(expression);
     }
 
@@ -36,7 +36,7 @@ public class VisitorTestEvaluator {
         return this;
     }
 
-    public <T> void expectValue(T expected) {
+    <T> void expectValue(T expected) {
         Expression optimized = new ExpressionEvaluator(expression, constParams).getExpression();
 
         assertTrue(optimized instanceof ValueExpression, () -> "Expected expression='" + expression + "' to be " +

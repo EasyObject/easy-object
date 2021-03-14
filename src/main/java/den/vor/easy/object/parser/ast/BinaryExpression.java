@@ -13,7 +13,7 @@ import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.OperationAware;
 import den.vor.easy.object.value.Value;
 
-import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public class BinaryExpression implements Expression {
 
@@ -68,9 +68,9 @@ public class BinaryExpression implements Expression {
         OR(OperationAware::bitwiseOr),
         XOR(OperationAware::bitwiseXor);
 
-        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
+        private final BinaryOperator<Value<?>> function;
 
-        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
+        Operation(BinaryOperator<Value<?>> function) {
             this.function = function;
         }
     }

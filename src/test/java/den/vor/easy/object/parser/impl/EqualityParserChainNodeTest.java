@@ -24,7 +24,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class EqualityParserChainNodeTest extends ParserChainNodeTestBase {
+class EqualityParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -48,7 +48,7 @@ public class EqualityParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.EQEQ)).thenReturn(false);
         when(tokenHolder.match(TokenType.EXCLEQ)).thenReturn(false);
@@ -60,7 +60,7 @@ public class EqualityParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithEqOperator() {
+    void shouldReturnBinaryExpressionWithEqOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.EQEQ)).thenReturn(true);
 
@@ -74,7 +74,7 @@ public class EqualityParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithNotEqOperator() {
+    void shouldReturnBinaryExpressionWithNotEqOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.EQEQ)).thenReturn(false);
         when(tokenHolder.match(TokenType.EXCLEQ)).thenReturn(true);

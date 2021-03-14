@@ -15,17 +15,17 @@ import java.util.stream.Collectors;
 
 public class Graph<T> {
 
-    private final Map<T, ? extends Collection<T>> graph;
+    private final Map<T, ? extends Collection<T>> nodes;
     private final Predicate<T> ignoreConnection;
     private List<T> order;
 
-    public Graph(Map<T, ? extends Collection<T>> graph, Predicate<T> ignoreConnection) {
-        this.graph = graph;
+    public Graph(Map<T, ? extends Collection<T>> nodes, Predicate<T> ignoreConnection) {
+        this.nodes = nodes;
         this.ignoreConnection = ignoreConnection;
     }
 
-    public Graph(Map<T, ? extends Collection<T>> graph) {
-        this(graph, v -> false);
+    public Graph(Map<T, ? extends Collection<T>> nodes) {
+        this(nodes, v -> false);
     }
 
     public List<T> getCreationOrder() {
@@ -37,26 +37,27 @@ public class Graph<T> {
     }
 
     private List<T> calculateOrder() {
-        List<Vertex<T>> vertices = buildVertexes(graph);
-        List<T> order = new ArrayList<>();
+        List<Vertex<T>> vertices = buildVertexes(nodes);
+        List<T> vertexOrder = new ArrayList<>();
 
         while (!vertices.isEmpty()) {
             List<Vertex<T>> resolvable = vertices.stream()
                     //TODO or remove instead of containsAll?
-                    .filter(v -> order.containsAll(v.adjacent))
+                    .filter(v -> vertexOrder.containsAll(v.adjacent))
                     .collect(Collectors.toList());
 
             if (resolvable.isEmpty()) {
                 //TODO change exception
-                throw new RuntimeException("Resolved: " + order + ", not resolved: [" + vertices.stream()
-                        .map(v -> "(" + v.key + " - " + v.adjacent + ")").collect(Collectors.joining(", ")) + "]");
+                throw new RuntimeException("Resolved: " + vertexOrder + ", not resolved: [" + vertices.stream()
+                        .map(v -> "(" + v.key + " - " + v.adjacent + ")")
+                        .collect(Collectors.joining(", ")) + "]");
             }
 
-            order.addAll(resolvable.stream().map(v -> v.key).collect(Collectors.toList()));
+            vertexOrder.addAll(resolvable.stream().map(v -> v.key).collect(Collectors.toList()));
             vertices.removeAll(resolvable);
         }
 
-        return order;
+        return vertexOrder;
     }
 
     private List<Vertex<T>> buildVertexes(Map<T, ? extends Collection<T>> graph) {

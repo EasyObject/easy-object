@@ -37,4 +37,8 @@ public class DoubleOperations {
     public static final Operator<Double> POWER_OPERATOR = Operator.operator(
             operator(Number.class, (a, b) -> DoubleValue.of(Math.pow(a, b.doubleValue())))
     );
+
+    private DoubleOperations() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

@@ -15,7 +15,6 @@ import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.BAR;
-import static den.vor.easy.object.parser.TokenType.CARET;
 
 public class BitwiseOrParserChainNode extends ParserChainNode {
 

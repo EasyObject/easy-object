@@ -26,7 +26,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
+class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -50,7 +50,7 @@ public class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.LT)).thenReturn(false);
         when(tokenHolder.match(TokenType.LTEQ)).thenReturn(false);
@@ -64,7 +64,7 @@ public class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithLtOperator() {
+    void shouldReturnBinaryExpressionWithLtOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.LT)).thenReturn(true).thenReturn(false);
 
@@ -78,7 +78,7 @@ public class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithLteOperator() {
+    void shouldReturnBinaryExpressionWithLteOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.LT)).thenReturn(false);
         when(tokenHolder.match(TokenType.LTEQ)).thenReturn(true).thenReturn(false);
@@ -93,7 +93,7 @@ public class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithGtOperator() {
+    void shouldReturnBinaryExpressionWithGtOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.LT)).thenReturn(false);
         when(tokenHolder.match(TokenType.LTEQ)).thenReturn(false);
@@ -109,7 +109,7 @@ public class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithGteOperator() {
+    void shouldReturnBinaryExpressionWithGteOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.LT)).thenReturn(false);
         when(tokenHolder.match(TokenType.LTEQ)).thenReturn(false);
@@ -127,7 +127,7 @@ public class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
 
 
     @Test
-    public void shouldReturnNestedConditionalExpressions() {
+    void shouldReturnNestedConditionalExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.LT)).thenReturn(true).thenReturn(true).thenReturn(false);
 

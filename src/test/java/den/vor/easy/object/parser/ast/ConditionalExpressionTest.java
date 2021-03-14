@@ -20,7 +20,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class ConditionalExpressionTest {
+class ConditionalExpressionTest {
 
     @Mock
     private Value<Object> firstValue;
@@ -36,7 +36,7 @@ public class ConditionalExpressionTest {
     private Variables variables;
 
     @Test
-    public void shouldEvaluateChildExpressionsAndCallAndMethodOnFirst() {
+    void shouldEvaluateChildExpressionsAndCallAndMethodOnFirst() {
         doReturn(firstValue).when(firstExpression).eval(variables);
         doReturn(secondValue).when(secondExpression).eval(variables);
 
@@ -56,7 +56,7 @@ public class ConditionalExpressionTest {
     }
 
     @Test
-    public void shouldCallVisitMethodOnVisitor_whenAccepted(@Mock ResultVisitor<Object> visitor,
+    void shouldCallVisitMethodOnVisitor_whenAccepted(@Mock ResultVisitor<Object> visitor,
                                                             @Mock ConditionalExpression expression) {
         Object expected = new Object();
         when(visitor.visit(any(ConditionalExpression.class))).thenReturn(expected);

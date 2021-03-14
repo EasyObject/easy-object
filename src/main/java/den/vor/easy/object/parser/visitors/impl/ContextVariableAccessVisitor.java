@@ -33,7 +33,7 @@ public class ContextVariableAccessVisitor extends AbstractOptimizationVisitor {
     @Override
     public Expression visit(VariableMapAccessExpression expression) {
         List<Expression> keys = expression.getKeys();
-        if (keys.stream().allMatch(k -> k instanceof ValueExpression)) {
+        if (keys.stream().allMatch(ValueExpression.class::isInstance)) {
             return getContextVariableAccessExpression(keys);
         }
         return expression;

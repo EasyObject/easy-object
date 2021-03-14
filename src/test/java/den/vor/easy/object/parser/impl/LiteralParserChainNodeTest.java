@@ -31,7 +31,7 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
+class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode root;
@@ -47,12 +47,12 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldThrowUnexpectedTokenExceptionWhenNoTokensMatch() {
+    void shouldThrowUnexpectedTokenExceptionWhenNoTokensMatch() {
         assertThrows(UnexpectedTokenException.class, () -> literalParserChainNode.parse(tokenHolder));
     }
 
     @Test
-    public void shouldReturnValueExpressionWithInt() {
+    void shouldReturnValueExpressionWithInt() {
         Token token = new Token(TokenType.INT_NUMBER, "1");
 
         when(tokenHolder.match(TokenType.INT_NUMBER)).thenReturn(true);
@@ -64,7 +64,7 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnValueExpressionWithDouble() {
+    void shouldReturnValueExpressionWithDouble() {
         Token token = new Token(TokenType.DOUBLE_NUMBER, "1.0");
 
         when(tokenHolder.match(TokenType.INT_NUMBER)).thenReturn(false);
@@ -77,7 +77,7 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnValueExpressionWithPeriod() {
+    void shouldReturnValueExpressionWithPeriod() {
         Token token = new Token(TokenType.PERIOD, "1y");
 
         when(tokenHolder.match(TokenType.INT_NUMBER)).thenReturn(false);
@@ -91,7 +91,7 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnValueExpressionWithBoolean() {
+    void shouldReturnValueExpressionWithBoolean() {
         Token token = new Token(TokenType.BOOLEAN, "true");
 
         when(tokenHolder.match(TokenType.INT_NUMBER)).thenReturn(false);
@@ -106,7 +106,7 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnValueExpressionWithText() {
+    void shouldReturnValueExpressionWithText() {
         Token token = new Token(TokenType.TEXT, "some text");
 
         when(tokenHolder.match(TokenType.INT_NUMBER)).thenReturn(false);
@@ -122,7 +122,7 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnVariableMapAccessExpressionWithTwoKeyHops(@Mock Expression thirdKey) {
+    void shouldReturnVariableMapAccessExpressionWithTwoKeyHops(@Mock Expression thirdKey) {
         Token token1 = new Token(TokenType.WORD, "key1");
         Token token2 = new Token(TokenType.WORD, "key2");
 
@@ -167,7 +167,7 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnFunctionCallWithTwoArgs(@Mock Expression firstArg, @Mock Expression secondArg) {
+    void shouldReturnFunctionCallWithTwoArgs(@Mock Expression firstArg, @Mock Expression secondArg) {
         Token token = new Token(TokenType.WORD, "funcName");
 
         when(tokenHolder.lookMatch(TokenType.WORD)).thenReturn(true);
@@ -208,7 +208,7 @@ public class LiteralParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnMethodCallWithTwoArgs(@Mock Expression firstArg, @Mock Expression secondArg) {
+    void shouldReturnMethodCallWithTwoArgs(@Mock Expression firstArg, @Mock Expression secondArg) {
         List<Token> tokens = List.of(
                 new Token(TokenType.INT_NUMBER, "1"),
                 new Token(TokenType.DOT, "."),

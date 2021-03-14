@@ -74,7 +74,7 @@ public class ElFactory<T> extends Factory<T, Value<T>> {
         Object expressionResult = value.getValue();
 
         if (!tClass.isInstance(expressionResult)) {
-            throw new RuntimeException("Expected result of type " + tClass + ", got " + expressionResult);
+            throw new ClassCastException("Expected result of type " + tClass + ", got " + expressionResult);
         }
         return (Value<T>) value;
     }

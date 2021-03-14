@@ -75,4 +75,8 @@ public class PeriodOperations {
                 .setNanos(period.getNanos() * multiplier);
         return PeriodValue.of(newPeriod);
     }
+
+    private PeriodOperations() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

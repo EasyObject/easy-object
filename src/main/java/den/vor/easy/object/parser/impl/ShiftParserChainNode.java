@@ -14,7 +14,7 @@ import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
-import static den.vor.easy.object.parser.TokenType.*;
+import static den.vor.easy.object.parser.TokenType.LSHIFT;
 import static den.vor.easy.object.parser.TokenType.RSHIFT;
 import static den.vor.easy.object.parser.ast.BinaryExpression.Operation.LEFT_SHIFT;
 import static den.vor.easy.object.parser.ast.BinaryExpression.Operation.RIGHT_SHIFT;

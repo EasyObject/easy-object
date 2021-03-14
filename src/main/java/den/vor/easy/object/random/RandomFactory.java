@@ -22,4 +22,8 @@ public class RandomFactory {
     public static CustomRandom getRandom() {
         return RANDOM_PROVIDER.getRandom();
     }
+
+    private RandomFactory() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

@@ -30,17 +30,17 @@ public class MapAccessExpression implements Expression {
 
     @Override
     public Value<?> eval(Variables variables) {
-        Value<?> value = this.value.eval(variables);
+        Value<?> result = value.eval(variables);
         for (Expression key : keys) {
             Value<?> keyValue = key.eval(variables);
             if (keyValue instanceof ScalarValue) {
                 ScalarValue<?> scalarValue = (ScalarValue<?>) keyValue;
-                value = value.get(scalarValue);
+                result = result.get(scalarValue);
             } else {
                 throw new RuntimeException();
             }
         }
-        return value;
+        return result;
     }
 
     public Expression getValue() {

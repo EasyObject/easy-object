@@ -25,7 +25,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-public class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
+class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
 
     @Mock
     private ParserChainNode next;
@@ -49,7 +49,7 @@ public class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNextResultWhenDoesNotMatchOperator() {
+    void shouldReturnNextResultWhenDoesNotMatchOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult);
         when(tokenHolder.match(TokenType.PLUS)).thenReturn(false);
         when(tokenHolder.match(TokenType.MINUS)).thenReturn(false);
@@ -61,7 +61,7 @@ public class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithPlusOperator() {
+    void shouldReturnBinaryExpressionWithPlusOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.PLUS)).thenReturn(true).thenReturn(false);
 
@@ -74,7 +74,7 @@ public class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnBinaryExpressionWithMinusOperator() {
+    void shouldReturnBinaryExpressionWithMinusOperator() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult);
         when(tokenHolder.match(TokenType.PLUS)).thenReturn(false);
         when(tokenHolder.match(TokenType.MINUS)).thenReturn(true).thenReturn(false);
@@ -88,7 +88,7 @@ public class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
     }
 
     @Test
-    public void shouldReturnNestedBinaryExpressions() {
+    void shouldReturnNestedBinaryExpressions() {
         when(next.parse(tokenHolder)).thenReturn(firstResult).thenReturn(secondResult).thenReturn(thirdResult);
         when(tokenHolder.match(TokenType.PLUS)).thenReturn(true).thenReturn(true).thenReturn(false);
 

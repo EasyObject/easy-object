@@ -21,8 +21,9 @@ public class MapValue extends CompoundValue<Map<ScalarValue<?>, Value<?>>> {
 
     private static final MapValue EMPTY_MAP_VALUE = new MapValue(Collections.emptyMap());
     private static final Map<String, FunctionalValue<Map<ScalarValue<?>, Value<?>>>> METHODS = Map.of(
-            "size", new FunctionalValue<>((map, args) -> IntValue.of(map.getValue().size()))
+            "size", new FunctionalValue<>((m, args) -> IntValue.of(m.getValue().size()))
     );
+
     private final Map<ScalarValue<?>, Value<?>> map;
 
     public MapValue(Map<ScalarValue<?>, Value<?>> map) {

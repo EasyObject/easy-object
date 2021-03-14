@@ -19,11 +19,11 @@ import static java.util.stream.Collectors.toList;
 
 public class RootFactory<R extends Value<?>> {
 
-    private final Factory<?, R> rootFactory;
+    private final Factory<?, R> factory;
     private final int count;
 
-    public RootFactory(Factory<?, R> rootFactory, int count) {
-        this.rootFactory = rootFactory;
+    public RootFactory(Factory<?, R> factory, int count) {
+        this.factory = factory;
         this.count = count;
     }
 
@@ -32,7 +32,7 @@ public class RootFactory<R extends Value<?>> {
     }
 
     private Stream<R> getStream(GenerationContext context) {
-        return rootFactory.getGenerator().stream(context);
+        return factory.getGenerator().stream(context);
     }
 
     public List<R> getList(int size) {

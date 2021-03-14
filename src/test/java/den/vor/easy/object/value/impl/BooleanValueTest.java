@@ -16,24 +16,24 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BooleanValueTest {
+class BooleanValueTest {
 
     @Test
-    public void shouldReturnTrueAsValue_whenTruePassedToFactory() {
+    void shouldReturnTrueAsValue_whenTruePassedToFactory() {
         BooleanValue booleanValue = BooleanValue.of(true);
 
         assertTrue(booleanValue.getValue(), () -> "Expected booleanValue=" + booleanValue + " return true as value");
     }
 
     @Test
-    public void shouldReturnFalseAsValue_whenTruePassedToFactory() {
+    void shouldReturnFalseAsValue_whenTruePassedToFactory() {
         BooleanValue booleanValue = BooleanValue.of(false);
 
         assertFalse(booleanValue.getValue(), () -> "Expected booleanValue=" + booleanValue + " return false as value");
     }
 
     @Test
-    public void shouldReturnSameInstances_whenFactoryCalledTwiceWithSameValue() {
+    void shouldReturnSameInstances_whenFactoryCalledTwiceWithSameValue() {
         BooleanValue first = BooleanValue.of(true);
         BooleanValue second = BooleanValue.of(true);
 
@@ -43,7 +43,7 @@ public class BooleanValueTest {
 
     @ParameterizedTest
     @CsvSource({"true,true", "true,false", "false,true", "false,false"})
-    public void shouldReturnLogicalAndOfTwoBooleans(boolean left, boolean right) {
+    void shouldReturnLogicalAndOfTwoBooleans(boolean left, boolean right) {
         BooleanValue leftValue = BooleanValue.of(left);
         BooleanValue rightValue = BooleanValue.of(right);
 
@@ -59,7 +59,7 @@ public class BooleanValueTest {
 
     @ParameterizedTest
     @CsvSource({"true,true", "true,false", "false,true", "false,false"})
-    public void shouldReturnLogicalOrOfTwoBooleans(boolean left, boolean right) {
+    void shouldReturnLogicalOrOfTwoBooleans(boolean left, boolean right) {
         BooleanValue leftValue = BooleanValue.of(left);
         BooleanValue rightValue = BooleanValue.of(right);
 
@@ -75,7 +75,7 @@ public class BooleanValueTest {
 
     @ParameterizedTest
     @CsvSource({"true,true", "true,false", "false,true", "false,false"})
-    public void shouldReturnLogicalXorOfTwoBooleans(boolean left, boolean right) {
+    void shouldReturnLogicalXorOfTwoBooleans(boolean left, boolean right) {
         BooleanValue leftValue = BooleanValue.of(left);
         BooleanValue rightValue = BooleanValue.of(right);
 

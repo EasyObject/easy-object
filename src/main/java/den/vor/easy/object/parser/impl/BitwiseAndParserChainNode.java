@@ -12,12 +12,9 @@ package den.vor.easy.object.parser.impl;
 import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.ast.BinaryExpression;
-import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
-import static den.vor.easy.object.parser.TokenType.*;
-import static den.vor.easy.object.parser.ast.ConditionalExpression.Operation.EQUALS;
-import static den.vor.easy.object.parser.ast.ConditionalExpression.Operation.NOT_EQUALS;
+import static den.vor.easy.object.parser.TokenType.AMP;
 
 public class BitwiseAndParserChainNode extends ParserChainNode {
 

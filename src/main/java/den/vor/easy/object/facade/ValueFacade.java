@@ -26,4 +26,8 @@ public class ValueFacade {
     public static DoubleValue of(double value) {
         return DoubleValue.of(value);
     }
+
+    private ValueFacade() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

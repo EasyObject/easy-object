@@ -26,8 +26,11 @@ public class TernaryExpression implements Expression {
 
     @Override
     public Value<?> eval(Variables variables) {
-        return condition.eval(variables).as(Boolean.class) ?
-                thenExpression.eval(variables) : elseExpression.eval(variables);
+        Boolean conditionValue = condition.eval(variables).as(Boolean.class);
+        if (Boolean.TRUE.equals(conditionValue)) {
+            return thenExpression.eval(variables);
+        }
+        return elseExpression.eval(variables);
     }
 
     public Expression getCondition() {

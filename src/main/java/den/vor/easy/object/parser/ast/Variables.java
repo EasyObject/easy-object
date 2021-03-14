@@ -23,7 +23,7 @@ public class Variables {
     static {
         Map<StringValue, Value<?>> consts = new HashMap<>();
         consts.put(StringValue.of("pi"), DoubleValue.of(Math.PI));
-        consts.put(StringValue.of("int"), new FunctionalValue<>((context, args) -> {
+        consts.put(StringValue.of("int"), new FunctionalValue<>((c, args) -> {
             if (args.size() != 1) {
                 throw new RuntimeException();
             }
@@ -41,8 +41,8 @@ public class Variables {
             }
             throw new UnsupportedOperationException();
         }, true));
-        consts.put(StringValue.of("now"), new FunctionalValue<>((context, args) -> {
-            if (args.size() != 0) {
+        consts.put(StringValue.of("now"), new FunctionalValue<>((c, args) -> {
+            if (!args.isEmpty()) {
                 throw new RuntimeException();
             }
             return DateTimeValue.of(LocalDateTime.now());
