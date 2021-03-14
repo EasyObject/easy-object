@@ -48,8 +48,7 @@ public class PeriodParser {
         return period;
     }
 
-    public PeriodParser() {
+    private PeriodParser() {
         // This is a class with static members only. There is no need to create instances of this class
-
     }
 }

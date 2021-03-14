@@ -15,7 +15,7 @@ public class FactoryConstants {
 
     public static final StringValue COUNT_STRING_VALUE = StringValue.of("count");
 
-    public FactoryConstants() {
+    private FactoryConstants() {
         // This is a class with static members only. There is no need to create instances of this class
     }
 }
