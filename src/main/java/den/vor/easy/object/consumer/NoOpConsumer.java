@@ -24,6 +24,5 @@ public class NoOpConsumer<T> extends Consumer<T> {
     @Override
     protected void doConsume(T toConsume) {
         LOGGER.debug("Consuming a value");
-        System.out.println("Consuming a value");
     }
 }

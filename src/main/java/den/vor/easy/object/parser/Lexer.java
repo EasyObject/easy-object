@@ -104,12 +104,8 @@ public final class Lexer {
                 }
             } else if (!Character.isDigit(current)) {
                 if (Character.isLetter(current)) {
-                    if (buffer.indexOf(".") != -1) {
-                        throw new InvalidNameException(buffer.append(current).toString());
-                    } else {
-                        tokenizePeriod(buffer);
-                        return;
-                    }
+                    tokenizePeriod(buffer.append(current));
+                    return;
                 }
                 break;
             }
@@ -124,6 +120,10 @@ public final class Lexer {
     }
 
     private void tokenizePeriod(StringBuilder buffer) {
+        if (buffer.indexOf(".") != -1) {
+            throw new InvalidNameException(buffer.toString());
+        }
+
         char current = peek(0);
         while (Character.isDigit(current) || Character.isLetter(current)) {
             buffer.append(current);
@@ -180,7 +180,7 @@ public final class Lexer {
                 break;
             default:
                 if (word.equals("$")) {
-                    throw new RuntimeException();
+                    throw new IllegalArgumentException("Word can not consist of $ sign only");
                 }
                 addToken(TokenType.WORD, word);
                 break;
@@ -219,9 +219,10 @@ public final class Lexer {
                         current = next();
                         buffer.append('\t');
                         continue;
+                    default:
+                        buffer.append('\\');
+                        continue;
                 }
-                buffer.append('\\');
-                continue;
             }
             if (current == start) {
                 break;

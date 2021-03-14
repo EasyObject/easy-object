@@ -13,6 +13,7 @@ import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
 
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 public class ConditionalExpression implements Expression {
 
@@ -66,9 +67,9 @@ public class ConditionalExpression implements Expression {
         AND(Value::and),
         OR(Value::or);
 
-        private final BiFunction<Value<?>, Value<?>, Value<?>> function;
+        private final BinaryOperator<Value<?>> function;
 
-        Operation(BiFunction<Value<?>, Value<?>, Value<?>> function) {
+        Operation(BinaryOperator<Value<?>> function) {
             this.function = function;
         }
     }

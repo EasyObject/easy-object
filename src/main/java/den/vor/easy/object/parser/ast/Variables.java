@@ -42,7 +42,7 @@ public class Variables {
             throw new UnsupportedOperationException();
         }, true));
         consts.put(StringValue.of("now"), new FunctionalValue<>((context, args) -> {
-            if (args.size() != 0) {
+            if (!args.isEmpty()) {
                 throw new RuntimeException();
             }
             return DateTimeValue.of(LocalDateTime.now());

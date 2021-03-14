@@ -26,15 +26,15 @@ public abstract class Consumer<T> {
     private Formatter<T>[] formatters;
     private InternalConsumer internalConsumer;
 
-    public Consumer(int batchSize, Formatter<T>... formatters) {
+    protected Consumer(int batchSize, Formatter<T>... formatters) {
         this(batchSize, true, formatters);
     }
 
-    public Consumer(boolean useBatch, Formatter<T>... formatters) {
+    protected Consumer(boolean useBatch, Formatter<T>... formatters) {
         this(DEFAULT_BATCH_SIZE, useBatch, formatters);
     }
 
-    public Consumer(Formatter<T>... formatters) {
+    protected Consumer(Formatter<T>... formatters) {
         this(DEFAULT_BATCH_SIZE, formatters);
     }
 

@@ -12,6 +12,7 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.value.Value;
 
 import java.util.function.BiFunction;
+import java.util.function.BinaryOperator;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,7 +20,7 @@ class OperatorTestHelper {
 
     private Value<?> left;
     private Value<?> right;
-    private BiFunction<Value<?>, Value<?>, Value<?>> function;
+    private BinaryOperator<Value<?>> function;
     private String functionSymbol;
 
     static OperatorTestHelper test(Value<?> left, Value<?> right) {
@@ -51,7 +52,7 @@ class OperatorTestHelper {
         return this;
     }
 
-    public OperatorTestHelper withFunction(BiFunction<Value<?>, Value<?>, Value<?>> function) {
+    public OperatorTestHelper withFunction(BinaryOperator<Value<?>> function) {
         this.function = function;
         return this;
     }

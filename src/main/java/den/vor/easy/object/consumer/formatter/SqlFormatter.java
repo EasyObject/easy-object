@@ -26,6 +26,8 @@ import java.util.stream.Collectors;
 public class SqlFormatter implements Formatter<String> {
 
     public static final String DEFAULT_DELIMITER = ",";
+    public static final String INSERT_INTO = "INSERT INTO ";
+    public static final String VALUES = ")\nVALUES\n";
 
     private String tableName;
     private NestedFormat nestedFormat;
@@ -47,7 +49,7 @@ public class SqlFormatter implements Formatter<String> {
     }
 
     private static String formatString(String str) {
-        return '"' + str.replaceAll("\"", "\\\\\"") + '"';
+        return '"' + str.replace("\"", "\\\\\"") + '"';
     }
 
     @Override
@@ -116,7 +118,7 @@ public class SqlFormatter implements Formatter<String> {
                     .map(Value::getValue)
                     .map(Object::toString)
                     .collect(Collectors.joining(DEFAULT_DELIMITER));
-            String headerSql = "INSERT INTO " + tableName + " (" + columns + ")\nVALUES\n";
+            String headerSql = INSERT_INTO + tableName + " (" + columns + VALUES;
             String table = headerSql + valuesSql + ";";
             String childTables = compoundValues.entrySet().stream()
                     .map(e -> formatChildTable(e.getKey(), e.getValue()))
@@ -165,7 +167,7 @@ public class SqlFormatter implements Formatter<String> {
                     .map(Value::getValue)
                     .map(Object::toString)
                     .collect(Collectors.joining(DEFAULT_DELIMITER));
-            String headerSql = "INSERT INTO " + tableName + " (parentId, " + columns + ")\nVALUES\n";
+            String headerSql = INSERT_INTO + tableName + " (parentId, " + columns + VALUES;
             String table = headerSql + valuesSql + ";";
             String childTables = compoundValues.entrySet().stream()
                     .map(e -> formatChildTable(e.getKey(), e.getValue()))
@@ -229,7 +231,7 @@ public class SqlFormatter implements Formatter<String> {
                     .map(Value::getValue)
                     .map(Object::toString)
                     .collect(Collectors.joining(DEFAULT_DELIMITER));
-            String headerSql = "INSERT INTO " + tableName + " (" + columns + ")\nVALUES\n";
+            String headerSql = INSERT_INTO + tableName + " (" + columns + VALUES;
             return headerSql + valuesSql + ";";
         }
     }

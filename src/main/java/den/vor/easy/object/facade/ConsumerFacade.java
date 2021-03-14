@@ -35,4 +35,8 @@ public class ConsumerFacade {
     public static JsonFormatter toJson(String path) {
         return new JsonFormatter(path);
     }
+
+    private ConsumerFacade() {
+        // This is a class with static members only. There is no need to create instances of this class
+    }
 }

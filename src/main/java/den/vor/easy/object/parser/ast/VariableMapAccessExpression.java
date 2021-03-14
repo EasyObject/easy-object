@@ -37,10 +37,7 @@ public class VariableMapAccessExpression implements Expression {
         Value<?> result = null;
         for (; processed < keys.size(); processed++) {
             Value<?> value = keys.get(processed).eval(variables);
-            if (!(value instanceof ScalarValue<?>)) {
-                throw new RuntimeException();
-            }
-            ScalarValue<?> scalarValue = (ScalarValue<?>) value;
+            ScalarValue<?> scalarValue = getScalarValue(value);
             if (!(scalarValue instanceof StringValue)) {
                 parentEscaped = true;
                 thisEscaped = true;
@@ -70,6 +67,13 @@ public class VariableMapAccessExpression implements Expression {
             }
         }
         return result;
+    }
+
+    private ScalarValue<?> getScalarValue(Value<?> value) {
+        if (!(value instanceof ScalarValue<?>)) {
+            throw new RuntimeException();
+        }
+        return (ScalarValue<?>) value;
     }
 
     @Override

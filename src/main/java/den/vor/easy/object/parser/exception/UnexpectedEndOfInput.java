@@ -11,7 +11,7 @@ package den.vor.easy.object.parser.exception;
 
 public class UnexpectedEndOfInput extends ParserException {
 
-    private char expectedChar;
+    private final char expectedChar;
 
     public UnexpectedEndOfInput(char expectedChar) {
         this.expectedChar = expectedChar;
