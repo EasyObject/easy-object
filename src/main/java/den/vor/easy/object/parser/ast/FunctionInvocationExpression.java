@@ -17,9 +17,18 @@ import den.vor.easy.object.value.impl.NullValue;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Expression that represents function invocation.
+ */
 public class FunctionInvocationExpression implements Expression {
 
+    /**
+     * Expression that returns {@link FunctionalValue} and determines function to call.
+     */
     private Expression expression;
+    /**
+     * List of function arguments expressions.
+     */
     private List<Expression> args;
 
     public FunctionInvocationExpression(Expression expression, List<Expression> args) {
@@ -27,6 +36,11 @@ public class FunctionInvocationExpression implements Expression {
         this.args = args;
     }
 
+    /**
+     * Evaluates {@code expression} and {@code args}, then calls the function using evaluated arguments.
+     * @param params variables to use during the evaluation
+     * @return function invocation result
+     */
     @Override
     public Value<?> eval(Variables params) {
         Value<?> value = expression.eval(params);

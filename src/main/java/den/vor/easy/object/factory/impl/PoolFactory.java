@@ -18,24 +18,34 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+/**
+ * Pools the values returns by {@link PoolFactory#tFactory}.
+ * Factory returns a random value from the pool with uniform distribution. Each pool entry has an associated
+ * time to live - number of times it will be returned by the factory before been replaced.
+ * Time to live is specified by {@link PoolFactory#ttlFactory}.
+ * If you need an infinite TTL use {@link den.vor.easy.object.factory.EnumFactory} for better performance.
+ *
+ * PoolFactory is lock-free
+ * @param <T>
+ */
 public class PoolFactory<T> extends Factory<T, Value<T>> {
 
     private final Factory<T, Value<T>> tFactory;
     private final int size;
-    private final Factory<Integer, ? extends Value<Integer>> timesToLive;
+    private final Factory<Integer, ? extends Value<Integer>> ttlFactory;
 
     public PoolFactory(Factory<T, Value<T>> tFactory,
                        int size,
                        Factory<Integer, ? extends Value<Integer>> ttlFactory) {
         this.tFactory = tFactory;
         this.size = size;
-        this.timesToLive = ttlFactory;
+        this.ttlFactory = ttlFactory;
     }
 
     @Override
     public Generator<Value<T>> getGenerator() {
         Generator<Value<T>> tGenerator = tFactory.getGenerator();
-        Generator<? extends Value<Integer>> timeToLiveGenerator = timesToLive.getGenerator();
+        Generator<? extends Value<Integer>> timeToLiveGenerator = ttlFactory.getGenerator();
 
         List<PoolEntry<Value<T>>> elements = Stream.generate(() -> new PoolEntry<Value<T>>(null, -1))
                 .limit(size)

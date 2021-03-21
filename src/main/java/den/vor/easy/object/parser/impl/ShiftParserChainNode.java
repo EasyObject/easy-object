@@ -16,8 +16,8 @@ import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.LSHIFT;
 import static den.vor.easy.object.parser.TokenType.RSHIFT;
-import static den.vor.easy.object.parser.ast.BinaryExpression.Operation.LEFT_SHIFT;
-import static den.vor.easy.object.parser.ast.BinaryExpression.Operation.RIGHT_SHIFT;
+import static den.vor.easy.object.parser.ast.BinaryExpression.Operator.LEFT_SHIFT;
+import static den.vor.easy.object.parser.ast.BinaryExpression.Operator.RIGHT_SHIFT;
 
 public class ShiftParserChainNode extends ParserChainNode {
 

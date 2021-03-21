@@ -21,11 +21,17 @@ import java.math.BigInteger;
 import static java.math.BigInteger.ONE;
 import static java.math.BigInteger.ZERO;
 
+/**
+ * Factory that generates {@link BigInteger} values within the given bounds.
+ */
 public class BigIntFactory extends ComparableFactory<BigInteger, BigIntValue> {
 
     private static final BigInteger DEFAULT_MIN = ZERO;
-    private static final BigInteger DEFAULT_MAX = new BigInteger("f".repeat(64), 16);
+    private static final BigInteger DEFAULT_MAX = new BigInteger("f".repeat(32), 16);
 
+    /**
+     * Creates a new instance of factory with default bounds - [0, ffffffff_ffffffff_ffffffff_ffffffff].
+     */
     public BigIntFactory() {
         this(DEFAULT_MIN, DEFAULT_MAX);
     }

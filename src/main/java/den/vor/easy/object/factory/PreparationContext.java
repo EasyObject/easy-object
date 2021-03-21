@@ -13,9 +13,18 @@ import den.vor.easy.object.random.CustomRandom;
 import den.vor.easy.object.random.RandomFactory;
 import den.vor.easy.object.value.impl.MapValue;
 
+/**
+ * Encapsulates the state that is used during the {@link Factory#prepare()} and {@link Factory#prepare(int)} methods.
+ */
 public class PreparationContext {
 
+    /**
+     * Object that should be used as a source of randomness during the factory preparation.
+     */
     private final CustomRandom random;
+    /**
+     * Global generation parameters that do not vary among different generated objects.
+     */
     private MapValue globalParams = MapValue.emptyMap();
 
     public PreparationContext() {

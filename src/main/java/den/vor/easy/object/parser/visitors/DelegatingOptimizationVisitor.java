@@ -21,7 +21,7 @@ public abstract class DelegatingOptimizationVisitor extends AbstractOptimization
         Expression leftVisited = expression.getLeft().accept(this);
         Expression rightVisited = expression.getRight().accept(this);
         if (leftVisited != expression.getLeft() || rightVisited != expression.getRight()) {
-            return new BinaryExpression(leftVisited, rightVisited, expression.getOperation());
+            return new BinaryExpression(leftVisited, rightVisited, expression.getOperator());
         }
         return expression;
     }
@@ -31,7 +31,7 @@ public abstract class DelegatingOptimizationVisitor extends AbstractOptimization
         Expression leftVisited = expression.getLeft().accept(this);
         Expression rightVisited = expression.getRight().accept(this);
         if (leftVisited != expression.getLeft() || rightVisited != expression.getRight()) {
-            return new ConditionalExpression(leftVisited, rightVisited, expression.getOperation());
+            return new ConditionalExpression(leftVisited, rightVisited, expression.getOperator());
         }
         return expression;
     }

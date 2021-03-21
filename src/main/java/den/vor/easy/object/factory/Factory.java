@@ -20,29 +20,34 @@ import java.util.Map;
 
 import static den.vor.easy.object.factory.FactoryConstants.COUNT_STRING_VALUE;
 
+/**
+ * Base class for all factories.
+ * Represents an object that prepares a {@link Generator} to generate a sequence of values.
+ * @param <T> type of generated values
+ * @param <R> corresponding wrapper type that extends {@link Value<T>}
+ */
 public abstract class Factory<T, R extends Value<T>> {
 
-    private boolean visible = true;
-
+    /**
+     * Get a {@link Generator} that is able to produce values.
+     * @return generator instance
+     */
     public abstract Generator<R> getGenerator();
 
+    /**
+     * Get a list of references to the fields, that current factory depends on.
+     * Is required to calculate the generation order for the fields of an object.
+     * @return list of references.
+     */
     public List<FieldRef> getDependencies() {
         return Collections.emptyList();
     }
 
-    public boolean isVisible() {
-        return visible;
-    }
-
-    public Factory<T, R> setVisible(boolean visible) {
-        this.visible = visible;
-        return this;
-    }
-
-    public Factory<T, R> invisible() {
-        return setVisible(false);
-    }
-
+    /**
+     * Finishes construction of a factory and prepares it to generate the specified number of objects.
+     * @param count number of objects to generate
+     * @return {@link RootFactory} instance
+     */
     public RootFactory<R> prepare(int count) {
         MapValue globalParams = new MapValue(Map.of(COUNT_STRING_VALUE, IntValue.of(count)));
         PreparationContext context = new PreparationContext().setGlobalParams(globalParams);
@@ -50,6 +55,10 @@ public abstract class Factory<T, R extends Value<T>> {
         return new RootFactory<>(this, count);
     }
 
+    /**
+     * Finishes construction of a factory and prepares it to generate the {@link Integer#MAX_VALUE} objects.
+     * @return {@link RootFactory} instance
+     */
     public RootFactory<R> prepare() {
         PreparationContext context = new PreparationContext();
         prepareInternal(context);
@@ -57,6 +66,6 @@ public abstract class Factory<T, R extends Value<T>> {
     }
 
     protected void prepareInternal(PreparationContext preparationContext) {
-
+        // this is a stub implementation that does nothing. May be overridden in child classes.
     }
 }

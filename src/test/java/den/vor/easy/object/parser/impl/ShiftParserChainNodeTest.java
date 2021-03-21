@@ -69,7 +69,7 @@ class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = shiftParserChainNode.parse(tokenHolder);
 
         assertBinaryExpressionWithChildren(expression, firstResult, secondResult,
-                BinaryExpression.Operation.LEFT_SHIFT);
+                BinaryExpression.Operator.LEFT_SHIFT);
 
         verify(tokenHolder, times(2)).match(TokenType.LSHIFT);
         verify(next, times(2)).parse(tokenHolder);
@@ -84,7 +84,7 @@ class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = shiftParserChainNode.parse(tokenHolder);
 
         assertBinaryExpressionWithChildren(expression, firstResult, secondResult,
-                BinaryExpression.Operation.RIGHT_SHIFT);
+                BinaryExpression.Operator.RIGHT_SHIFT);
 
         verify(tokenHolder, times(2)).match(TokenType.RSHIFT);
         verify(next, times(2)).parse(tokenHolder);
@@ -102,7 +102,7 @@ class ShiftParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = binaryExpression.getLeft();
 
         BinaryExpression leftBinaryExpression = assertBinaryExpressionWithChildren(left, firstResult, secondResult,
-                        BinaryExpression.Operation.LEFT_SHIFT);
+                        BinaryExpression.Operator.LEFT_SHIFT);
 
         assertBinaryExpressionChildren(binaryExpression, leftBinaryExpression, thirdResult);
 

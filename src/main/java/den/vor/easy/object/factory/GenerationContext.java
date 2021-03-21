@@ -15,11 +15,26 @@ import den.vor.easy.object.value.CompoundValue;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.MapValue;
 
+/**
+ * Class that encapsulates generation context.
+ */
 public class GenerationContext {
 
+    /**
+     * Object that should be used as a source of randomness in all factories.
+     */
     private final CustomRandom random;
+    /**
+     * Global generation parameters that do not vary among different generated objects.
+     */
     private MapValue globalParams = MapValue.emptyMap();
+    /**
+     * Object that is currently under construction. Should be used to retrieve the dependency fields values.
+     */
     private Value<?> context = MapValue.emptyMap();
+    /**
+     * Link to the parent {@link CompoundValue}. Is used to traverse the tree up.
+     */
     private CompoundValue<?> parent = MapValue.emptyMap();
 
     public GenerationContext() {

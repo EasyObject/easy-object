@@ -13,7 +13,6 @@ import den.vor.easy.object.enums.impl.CollectionEnumValuesProvider;
 import den.vor.easy.object.enums.impl.EnumEnumValuesProvider;
 import den.vor.easy.object.factory.EnumFactory;
 import den.vor.easy.object.factory.Factory;
-import den.vor.easy.object.factory.RootFactory;
 import den.vor.easy.object.factory.impl.*;
 import den.vor.easy.object.value.Value;
 
@@ -21,10 +20,6 @@ import java.util.Collection;
 import java.util.function.Supplier;
 
 public class EasyObject {
-
-    public static <T extends Value<?>> RootFactory<T> root(Factory<?, T> factory) {
-        return new RootFactory<>(factory, Integer.MAX_VALUE);
-    }
 
     public static ObjectFactory isObject() {
         return new ObjectFactory();

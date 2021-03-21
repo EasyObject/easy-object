@@ -24,7 +24,7 @@ public class BitwiseOrParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(BAR)) {
-                result = new BinaryExpression(result, parseNext(tokenHolder), BinaryExpression.Operation.OR);
+                result = new BinaryExpression(result, parseNext(tokenHolder), BinaryExpression.Operator.OR);
                 continue;
             }
             break;

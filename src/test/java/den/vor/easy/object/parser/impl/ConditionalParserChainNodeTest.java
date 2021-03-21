@@ -12,7 +12,6 @@ package den.vor.easy.object.parser.impl;
 import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.TokenType;
-import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 import org.junit.jupiter.api.BeforeEach;
@@ -71,7 +70,7 @@ class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = conditionalParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.LT);
+                ConditionalExpression.Operator.LT);
 
         verify(tokenHolder, times(2)).match(TokenType.LT);
         verify(next, times(2)).parse(tokenHolder);
@@ -86,7 +85,7 @@ class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = conditionalParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.LTEQ);
+                ConditionalExpression.Operator.LTEQ);
 
         verify(tokenHolder, times(2)).match(TokenType.LTEQ);
         verify(next, times(2)).parse(tokenHolder);
@@ -102,7 +101,7 @@ class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = conditionalParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.GT);
+                ConditionalExpression.Operator.GT);
 
         verify(tokenHolder, times(2)).match(TokenType.GT);
         verify(next, times(2)).parse(tokenHolder);
@@ -119,7 +118,7 @@ class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = conditionalParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.GTEQ);
+                ConditionalExpression.Operator.GTEQ);
 
         verify(tokenHolder, times(2)).match(TokenType.GTEQ);
         verify(next, times(2)).parse(tokenHolder);
@@ -138,7 +137,7 @@ class ConditionalParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = conditionalExpression.getLeft();
 
         ConditionalExpression leftConditionalExpression = assertConditionalExpressionWithChildren(left, firstResult,
-                secondResult, ConditionalExpression.Operation.LT);
+                secondResult, ConditionalExpression.Operator.LT);
 
         assertConditionalExpressionChildren(conditionalExpression, leftConditionalExpression, thirdResult);
 

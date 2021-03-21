@@ -13,6 +13,10 @@ import den.vor.easy.object.consumer.formatter.Formatter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Consumer that does nothing with values. Development purpose only.
+ * @param <T> type of value returned by {@link Formatter}s
+ */
 public class NoOpConsumer<T> extends Consumer<T> {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(NoOpConsumer.class);

@@ -24,7 +24,7 @@ public class LogicalAndParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(AMPAMP)) {
-                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operation.AND);
+                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operator.AND);
                 continue;
             }
             break;

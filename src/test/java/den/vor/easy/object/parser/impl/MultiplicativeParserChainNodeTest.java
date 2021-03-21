@@ -66,7 +66,7 @@ class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = multiplicativeParserChainNode.parse(tokenHolder);
 
-        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operation.MULTIPLY);
+        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operator.MULTIPLY);
 
         verify(tokenHolder, times(2)).match(TokenType.STAR);
         verify(next, times(2)).parse(tokenHolder);
@@ -81,7 +81,7 @@ class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = multiplicativeParserChainNode.parse(tokenHolder);
 
-        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operation.DIVIDE);
+        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operator.DIVIDE);
 
         verify(tokenHolder, times(2)).match(TokenType.SLASH);
         verify(next, times(2)).parse(tokenHolder);
@@ -96,7 +96,7 @@ class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = multiplicativeParserChainNode.parse(tokenHolder);
 
-        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operation.REMAINDER);
+        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operator.REMAINDER);
 
         verify(tokenHolder, times(2)).match(TokenType.PERCENT);
         verify(next, times(2)).parse(tokenHolder);
@@ -114,7 +114,7 @@ class MultiplicativeParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = binaryExpression.getLeft();
 
         BinaryExpression leftBinaryExpression = assertBinaryExpressionWithChildren(left, firstResult, secondResult,
-                BinaryExpression.Operation.MULTIPLY);
+                BinaryExpression.Operator.MULTIPLY);
 
         assertBinaryExpressionChildren(binaryExpression, leftBinaryExpression, thirdResult);
 

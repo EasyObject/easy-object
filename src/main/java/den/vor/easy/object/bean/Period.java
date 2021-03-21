@@ -11,6 +11,9 @@ package den.vor.easy.object.bean;
 
 import java.util.Objects;
 
+/**
+ * Class that represents a difference between two date time values.
+ */
 public class Period {
     private int years;
     private int months;

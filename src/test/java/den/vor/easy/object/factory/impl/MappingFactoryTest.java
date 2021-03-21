@@ -43,7 +43,7 @@ class MappingFactoryTest {
         FieldRef dependency = new FieldRef(List.of(StringValue.of("key")), 0);
         List<FieldRef> dependencies = List.of(dependency);
         when(factory.getDependencies()).thenReturn(dependencies);
-        MappingFactory<Integer, String, StringValue> mappingFactory = new MappingFactory<>(factory, function);
+        MappingFactory<Integer, StringValue> mappingFactory = new MappingFactory<>(factory, function);
 
         List<FieldRef> result = mappingFactory.getDependencies();
 

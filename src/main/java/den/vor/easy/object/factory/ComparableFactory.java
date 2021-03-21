@@ -25,12 +25,22 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Base class for factories that generate a {@link Comparable} values.
+ * @param <T> type of generated values
+ * @param <R> corresponding wrapper type that extends {@link Value<T>}
+ */
 public abstract class ComparableFactory<T extends Comparable<? super T>, R extends Value<T>> extends Factory<T, R> {
 
     private Bound<T> min;
     private Bound<T> max;
     private List<SequenceConstraint<T>> constraints = new ArrayList<>();
 
+    /**
+     * Creates a new factory instance with specified bounds.
+     * @param min lower bound
+     * @param max upper bound
+     */
     protected ComparableFactory(T min, T max) {
         this.min = new Bound<>(min, true);
         this.max = new Bound<>(max, true);
@@ -39,6 +49,13 @@ public abstract class ComparableFactory<T extends Comparable<? super T>, R exten
         }
     }
 
+    /**
+     * Generate a value between given bounds.
+     * @param context generation context
+     * @param min lower bound
+     * @param max upper bound
+     * @return value generated
+     */
     protected abstract R getBetween(GenerationContext context, Bound<T> min, Bound<T> max);
 
     @Override
@@ -59,23 +76,47 @@ public abstract class ComparableFactory<T extends Comparable<? super T>, R exten
 
     protected abstract T cast(Value<?> value);
 
-    public ComparableFactory<T, R> lt(String path) {
-        constraints.add(new LtConstraint<>(path));
+    /**
+     * Add a '<' constraint in a form of expression.
+     * See {@link LtConstraint}
+     * @param expression expression to evaluate for each object to get a constraint value
+     * @return ComparableFactory instance
+     */
+    public ComparableFactory<T, R> lt(String expression) {
+        constraints.add(new LtConstraint<>(expression));
         return this;
     }
 
-    public ComparableFactory<T, R> le(String path) {
-        constraints.add(new LeConstraint<>(path));
+    /**
+     * Add a '<=' constraint in a form of expression.
+     * See {@link LeConstraint}
+     * @param expression expression to evaluate for each object to get a constraint value
+     * @return ComparableFactory instance
+     */
+    public ComparableFactory<T, R> le(String expression) {
+        constraints.add(new LeConstraint<>(expression));
         return this;
     }
 
-    public ComparableFactory<T, R> gt(String path) {
-        constraints.add(new GtConstraint<>(path));
+    /**
+     * Add a '>' constraint in a form of expression.
+     * See {@link GtConstraint}
+     * @param expression expression to evaluate for each object to get a constraint value
+     * @return ComparableFactory instance
+     */
+    public ComparableFactory<T, R> gt(String expression) {
+        constraints.add(new GtConstraint<>(expression));
         return this;
     }
 
-    public ComparableFactory<T, R> ge(String path) {
-        constraints.add(new GeConstraint<>(path));
+    /**
+     * Add a '>=' constraint in a form of expression.
+     * See {@link GeConstraint}
+     * @param expression expression to evaluate for each object to get a constraint value
+     * @return ComparableFactory instance
+     */
+    public ComparableFactory<T, R> ge(String expression) {
+        constraints.add(new GeConstraint<>(expression));
         return this;
     }
 

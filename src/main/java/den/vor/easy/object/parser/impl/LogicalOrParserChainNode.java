@@ -24,7 +24,7 @@ public class LogicalOrParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(BARBAR)) {
-                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operation.OR);
+                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operator.OR);
                 continue;
             }
             break;

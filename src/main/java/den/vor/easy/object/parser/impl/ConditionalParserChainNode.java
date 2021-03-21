@@ -24,21 +24,21 @@ public class ConditionalParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(LT)) {
-                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operation.LT);
+                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operator.LT);
                 continue;
             }
             if (tokenHolder.match(LTEQ)) {
                 result = new ConditionalExpression(result, parseNext(tokenHolder),
-                        ConditionalExpression.Operation.LTEQ);
+                        ConditionalExpression.Operator.LTEQ);
                 continue;
             }
             if (tokenHolder.match(GT)) {
-                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operation.GT);
+                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operator.GT);
                 continue;
             }
             if (tokenHolder.match(GTEQ)) {
                 result = new ConditionalExpression(result, parseNext(tokenHolder),
-                        ConditionalExpression.Operation.GTEQ);
+                        ConditionalExpression.Operator.GTEQ);
                 continue;
             }
             break;

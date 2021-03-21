@@ -16,8 +16,8 @@ import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.EQEQ;
 import static den.vor.easy.object.parser.TokenType.EXCLEQ;
-import static den.vor.easy.object.parser.ast.ConditionalExpression.Operation.EQUALS;
-import static den.vor.easy.object.parser.ast.ConditionalExpression.Operation.NOT_EQUALS;
+import static den.vor.easy.object.parser.ast.ConditionalExpression.Operator.EQUALS;
+import static den.vor.easy.object.parser.ast.ConditionalExpression.Operator.NOT_EQUALS;
 
 public class EqualityParserChainNode extends ParserChainNode {
 

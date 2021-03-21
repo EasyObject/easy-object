@@ -15,7 +15,7 @@ import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.*;
-import static den.vor.easy.object.parser.ast.BinaryExpression.Operation.*;
+import static den.vor.easy.object.parser.ast.BinaryExpression.Operator.*;
 
 public class MultiplicativeParserChainNode extends ParserChainNode {
 

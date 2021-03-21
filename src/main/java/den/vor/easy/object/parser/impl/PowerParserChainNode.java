@@ -23,7 +23,7 @@ public class PowerParserChainNode extends ParserChainNode {
         Expression result = getNext().parse(tokenHolder);
 
         while (tokenHolder.match(POW)) {
-            result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operation.POW);
+            result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operator.POW);
         }
 
         return result;

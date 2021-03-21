@@ -25,11 +25,11 @@ public class AdditiveParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(PLUS)) {
-                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operation.PLUS);
+                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operator.PLUS);
                 continue;
             }
             if (tokenHolder.match(MINUS)) {
-                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operation.MINUS);
+                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operator.MINUS);
                 continue;
             }
             break;

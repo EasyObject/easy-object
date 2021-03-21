@@ -24,7 +24,7 @@ public class BitwiseXorParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(CARET)) {
-                result = new BinaryExpression(result, parseNext(tokenHolder), BinaryExpression.Operation.XOR);
+                result = new BinaryExpression(result, parseNext(tokenHolder), BinaryExpression.Operator.XOR);
                 continue;
             }
             break;

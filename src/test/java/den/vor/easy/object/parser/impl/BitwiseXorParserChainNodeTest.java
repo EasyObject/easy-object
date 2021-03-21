@@ -66,7 +66,7 @@ class BitwiseXorParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = bitwiseXorParserChainNode.parse(tokenHolder);
 
-        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operation.XOR);
+        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operator.XOR);
 
         verify(tokenHolder, times(2)).match(TokenType.CARET);
         verify(next, times(2)).parse(tokenHolder);
@@ -84,7 +84,7 @@ class BitwiseXorParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = binaryExpression.getLeft();
 
         BinaryExpression leftBinaryExpression =
-                assertBinaryExpressionWithChildren(left, firstResult, secondResult, BinaryExpression.Operation.XOR);
+                assertBinaryExpressionWithChildren(left, firstResult, secondResult, BinaryExpression.Operator.XOR);
 
         assertBinaryExpressionChildren(binaryExpression, leftBinaryExpression, thirdResult);
 
