@@ -15,6 +15,9 @@ import den.vor.easy.object.random.RandomProvider;
 
 import java.util.Random;
 
+/**
+ * Class that provides custom random with {@link Random} implementation.
+ */
 public class SimpleRandomProvider implements RandomProvider {
 
     @Override
@@ -22,6 +25,9 @@ public class SimpleRandomProvider implements RandomProvider {
         return new Wrapper();
     }
 
+    /**
+     * Wrapper for Random class.
+     */
     private static class Wrapper extends Random implements CustomRandom {
 
     }

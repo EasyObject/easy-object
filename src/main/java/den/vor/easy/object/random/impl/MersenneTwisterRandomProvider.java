@@ -15,6 +15,9 @@ import org.apache.commons.rng.core.source32.MersenneTwister;
 
 import java.util.Random;
 
+/**
+ * Class that provides custom random with {@link MersenneTwister} implementation.
+ */
 public class MersenneTwisterRandomProvider implements RandomProvider {
 
     public static final Random RANDOM = new Random();
@@ -23,6 +26,9 @@ public class MersenneTwisterRandomProvider implements RandomProvider {
         return new Wrapper();
     }
 
+    /**
+     * Wrapper for MersenneTwister class.
+     */
     private static class Wrapper extends MersenneTwister implements CustomRandom {
 
         public Wrapper() {

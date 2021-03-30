@@ -11,8 +11,15 @@ package den.vor.easy.object.value;
 
 import den.vor.easy.object.value.impl.StringValue;
 
+/**
+ * Base class for values, that do not carry other values in any form (like collections).
+ * @param <T> type of encapsulated object
+ */
 public abstract class ScalarValue<T> extends Value<T> {
 
+    /**
+     * Returns {@link StringValue} with value's representation.
+     */
     public StringValue toStringValue() {
         throw new UnsupportedOperationException();
     }

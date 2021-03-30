@@ -35,7 +35,7 @@ class UnaryExpressionTest {
     void shouldEvaluateChildExpressionsAndCallPlusMethodOnFirst() {
         doReturn(value).when(expression).eval(variables);
 
-        UnaryExpression unaryExpression = new UnaryExpression(expression, UnaryExpression.Operation.MINUS);
+        UnaryExpression unaryExpression = new UnaryExpression(expression, UnaryExpression.Operator.MINUS);
 
         doReturn(resultValue).when(value).minus();
 

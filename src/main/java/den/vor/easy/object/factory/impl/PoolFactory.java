@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 
 /**
  * Pools the values returns by {@link PoolFactory#tFactory}.
- * Factory returns a random value from the pool with uniform distribution. Each pool entry has an associated
+ * Factory returns a random value from the pool with equal probability. Each pool entry has an associated
  * time to live - number of times it will be returned by the factory before been replaced.
  * Time to live is specified by {@link PoolFactory#ttlFactory}.
  * If you need an infinite TTL use {@link den.vor.easy.object.factory.EnumFactory} for better performance.

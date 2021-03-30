@@ -9,9 +9,19 @@
 
 package den.vor.easy.object.parser;
 
-public final class Token {
+/**
+ * Represents an expression language token.
+ * See {@link Lexer} and {@link Parser} for usages.
+ */
+public class Token {
 
+    /**
+     * Token type.
+     */
     private final TokenType type;
+    /**
+     * Text that {@link Lexer} parsed into this token.
+     */
     private final String text;
 
     public Token(TokenType type, String text) {

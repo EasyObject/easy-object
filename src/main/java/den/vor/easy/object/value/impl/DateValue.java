@@ -12,9 +12,16 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.value.ComparableValue;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.operator.impl.DateOperations;
+import den.vor.easy.object.value.operator.impl.DateTimeOperations;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
+/**
+ * Value that encapsulates {@link LocalDate}.
+ * Supports addition and subtraction operation. See {@link DateOperations} for details.
+ * Uses default comparable operators implementation.
+ */
 public class DateValue extends ComparableValue<LocalDate> {
 
     private final LocalDate value;
@@ -23,6 +30,10 @@ public class DateValue extends ComparableValue<LocalDate> {
         this.value = value;
     }
 
+    /**
+     * Wraps the given value with {@linkplain DateValue}.
+     * @param value value to wrap
+     */
     public static DateValue of(LocalDate value) {
         return new DateValue(value);
     }

@@ -17,6 +17,11 @@ import den.vor.easy.object.parser.ast.Expression;
 import static den.vor.easy.object.parser.TokenType.*;
 import static den.vor.easy.object.parser.ast.BinaryExpression.Operator.*;
 
+/**
+ * Chain node that parses binary '*', '/' and '%' operators tokens.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link BinaryExpression} for details.
+ */
 public class MultiplicativeParserChainNode extends ParserChainNode {
 
     @Override

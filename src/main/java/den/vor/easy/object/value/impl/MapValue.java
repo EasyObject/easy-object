@@ -15,8 +15,13 @@ import den.vor.easy.object.value.Value;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+/**
+ * Value that encapsulates {@link Map<Value>}.
+ * Does not support any arithmetical or comparison operations.
+ */
 public class MapValue extends CompoundValue<Map<ScalarValue<?>, Value<?>>> {
 
     private static final MapValue EMPTY_MAP_VALUE = new MapValue(Collections.emptyMap());
@@ -34,8 +39,28 @@ public class MapValue extends CompoundValue<Map<ScalarValue<?>, Value<?>>> {
         this(new HashMap<>());
     }
 
+    /**
+     * Returns an empty read-only map. If you need read-write map, see {@link MapValue#of()}.
+     * @return map value instance
+     */
     public static MapValue emptyMap() {
         return EMPTY_MAP_VALUE;
+    }
+
+    /**
+     * Wraps a given map.
+     * @return map value instance
+     */
+    public static MapValue of(Map<ScalarValue<?>, Value<?>> value) {
+        return new MapValue(value);
+    }
+
+    /**
+     * Wraps a given map.
+     * @return map value instance
+     */
+    public static MapValue of() {
+        return of(new HashMap<>());
     }
 
     @Override

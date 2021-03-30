@@ -26,6 +26,12 @@ public class ExpressionSimplifierVisitor extends AbstractOptimizationVisitor {
         this.variables = variables;
     }
 
+    /**
+     * If ternary expression's condition can be evaluated on the compile time,
+     * evaluates it and replaces with expression with one of it's branches, depending on evaluation result.
+     * @param expression expression to visit
+     * @return original or optimized expression
+     */
     @Override
     public Expression visit(TernaryExpression expression) {
         if (isValue(expression.getCondition())) {

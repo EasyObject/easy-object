@@ -14,18 +14,33 @@ import den.vor.easy.object.value.Value;
 
 import java.util.function.UnaryOperator;
 
+/**
+ * Expression that encapsulates an unary operator and it's operand.
+ */
 public class UnaryExpression implements Expression {
 
+    /**
+     * Expression, which result is used as an operand.
+     */
     private final Expression expression;
-    private final Operation operation;
-    public UnaryExpression(Expression expression, Operation operation) {
+    /**
+     * Unary operator.
+     */
+    private final Operator operator;
+
+    public UnaryExpression(Expression expression, Operator operator) {
         this.expression = expression;
-        this.operation = operation;
+        this.operator = operator;
     }
 
+    /**
+     * Evaluates an expression and applies it's result to the operator.
+     * @param variables variables to use during the evaluation
+     * @return unary operator invocation result
+     */
     @Override
     public Value<?> eval(Variables variables) {
-        return operation.function.apply(expression.eval(variables));
+        return operator.function.apply(expression.eval(variables));
     }
 
     public Expression getExpression() {
@@ -39,21 +54,27 @@ public class UnaryExpression implements Expression {
 
     @Override
     public String toString() {
-        return "UnaryExpression{" + operation + expression + '}';
+        return "UnaryExpression{" + operator + expression + '}';
     }
 
-    public Operation getOperation() {
-        return operation;
+    public Operator getOperator() {
+        return operator;
     }
 
-    public enum Operation {
+    /**
+     * Enum that describes all unary operators.
+     */
+    public enum Operator {
         NOT(Value::not),
         MINUS(Value::minus),
         PLUS(Value::plus);
 
+        /**
+         * Function that is used to calculate operator's result.
+         */
         private final UnaryOperator<Value<?>> function;
 
-        Operation(UnaryOperator<Value<?>> function) {
+        Operator(UnaryOperator<Value<?>> function) {
             this.function = function;
         }
     }

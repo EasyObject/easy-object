@@ -9,6 +9,10 @@
 
 package den.vor.easy.object.parser;
 
+/**
+ * Enum that stores all possible token types.
+ * See {@link Token} and {@link Lexer} for usage.
+ */
 public enum TokenType {
     QUESTION_SIGN,
     COLON,

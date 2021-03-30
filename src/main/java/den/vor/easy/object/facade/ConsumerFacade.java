@@ -14,26 +14,50 @@ import den.vor.easy.object.consumer.StdConsumer;
 import den.vor.easy.object.consumer.formatter.Formatter;
 import den.vor.easy.object.consumer.formatter.JsonFormatter;
 
+/**
+ * Utility class for objects consumption.
+ */
 public class ConsumerFacade {
 
+    /**
+     * Creates a consumer that formats objects by provided formatters and writes the result to the file.
+     * Each object will be formatted by each formatter.
+     * If the file does not exist, it will be created. All required parent directories will be created too.
+     * @param path target file path
+     * @param formatters list of formats
+     * @return consumer instance
+     */
     public static FileConsumer toFile(String path, Formatter<String>... formatters) {
         return new FileConsumer(path, formatters);
     }
 
+    /**
+     * Creates a consumer that formats objects by provided formatters and writes the result to the console.
+     * Each object will be formatted by each formatter.
+     * @param formatters list of formats
+     * @return consumer instance
+     */
     public static StdConsumer toStd(Formatter<String>... formatters) {
         return new StdConsumer(formatters);
     }
 
-    public static StdConsumer toStd(boolean useBatch, Formatter<String>... formatters) {
-        return new StdConsumer(useBatch, formatters);
-    }
-
+    /**
+     * Creates a formatter that prints whole objects to JSON.
+     * Can be later used by {@link den.vor.easy.object.consumer.Consumer}.
+     * @return formatter instance
+     */
     public static JsonFormatter toJson() {
         return new JsonFormatter();
     }
 
-    public static JsonFormatter toJson(String path) {
-        return new JsonFormatter(path);
+    /**
+     * Creates a formatter that applies a given expression to the objects and writes the results to JSON.
+     * Can be used to print only a part of the object (one field, for example).
+     * @param expression expression to evaluate on each object
+     * @return formatter instance
+     */
+    public static JsonFormatter toJson(String expression) {
+        return new JsonFormatter(expression);
     }
 
     private ConsumerFacade() {

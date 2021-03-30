@@ -17,7 +17,8 @@ import java.time.LocalTime;
 
 /**
  * Value class that encapsulates {@link LocalTime}.
- * Supports + and - operations with {@link den.vor.easy.object.bean.Period}, see {@link TimeOperations} for details
+ * Supports addition and subtraction operations with {@link den.vor.easy.object.bean.Period},
+ * see {@link TimeOperations} for details.
  */
 public class TimeValue extends ComparableValue<LocalTime> {
 
@@ -27,6 +28,10 @@ public class TimeValue extends ComparableValue<LocalTime> {
         this.value = value;
     }
 
+    /**
+     * Wraps the given value with {@linkplain TimeValue}.
+     * @param value value to wrap
+     */
     public static TimeValue of(LocalTime value) {
         return new TimeValue(value);
     }

@@ -11,6 +11,10 @@ package den.vor.easy.object.parser.visitors;
 
 import den.vor.easy.object.parser.ast.*;
 
+/**
+ * Interface for an optimization AST nodes visitor.
+ * Visitors are used by {@link den.vor.easy.object.parser.ExpressionEvaluator} to optimize expression.
+ */
 public interface OptimizationVisitor extends ResultVisitor<Expression> {
 
     Expression visit(BinaryExpression expression);

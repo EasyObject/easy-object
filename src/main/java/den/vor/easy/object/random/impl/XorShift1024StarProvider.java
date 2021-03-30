@@ -15,6 +15,9 @@ import org.apache.commons.rng.core.source64.XorShift1024Star;
 
 import java.util.Random;
 
+/**
+ * Class that provides custom random with XorShift1024Star algorithm.
+ */
 public class XorShift1024StarProvider implements RandomProvider {
 
     public static final Random RANDOM = new Random();
@@ -36,6 +39,9 @@ public class XorShift1024StarProvider implements RandomProvider {
         return new Wrapper(seed);
     }
 
+    /**
+     * Wrapper for XorShift1024Star random.
+     */
     private static class Wrapper extends XorShift1024Star implements CustomRandom {
 
         private final long[] seed;

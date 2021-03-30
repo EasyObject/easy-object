@@ -11,30 +11,58 @@ package den.vor.easy.object.value.operator.impl;
 
 import den.vor.easy.object.value.impl.DoubleValue;
 import den.vor.easy.object.value.impl.StringValue;
-import den.vor.easy.object.value.operator.Operator;
+import den.vor.easy.object.value.operator.BinaryOperator;
 
-import static den.vor.easy.object.value.operator.OperatorImpl.operator;
+import static den.vor.easy.object.value.operator.BinaryOperatorImpl.operator;
 
+/**
+ * Class that contains operator implementation for {@link DoubleValue}.
+ */
 public class DoubleOperations {
 
-    public static final Operator<Double> PLUS_OPERATOR = Operator.operator(
+    /**
+     * Binary addition operator implementation. Can calculate result when the second operand is:
+     * * {@link Number} - adds current value to number's {@link Number#doubleValue()}. Returns {@link DoubleValue}.
+     * * {@link String} - converts current value to string and adds the second operand. Returns {@link StringValue}.
+     */
+    public static final BinaryOperator<Double> PLUS_OPERATOR = BinaryOperator.operator(
             operator(Number.class, (a, b) -> DoubleValue.of(a + b.doubleValue())),
             operator(String.class, (a, b) -> StringValue.of(a + b))
     );
 
-    public static final Operator<Double> MINUS_OPERATOR = Operator.operator(
+    /**
+     * Binary subtraction operator implementation.
+     * Can calculate result only when the second operand is {@link Number}.
+     * Subtract number's {@link Number#doubleValue()} from current value. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Double> MINUS_OPERATOR = BinaryOperator.operator(
             operator(Number.class, (a, b) -> DoubleValue.of(a - b.doubleValue()))
     );
 
-    public static final Operator<Double> MULTIPLY_OPERATOR = Operator.operator(
+    /**
+     * Binary multiplication operator implementation.
+     * Can calculate result only when the second operand is {@link Number}.
+     * Multiplies number's {@link Number#doubleValue()} by current value. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Double> MULTIPLY_OPERATOR = BinaryOperator.operator(
             operator(Number.class, (a, b) -> DoubleValue.of(a * b.doubleValue()))
     );
 
-    public static final Operator<Double> DIVIDE_OPERATOR = Operator.operator(
+    /**
+     * Binary division operator implementation.
+     * Can calculate result only when the second operand is {@link Number}.
+     * Divides current value by number's {@link Number#doubleValue()}. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Double> DIVIDE_OPERATOR = BinaryOperator.operator(
             operator(Number.class, (a, b) -> DoubleValue.of(a / b.doubleValue()))
     );
 
-    public static final Operator<Double> POWER_OPERATOR = Operator.operator(
+    /**
+     * Binary power operator implementation.
+     * Can calculate result only when the second operand is {@link Number}.
+     * Elevates current value by number's {@link Number#doubleValue()}. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Double> POWER_OPERATOR = BinaryOperator.operator(
             operator(Number.class, (a, b) -> DoubleValue.of(Math.pow(a, b.doubleValue())))
     );
 

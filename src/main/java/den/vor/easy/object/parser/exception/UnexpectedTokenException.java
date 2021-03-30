@@ -11,17 +11,15 @@ package den.vor.easy.object.parser.exception;
 
 import den.vor.easy.object.parser.Token;
 
-public class UnexpectedTokenException extends ParserException {
+/**
+ * Exception that is thrown when {@link den.vor.easy.object.parser.ParserChain} doesn't know how to parse a token.
+ */
+public class UnexpectedTokenException extends ELException {
 
     private final Token token;
 
     public UnexpectedTokenException(Token token) {
         this.token = token;
-    }
-
-    @Override
-    public String getUserMessage() {
-        return "Didn't expect token " + token.getType() + " (" + token.getText() + ")";
     }
 
     @Override

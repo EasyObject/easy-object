@@ -11,14 +11,25 @@ package den.vor.easy.object.random;
 
 import den.vor.easy.object.random.impl.XorShift1024StarProvider;
 
+/**
+ * Utility class that encapsulates a {@link RandomProvider} and can generate {@link CustomRandom} instances.
+ * By default uses {@link XorShift1024StarProvider}.
+ */
 public class RandomFactory {
 
     private static RandomProvider RANDOM_PROVIDER = new XorShift1024StarProvider();
 
+    /**
+     * Sets random provider. All further calls will be directed to it.
+     */
     public static void setRandomProvider(RandomProvider randomProvider) {
         RANDOM_PROVIDER = randomProvider;
     }
 
+    /**
+     * Generates a {@link CustomRandom} or returns a cached instance.
+     * @return random instance
+     */
     public static CustomRandom getRandom() {
         return RANDOM_PROVIDER.getRandom();
     }

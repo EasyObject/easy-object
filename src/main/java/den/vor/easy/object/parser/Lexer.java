@@ -10,7 +10,7 @@
 package den.vor.easy.object.parser;
 
 import den.vor.easy.object.parser.exception.FloatNumberException;
-import den.vor.easy.object.parser.exception.InvalidNameException;
+import den.vor.easy.object.parser.exception.InvalidPeriodFormatException;
 import den.vor.easy.object.parser.exception.UnexpectedEndOfInput;
 
 import java.util.ArrayList;
@@ -19,10 +19,19 @@ import java.util.Map;
 
 import static java.util.Map.entry;
 
-public final class Lexer {
+/**
+ * Class that parses an input string into a collection of {@link Token}.
+ */
+public class Lexer {
 
+    /**
+     * Characters that may be found in operators.
+     */
     private static final String OPERATOR_CHARS = "^?+-*/()[]{}=<>!&|,:.%";
 
+    /**
+     * Map of operators. Keys are strings that represent an operator, values are corresponding {@link TokenType} values.
+     */
     private static final Map<String, TokenType> OPERATORS;
 
     static {
@@ -75,7 +84,7 @@ public final class Lexer {
 
     public TokenHolder tokenize() {
         while (pos < length) {
-            final char current = peek(0);
+            final char current = peek();
             if (Character.isDigit(current)) {
                 tokenizeNumber();
             } else if (Character.isLetter(current) || current == '$') {
@@ -96,7 +105,7 @@ public final class Lexer {
 
     private void tokenizeNumber() {
         final StringBuilder buffer = new StringBuilder();
-        char current = peek(0);
+        char current = peek();
         while (true) {
             if (current == '.') {
                 if (buffer.indexOf(".") != -1) {
@@ -121,10 +130,10 @@ public final class Lexer {
 
     private void tokenizePeriod(StringBuilder buffer) {
         if (buffer.indexOf(".") != -1) {
-            throw new InvalidNameException(buffer.toString());
+            throw new InvalidPeriodFormatException(buffer.toString());
         }
 
-        char current = peek(0);
+        char current = peek();
         while (Character.isDigit(current) || Character.isLetter(current)) {
             buffer.append(current);
             current = next();
@@ -133,7 +142,7 @@ public final class Lexer {
     }
 
     private void tokenizeOperator() {
-        char current = peek(0);
+        char current = peek();
         StringBuilder buffer = new StringBuilder();
         while (true) {
             final String text = buffer.toString();
@@ -148,7 +157,7 @@ public final class Lexer {
 
     private void tokenizeWord() {
         final StringBuilder buffer = new StringBuilder();
-        char current = peek(0);
+        char current = peek();
         while (isWordChar(current)) {
             buffer.append(current);
             current = next();
@@ -192,10 +201,10 @@ public final class Lexer {
     }
 
     private void tokenizeText() {
-        char start = peek(0);
+        char start = peek();
         next(); // skip quote
         StringBuilder buffer = new StringBuilder();
-        char current = peek(0);
+        char current = peek();
         while (true) {
             if (pos >= length) {
                 throw new UnexpectedEndOfInput('\'');
@@ -236,15 +245,14 @@ public final class Lexer {
 
     private char next() {
         pos++;
-        return peek(0);
+        return peek();
     }
 
-    private char peek(int relativePosition) {
-        final int position = pos + relativePosition;
-        if (position >= length) {
+    private char peek() {
+        if (pos >= length) {
             return '\0';
         }
-        return input.charAt(position);
+        return input.charAt(pos);
     }
 
     private void addToken(TokenType type) {

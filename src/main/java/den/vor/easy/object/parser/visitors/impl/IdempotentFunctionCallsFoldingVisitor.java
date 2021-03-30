@@ -29,6 +29,13 @@ public class IdempotentFunctionCallsFoldingVisitor extends AbstractOptimizationV
         this.variables = variables;
     }
 
+    /**
+     * If {@link FunctionInvocationExpression} is an idempotent and all arguments are known or the compile time,
+     * replaces the call with an actual value.
+     * Example: {@code int('12')} will be replaced with a single value.
+     * @param expression expression to visit
+     * @return original or evaluated expression
+     */
     @Override
     public Expression visit(FunctionInvocationExpression expression) {
         if (isExpressionIdempotentFunction(expression.getExpression()) && allArgsAreValues(expression.getArgs())) {
@@ -37,6 +44,15 @@ public class IdempotentFunctionCallsFoldingVisitor extends AbstractOptimizationV
         return expression;
     }
 
+    /**
+     * Replaces method invocation with an actual result if all conditions apply:
+     * * method context expression is a {@link ValueExpression}.
+     * * method is idempotent.
+     * * all arguments are {@link ValueExpression}s (if any).
+     * Example: {@code someList.size()} will be replaced with a single value.
+     * @param expression expression to visit
+     * @return original or evaluated expression
+     */
     @Override
     public Expression visit(MethodInvocationExpression expression) {
         if (isValue(expression.getExpression()) &&

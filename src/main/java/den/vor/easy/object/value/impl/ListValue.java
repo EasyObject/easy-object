@@ -12,9 +12,17 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
 
+import java.math.BigInteger;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Value that encapsulates {@link List<Value>}.
+ * Does not support any arithmetical or comparison operations.
+ *
+ * @param <T> type of value in each list entry
+ */
 public class ListValue<T> extends Value<List<T>> {
 
     private final List<Value<T>> values;
@@ -22,6 +30,24 @@ public class ListValue<T> extends Value<List<T>> {
 
     public ListValue(List<Value<T>> values) {
         this.values = values;
+    }
+
+    /**
+     * Wraps a given list of elements into the list
+     * @param elements elements to wrap
+     * @return list value instance
+     */
+    public static <T> ListValue<T> of(List<Value<T>> elements) {
+        return new ListValue<>(elements);
+    }
+
+    /**
+     * Wraps a given list of elements into the list
+     * @param elements elements to wrap
+     * @return list value instance
+     */
+    public static <T> ListValue<T> of(Value<T>... elements) {
+        return of(Arrays.asList(elements));
     }
 
     @Override

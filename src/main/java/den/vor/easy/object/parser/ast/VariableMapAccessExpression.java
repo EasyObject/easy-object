@@ -20,8 +20,18 @@ import java.util.List;
 import static den.vor.easy.object.parser.ExpressionConstants.PARENT_REF;
 import static den.vor.easy.object.parser.ExpressionConstants.THIS_REF;
 
+/**
+ * Expression that traverses an object tree. Encapsulates a list of keys used for traversal.
+ * All keys must evaluate to a {@link ScalarValue}.
+ * To reference parent object, use {@code parent} reference. For several parent leaps - {@code parent.parent.parent}.
+ * To access a 'parent' field, escape it with 'this' - {@code this.parent}.
+ * To access a 'this' field, escape it with 'this' - {@code this.this}.
+ */
 public class VariableMapAccessExpression implements Expression {
 
+    /**
+     * Keys used for traversal
+     */
     private final List<Expression> keys;
 
     public VariableMapAccessExpression(List<Expression> keys) {

@@ -11,11 +11,18 @@ package den.vor.easy.object.value.impl;
 
 import den.vor.easy.object.value.ComparableValue;
 import den.vor.easy.object.value.Value;
+import den.vor.easy.object.value.operator.impl.DateOperations;
 import den.vor.easy.object.value.operator.impl.StringOperations;
 
+import java.time.LocalDate;
 import java.util.Map;
 import java.util.Objects;
 
+/**
+ * Value that encapsulates {@link String}.
+ * Supports addition and multiplication operations. See {@link StringOperations} for details.
+ * Uses default comparable operators implementation.
+ */
 public class StringValue extends ComparableValue<String> {
 
     private static final Map<String, FunctionalValue<String>> METHODS = Map.of(
@@ -30,6 +37,10 @@ public class StringValue extends ComparableValue<String> {
         this.value = value;
     }
 
+    /**
+     * Wraps the given value with {@linkplain StringValue}.
+     * @param value value to wrap
+     */
     public static StringValue of(String value) {
         return new StringValue(value);
     }

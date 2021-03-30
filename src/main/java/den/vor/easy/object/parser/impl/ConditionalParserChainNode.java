@@ -16,6 +16,11 @@ import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.*;
 
+/**
+ * Chain node that parses logical binary comparison operators, such as '>', '<', '>=', '<='.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link ConditionalExpression} for details.
+ */
 public class ConditionalParserChainNode extends ParserChainNode {
 
     @Override

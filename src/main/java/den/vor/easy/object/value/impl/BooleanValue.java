@@ -12,10 +12,15 @@ package den.vor.easy.object.value.impl;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
 
+import java.math.BigInteger;
 import java.util.Objects;
 
 import static den.vor.easy.object.value.operator.impl.BooleanOperations.*;
 
+/**
+ * Value that encapsulates {@link Boolean}.
+ * Does not support any arithmetical operations. Supports logical operations.
+ */
 public class BooleanValue extends ScalarValue<Boolean> {
 
     public static final BooleanValue TRUE = new BooleanValue(true);
@@ -26,6 +31,10 @@ public class BooleanValue extends ScalarValue<Boolean> {
         this.value = value;
     }
 
+    /**
+     * Returns one of two constants depending on value provided.
+     * @param value value to wrap
+     */
     public static BooleanValue of(boolean value) {
         return value ? TRUE : FALSE;
     }

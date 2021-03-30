@@ -16,6 +16,11 @@ import java.util.Objects;
 
 import static den.vor.easy.object.value.operator.impl.PeriodOperations.*;
 
+/**
+ * Value that encapsulates {@link Period}.
+ * Supports addition, subtraction and multiplication operations.
+ * See {@link den.vor.easy.object.value.operator.impl.PeriodOperations} for details.
+ */
 public class PeriodValue extends Value<Period> {
 
     private final Period period;
@@ -24,6 +29,10 @@ public class PeriodValue extends Value<Period> {
         this.period = period;
     }
 
+    /**
+     * Wraps the given value with {@linkplain PeriodValue}.
+     * @param period value to wrap
+     */
     public static PeriodValue of(Period period) {
         return new PeriodValue(period);
     }
@@ -45,17 +54,17 @@ public class PeriodValue extends Value<Period> {
 
     @Override
     public Value<?> multiply(Value<?> another) {
-        return MULTIPLY_OPERATOR_REGISTRY.apply(getValue(), another);
+        return MULTIPLY_OPERATOR.apply(getValue(), another);
     }
 
     @Override
     public Value<?> minus(Value<?> another) {
-        return MINUS_OPERATOR_REGISTRY.apply(getValue(), another);
+        return MINUS_OPERATOR.apply(getValue(), another);
     }
 
     @Override
     public Value<?> plus(Value<?> another) {
-        return PLUS_OPERATOR_REGISTRY.apply(getValue(), another);
+        return PLUS_OPERATOR.apply(getValue(), another);
     }
 
     @Override

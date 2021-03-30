@@ -9,8 +9,19 @@
 
 package den.vor.easy.object.value;
 
+/**
+ * Base class for values that encapsulate {@link Number} value.
+ * @param <T> type of encapsulated object
+ */
 public abstract class NumberValue<T extends Number & Comparable<T>> extends ComparableValue<T> {
 
+    /**
+     * Default comparison method implementation.
+     * If both numbers are instances of one class, delegates comparison to them. If not - comparison is made by the
+     * double values (see {@linkplain Number#doubleValue()}).
+     * @param value value to compare with.
+     * @return comparison result.
+     */
     @Override
     @SuppressWarnings("unchecked")
     protected int compareTo(Value<?> value) {

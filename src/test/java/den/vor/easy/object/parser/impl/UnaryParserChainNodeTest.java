@@ -65,7 +65,7 @@ class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = unaryParserChainNode.parse(tokenHolder);
 
-        assertUnaryExpressionWithChild(expression, firstResult, UnaryExpression.Operation.PLUS);
+        assertUnaryExpressionWithChild(expression, firstResult, UnaryExpression.Operator.PLUS);
 
         verify(tokenHolder).match(TokenType.PLUS);
         verify(next, times(1)).parse(tokenHolder);
@@ -78,7 +78,7 @@ class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = unaryParserChainNode.parse(tokenHolder);
 
-        assertUnaryExpressionWithChild(expression, firstResult, UnaryExpression.Operation.MINUS);
+        assertUnaryExpressionWithChild(expression, firstResult, UnaryExpression.Operator.MINUS);
 
         verify(tokenHolder).match(TokenType.MINUS);
         verify(next, times(1)).parse(tokenHolder);
@@ -92,7 +92,7 @@ class UnaryParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = unaryParserChainNode.parse(tokenHolder);
 
-        assertUnaryExpressionWithChild(expression, firstResult, UnaryExpression.Operation.NOT);
+        assertUnaryExpressionWithChild(expression, firstResult, UnaryExpression.Operator.NOT);
 
         verify(tokenHolder).match(TokenType.NOT);
         verify(next, times(1)).parse(tokenHolder);

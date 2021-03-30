@@ -11,11 +11,17 @@ package den.vor.easy.object.parser.impl;
 
 import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.TokenHolder;
+import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.BARBAR;
 
+/**
+ * Chain node that parses logical binary '||' operator tokens.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link ConditionalExpression} for details.
+ */
 public class LogicalOrParserChainNode extends ParserChainNode {
 
     @Override

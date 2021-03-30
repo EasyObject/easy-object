@@ -12,7 +12,10 @@ package den.vor.easy.object.parser.exception;
 import den.vor.easy.object.parser.Token;
 import den.vor.easy.object.parser.TokenType;
 
-public class ExpectedAnotherTokenException extends ParserException {
+/**
+ * Exception that is thrown when {@link den.vor.easy.object.parser.ParserChainNode} expected one token, but got another.
+ */
+public class ExpectedAnotherTokenException extends ELException {
 
     private final Token token;
     private final TokenType expected;
@@ -20,10 +23,5 @@ public class ExpectedAnotherTokenException extends ParserException {
     public ExpectedAnotherTokenException(Token token, TokenType expected) {
         this.token = token;
         this.expected = expected;
-    }
-
-    @Override
-    public String getUserMessage() {
-        return "Expected " + expected + " but got " + token.getType();
     }
 }

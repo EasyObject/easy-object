@@ -13,6 +13,9 @@ import den.vor.easy.object.random.CustomRandom;
 import den.vor.easy.object.random.RandomProvider;
 import org.apache.commons.rng.core.source64.SplitMix64;
 
+/**
+ * Class that provides custom random with SplitMix64 algorithm.
+ */
 public class SplitMix64Provider implements RandomProvider {
 
     @Override
@@ -20,6 +23,9 @@ public class SplitMix64Provider implements RandomProvider {
         return new Wrapper();
     }
 
+    /**
+     * Wrapper for SplitMix64 class.
+     */
     private static class Wrapper extends SplitMix64 implements CustomRandom {
 
         public Wrapper() {

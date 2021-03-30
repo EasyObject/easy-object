@@ -52,12 +52,16 @@ public abstract class CompoundFactory<T, R extends Value<T>> extends Factory<T, 
 
     protected List<ScalarValue<?>> getOrderedGenerators() {
         Map<ScalarValue<?>, List<ScalarValue<?>>> childFactoriesDependencies = getChildFactories().entrySet().stream()
-                .collect(toMap(Map.Entry::getKey, e -> e.getValue().getDependencies().stream()
-                        .filter(d -> d.getParentLinks() == 0)
-                        .map(FieldRef::getFirstPath)
-                        .collect(toList())));
+                .collect(toMap(Map.Entry::getKey, this::getFirstLinks));
         Graph<ScalarValue<?>> graph = new Graph<>(childFactoriesDependencies);
         return graph.getCreationOrder();
+    }
+
+    private List<ScalarValue<?>> getFirstLinks(Map.Entry<? extends ScalarValue<?>, Factory<?, ?>> e) {
+        return e.getValue().getDependencies().stream()
+                .filter(d -> d.getParentLinks() == 0)
+                .map(FieldRef::getFirstPath)
+                .collect(toList());
     }
 
     @Override

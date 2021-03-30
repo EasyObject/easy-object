@@ -12,10 +12,16 @@ package den.vor.easy.object.parser.impl;
 import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.ast.BinaryExpression;
+import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.CARET;
 
+/**
+ * Chain node that parses bitwise '^' operator tokens.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link BinaryExpression} for details.
+ */
 public class BitwiseXorParserChainNode extends ParserChainNode {
 
     @Override

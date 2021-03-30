@@ -51,12 +51,12 @@ abstract class ParserChainNodeTestBase {
 
     protected UnaryExpression assertUnaryExpressionWithChild(Expression expression,
                                                              Expression child,
-                                                             UnaryExpression.Operation operation) {
+                                                             UnaryExpression.Operator operator) {
         UnaryExpression unaryExpression = assertUnaryExpression(expression);
         assertEquals(child, unaryExpression.getExpression(), () -> "Expected " + child +
                 " to be the child in " + unaryExpression + ", got " + unaryExpression.getExpression());
-        assertEquals(operation, unaryExpression.getOperation(), () -> "Expected " + unaryExpression +
-                " to have " + operation + " operation, actual=" + unaryExpression.getOperation());
+        assertEquals(operator, unaryExpression.getOperator(), () -> "Expected " + unaryExpression +
+                " to have " + operator + " operation, actual=" + unaryExpression.getOperator());
         return unaryExpression;
     }
 

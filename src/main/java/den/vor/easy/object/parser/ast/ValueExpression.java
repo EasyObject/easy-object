@@ -12,6 +12,9 @@ package den.vor.easy.object.parser.ast;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
 
+/**
+ * Expression that returns a constant value as a result of evaluation.
+ */
 public class ValueExpression implements Expression {
 
     private final Value<?> value;

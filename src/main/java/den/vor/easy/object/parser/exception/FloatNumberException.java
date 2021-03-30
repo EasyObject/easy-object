@@ -9,10 +9,10 @@
 
 package den.vor.easy.object.parser.exception;
 
-public class FloatNumberException extends ParserException {
+/**
+ * Exception that is thrown by {@link den.vor.easy.object.parser.Lexer} when a floating point number contains two dots.
+ * Example: {@code 1.2.3}.
+ */
+public class FloatNumberException extends ELException {
 
-    @Override
-    public String getUserMessage() {
-        return "Invalid float number: didn't expect two dots";
-    }
 }

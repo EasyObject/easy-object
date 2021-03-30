@@ -18,6 +18,10 @@ import java.util.List;
 import static java.util.Arrays.asList;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Skeletal implementation of a {@link ResultVisitor}.
+ * Visits all child expressions and concatenates results.
+ */
 public abstract class AbstractResultVisitor<T> implements ResultVisitor<List<T>> {
 
     @Override
