@@ -22,7 +22,7 @@ import java.util.regex.Pattern;
  */
 public class PeriodParser {
 
-    private static final Pattern CHUNK_PATTERN = Pattern.compile("(\\d+)([ymdhMsnw])");
+    private static final Pattern CHUNK_PATTERN = Pattern.compile("(\\d{1,10})([ymdhMsnw])");
     private static final Map<String, ObjIntConsumer<Period>> PERIOD_SETTER;
 
     static {
