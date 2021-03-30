@@ -30,7 +30,7 @@ public interface BinaryOperator<T> {
     }
 
     /**
-     * Apply operator,
+     * Apply operator.
      * @param t left operand
      * @param value right operand, wrapped in {@link Value}
      * @return operation result

@@ -31,7 +31,7 @@ public class ParserChain {
     }
 
     /**
-     * Parses a provided collection of tokens into {@linkplain Expression} tree,
+     * Parses a provided collection of tokens into {@linkplain Expression} tree.
      * @param tokenHolder holder to take tokens from
      * @return parsed expression tree
      */

@@ -33,7 +33,7 @@ public class ListValue<T> extends Value<List<T>> {
     }
 
     /**
-     * Wraps a given list of elements into the list
+     * Wraps a given list of elements into the list.
      * @param elements elements to wrap
      * @return list value instance
      */
@@ -42,7 +42,7 @@ public class ListValue<T> extends Value<List<T>> {
     }
 
     /**
-     * Wraps a given list of elements into the list
+     * Wraps a given list of elements into the list.
      * @param elements elements to wrap
      * @return list value instance
      */

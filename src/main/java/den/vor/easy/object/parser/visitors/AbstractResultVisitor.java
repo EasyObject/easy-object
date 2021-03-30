@@ -21,6 +21,7 @@ import static java.util.stream.Collectors.toList;
 /**
  * Skeletal implementation of a {@link ResultVisitor}.
  * Visits all child expressions and concatenates results.
+ * @param <T> type of objects in list returned by a visitor.
  */
 public abstract class AbstractResultVisitor<T> implements ResultVisitor<List<T>> {
 

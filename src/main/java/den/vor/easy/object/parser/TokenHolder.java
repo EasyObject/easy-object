@@ -28,7 +28,7 @@ public class TokenHolder {
     private int pos;
 
     /**
-     * Creates a new holder with provided tokens
+     * Creates a new holder with provided tokens.
      */
     public TokenHolder(List<Token> tokens) {
         this.tokens = tokens;

@@ -30,7 +30,7 @@ import static den.vor.easy.object.parser.ExpressionConstants.THIS_REF;
 public class VariableMapAccessExpression implements Expression {
 
     /**
-     * Keys used for traversal
+     * Keys used for traversal.
      */
     private final List<Expression> keys;
 

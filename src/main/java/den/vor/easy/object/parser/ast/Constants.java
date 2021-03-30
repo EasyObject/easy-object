@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 public class Constants {
 
     /**
-     * Mathematical constant 'pi', approximately equal 3.1415
+     * Mathematical constant 'pi', approximately equal 3.1415.
      */
     public static final DoubleValue PI = DoubleValue.of(Math.PI);
 
