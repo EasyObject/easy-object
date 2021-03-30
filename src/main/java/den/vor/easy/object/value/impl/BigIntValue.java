@@ -10,9 +10,14 @@
 package den.vor.easy.object.value.impl;
 
 import den.vor.easy.object.value.NumberValue;
+import den.vor.easy.object.value.Value;
 
 import java.math.BigInteger;
 
+/**
+ * Value that encapsulates {@link BigInteger}.
+ * Does not support any arithmetical operations. Uses default comparison implementation.
+ */
 public class BigIntValue extends NumberValue<BigInteger> {
 
     private final BigInteger value;
@@ -21,6 +26,10 @@ public class BigIntValue extends NumberValue<BigInteger> {
         this.value = value;
     }
 
+    /**
+     * Wraps the given value with {@linkplain BigIntValue}.
+     * @param value value to wrap
+     */
     public static BigIntValue of(BigInteger value) {
         return new BigIntValue(value);
     }

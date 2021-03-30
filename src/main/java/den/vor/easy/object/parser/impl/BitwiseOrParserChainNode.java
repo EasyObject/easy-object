@@ -16,6 +16,11 @@ import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.BAR;
 
+/**
+ * Chain node that parses bitwise '|' operator tokens.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link BinaryExpression} for details.
+ */
 public class BitwiseOrParserChainNode extends ParserChainNode {
 
     @Override
@@ -24,7 +29,7 @@ public class BitwiseOrParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(BAR)) {
-                result = new BinaryExpression(result, parseNext(tokenHolder), BinaryExpression.Operation.OR);
+                result = new BinaryExpression(result, parseNext(tokenHolder), BinaryExpression.Operator.OR);
                 continue;
             }
             break;

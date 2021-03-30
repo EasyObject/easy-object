@@ -16,6 +16,13 @@ import java.util.Objects;
 
 import static den.vor.easy.object.value.operator.impl.IntOperations.*;
 
+/**
+ * Value that encapsulates {@link Integer}.
+ * Supports the following arithmetical operations: addition, subtraction, multiplication, division, powering,
+ * shifts, remainder, bitwise operations.
+ * Supports unary plus and minus operators.
+ * See {@link den.vor.easy.object.value.operator.impl.IntOperations} for implementation details.
+ */
 public class IntValue extends NumberValue<Integer> {
 
     private final int value;
@@ -24,6 +31,10 @@ public class IntValue extends NumberValue<Integer> {
         this.value = value;
     }
 
+    /**
+     * Wraps the given value with {@linkplain IntValue}.
+     * @param value value to wrap
+     */
     public static IntValue of(int value) {
         return new IntValue(value);
     }

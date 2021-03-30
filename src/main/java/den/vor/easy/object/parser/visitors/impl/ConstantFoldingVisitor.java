@@ -24,6 +24,12 @@ public class ConstantFoldingVisitor extends AbstractOptimizationVisitor {
         this.variables = variables;
     }
 
+    /**
+     * Folds an unary expression, if a nested expression is instance of {@link ValueExpression}.
+     * Example: {@code -3} will be folded into a single value.
+     * @param expression expression to visit
+     * @return original or evaluated  expression or evaluated
+     */
     @Override
     public Expression visit(UnaryExpression expression) {
         if (isValue(expression.getExpression())) {
@@ -32,6 +38,12 @@ public class ConstantFoldingVisitor extends AbstractOptimizationVisitor {
         return expression;
     }
 
+    /**
+     * Folds an binary expression, if a nested expressions are instances of {@link ValueExpression}.
+     * Example: {@code 3 + 2} will be folded into a single value.
+     * @param expression expression to visit
+     * @return original or evaluated  expression or evaluated
+     */
     @Override
     public Expression visit(BinaryExpression expression) {
         if (isValue(expression.getLeft()) && isValue(expression.getRight())) {
@@ -40,6 +52,12 @@ public class ConstantFoldingVisitor extends AbstractOptimizationVisitor {
         return expression;
     }
 
+    /**
+     * Folds an conditional expression, if a nested expressions are instances of {@link ValueExpression}.
+     * Example: {@code 3 > 2} will be folded into a single value.
+     * @param expression expression to visit
+     * @return original or evaluated  expression or evaluated
+     */
     @Override
     public Expression visit(ConditionalExpression expression) {
         if (isValue(expression.getLeft()) && isValue(expression.getRight())) {

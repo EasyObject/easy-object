@@ -14,6 +14,11 @@ import java.util.function.IntFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+/**
+ * Class that provides wight random for integer values in the range [1, n].
+ * Weights are configured as double numbers.
+ * If you need integer weights, see {@link IntWeightRandom}.
+ */
 public final class DoubleWeightRandom {
 
     private final CustomRandom random = RandomFactory.getRandom();
@@ -22,6 +27,11 @@ public final class DoubleWeightRandom {
     private double[] accumulatedWeights;
     private boolean isSingleValue;
 
+    /**
+     * Create a weight random instance for integers with the corresponding double weights from the list.
+     * 0 - weights[0], 1 - weights[1] etc.
+     * @param weights weights to set to numbers
+     */
     public DoubleWeightRandom(List<? extends Number> weights) {
         if (weights.isEmpty()) {
             throw new IllegalArgumentException("Non-empty collection expected");
@@ -34,10 +44,21 @@ public final class DoubleWeightRandom {
         lastWeight = accumulatedWeights[lastElement];
     }
 
+    /**
+     * Create a weight random instance for integers using provided function to calculate their weights.
+     * 0 gets weight function(0), 1 - function(1) etc.
+     * @param weightFunc function that generates weights
+     * @param count numbers to generate
+     */
     public DoubleWeightRandom(IntFunction<? extends Number> weightFunc, int count) {
         this(IntStream.range(1, count + 1).mapToObj(weightFunc).collect(Collectors.toList()));
     }
 
+    /**
+     * Returns a random integer in range [1, n]. n is specified on the object creation time.
+     * Distribution is controlled by the number weights.
+     * @return random integer
+     */
     public int getNext() {
         if (isSingleValue) {
             return 0;

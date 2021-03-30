@@ -17,6 +17,11 @@ import den.vor.easy.object.parser.ast.TernaryExpression;
 import static den.vor.easy.object.parser.TokenType.COLON;
 import static den.vor.easy.object.parser.TokenType.QUESTION_SIGN;
 
+/**
+ * Chain node that ternary expression tokens.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link TernaryExpression} for details.
+ */
 public class TernaryParserChainNode extends ParserChainNode {
 
     @Override

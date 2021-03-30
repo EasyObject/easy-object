@@ -17,9 +17,12 @@ import java.util.function.ObjIntConsumer;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility class for parsing string into a {@link Period} instance.
+ */
 public class PeriodParser {
 
-    private static final Pattern CHUNK_PATTERN = Pattern.compile("(\\d+)([ymdhMsnw])");
+    private static final Pattern CHUNK_PATTERN = Pattern.compile("(\\d{1,10})([ymdhMsnw])");
     private static final Map<String, ObjIntConsumer<Period>> PERIOD_SETTER;
 
     static {
@@ -35,6 +38,21 @@ public class PeriodParser {
         );
     }
 
+    /**
+     * Parses string into a {@link Period} instance.
+     * String should consist of number-letter pairs. A number represents a number of time intervals.
+     * Letter should be a code of a time interval. Available intervals:
+     *  * 'y' - Years
+     *  * 'm' - Months
+     *  * 'w' - Weeks
+     *  * 'd' - Days
+     *  * 'h' - Hours
+     *  * 'M' - Minutes
+     *  * 's' - Seconds
+     *  * 'n' - Nanos
+     * @param input string period representation
+     * @return {@link Period} instance
+     */
     public static Period parse(String input) {
         Period period = new Period();
         Matcher matcher = CHUNK_PATTERN.matcher(input);

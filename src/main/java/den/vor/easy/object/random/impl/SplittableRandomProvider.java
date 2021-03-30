@@ -15,6 +15,9 @@ import den.vor.easy.object.random.RandomProvider;
 
 import java.util.SplittableRandom;
 
+/**
+ * Class that provides custom random with SplittableRandom algorithm.
+ */
 public class SplittableRandomProvider implements RandomProvider {
 
     @Override
@@ -22,6 +25,9 @@ public class SplittableRandomProvider implements RandomProvider {
         return new SplittableWrapper();
     }
 
+    /**
+     * Wrapper for SplittableRandom class.
+     */
     private static class SplittableWrapper implements CustomRandom {
 
         private final SplittableRandom splittableRandom = new SplittableRandom();
@@ -44,11 +50,6 @@ public class SplittableRandomProvider implements RandomProvider {
         @Override
         public boolean nextBoolean() {
             return splittableRandom.nextBoolean();
-        }
-
-        @Override
-        public float nextFloat() {
-            return (float) splittableRandom.nextDouble();
         }
 
         @Override

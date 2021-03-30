@@ -65,7 +65,7 @@ class PowerParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = powerParserChainNode.parse(tokenHolder);
 
-        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operation.POW);
+        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operator.POW);
 
         verify(tokenHolder, times(2)).match(TokenType.POW);
         verify(next, times(2)).parse(tokenHolder);
@@ -83,7 +83,7 @@ class PowerParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = binaryExpression.getLeft();
 
         BinaryExpression leftBinaryExpression =
-                assertBinaryExpressionWithChildren(left, firstResult, secondResult, BinaryExpression.Operation.POW);
+                assertBinaryExpressionWithChildren(left, firstResult, secondResult, BinaryExpression.Operator.POW);
 
         assertBinaryExpressionChildren(binaryExpression, leftBinaryExpression, thirdResult);
 

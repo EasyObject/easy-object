@@ -41,7 +41,7 @@ class ConditionalExpressionTest {
         doReturn(secondValue).when(secondExpression).eval(variables);
 
         ConditionalExpression binaryExpression = new ConditionalExpression(firstExpression, secondExpression,
-                ConditionalExpression.Operation.AND);
+                ConditionalExpression.Operator.AND);
 
         doReturn(resultValue).when(firstValue).and(secondValue);
 

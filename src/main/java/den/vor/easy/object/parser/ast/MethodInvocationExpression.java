@@ -17,10 +17,22 @@ import den.vor.easy.object.value.impl.FunctionalValue;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Expression that represents method invocation.
+ */
 public class MethodInvocationExpression implements Expression {
 
+    /**
+     * Expression, to call method on.
+     */
     private Expression expression;
+    /**
+     * Method name expression. Must evaluate to a {@link ScalarValue}.
+     */
     private Expression method;
+    /**
+     * List of arguments of a method.
+     */
     private List<Expression> args;
 
     public MethodInvocationExpression(Expression expression, Expression method, List<Expression> args) {
@@ -29,6 +41,11 @@ public class MethodInvocationExpression implements Expression {
         this.args = args;
     }
 
+    /**
+     * Evaluates {@code expression}, {@code method} and {@code args}, then calls the method.
+     * @param params variables to use during the evaluation
+     * @return method invocation result
+     */
     @Override
     public Value<?> eval(Variables params) {
         Value<?> value = expression.eval(params);

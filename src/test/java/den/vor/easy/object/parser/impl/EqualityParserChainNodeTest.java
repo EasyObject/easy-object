@@ -67,7 +67,7 @@ class EqualityParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = equalityParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.EQUALS);
+                ConditionalExpression.Operator.EQUALS);
 
         verify(tokenHolder).match(TokenType.EQEQ);
         verify(next, times(2)).parse(tokenHolder);
@@ -82,7 +82,7 @@ class EqualityParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = equalityParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.NOT_EQUALS);
+                ConditionalExpression.Operator.NOT_EQUALS);
 
         verify(tokenHolder).match(TokenType.EXCLEQ);
         verify(next, times(2)).parse(tokenHolder);

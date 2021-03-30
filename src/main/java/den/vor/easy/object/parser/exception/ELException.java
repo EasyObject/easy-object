@@ -9,8 +9,9 @@
 
 package den.vor.easy.object.parser.exception;
 
+/**
+ * Basic exception for all expression language exceptions.
+ */
+public abstract class ELException extends RuntimeException {
 
-public abstract class ParserException extends RuntimeException {
-
-    public abstract String getUserMessage();
 }

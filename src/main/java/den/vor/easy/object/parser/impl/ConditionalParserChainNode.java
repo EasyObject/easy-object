@@ -16,6 +16,11 @@ import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.*;
 
+/**
+ * Chain node that parses logical binary comparison operators, such as '>', '<', '>=', '<='.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link ConditionalExpression} for details.
+ */
 public class ConditionalParserChainNode extends ParserChainNode {
 
     @Override
@@ -24,21 +29,21 @@ public class ConditionalParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(LT)) {
-                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operation.LT);
+                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operator.LT);
                 continue;
             }
             if (tokenHolder.match(LTEQ)) {
                 result = new ConditionalExpression(result, parseNext(tokenHolder),
-                        ConditionalExpression.Operation.LTEQ);
+                        ConditionalExpression.Operator.LTEQ);
                 continue;
             }
             if (tokenHolder.match(GT)) {
-                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operation.GT);
+                result = new ConditionalExpression(result, parseNext(tokenHolder), ConditionalExpression.Operator.GT);
                 continue;
             }
             if (tokenHolder.match(GTEQ)) {
                 result = new ConditionalExpression(result, parseNext(tokenHolder),
-                        ConditionalExpression.Operation.GTEQ);
+                        ConditionalExpression.Operator.GTEQ);
                 continue;
             }
             break;

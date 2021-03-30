@@ -67,7 +67,7 @@ class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = additiveParserChainNode.parse(tokenHolder);
 
-        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operation.PLUS);
+        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operator.PLUS);
 
         verify(tokenHolder, times(2)).match(TokenType.PLUS);
         verify(next, times(2)).parse(tokenHolder);
@@ -81,7 +81,7 @@ class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
 
         Expression expression = additiveParserChainNode.parse(tokenHolder);
 
-        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operation.MINUS);
+        assertBinaryExpressionWithChildren(expression, firstResult, secondResult, BinaryExpression.Operator.MINUS);
 
         verify(tokenHolder, times(2)).match(TokenType.MINUS);
         verify(next, times(2)).parse(tokenHolder);
@@ -99,7 +99,7 @@ class AdditiveParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = binaryExpression.getLeft();
 
         BinaryExpression leftBinaryExpression =
-                assertBinaryExpressionWithChildren(left, firstResult, secondResult, BinaryExpression.Operation.PLUS);
+                assertBinaryExpressionWithChildren(left, firstResult, secondResult, BinaryExpression.Operator.PLUS);
 
         assertBinaryExpressionChildren(binaryExpression, leftBinaryExpression, thirdResult);
 

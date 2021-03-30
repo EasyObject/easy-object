@@ -12,59 +12,118 @@ package den.vor.easy.object.value.operator.impl;
 import den.vor.easy.object.value.impl.DoubleValue;
 import den.vor.easy.object.value.impl.IntValue;
 import den.vor.easy.object.value.impl.StringValue;
-import den.vor.easy.object.value.operator.Operator;
+import den.vor.easy.object.value.operator.BinaryOperator;
 
-import static den.vor.easy.object.value.operator.OperatorImpl.operator;
+import static den.vor.easy.object.value.operator.BinaryOperatorImpl.operator;
 
+/**
+ * Class that contains operator implementation for {@link IntValue}.
+ */
 public class IntOperations {
 
-    public static final Operator<Integer> PLUS_OPERATOR = Operator.operator(
+    /**
+     * Binary addition operator implementation. Can calculate result when the second operand is:
+     * * {@link Integer} - adds current value to the number. Returns {@link IntValue}.
+     * * {@link Double} - adds current value to the number. Returns {@link DoubleValue}.
+     * * {@link String} - converts current value to string and adds the second operand. Returns {@link StringValue}.
+     */
+    public static final BinaryOperator<Integer> PLUS_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a + b)),
             operator(Double.class, (a, b) -> DoubleValue.of(a + b)),
             operator(String.class, (a, b) -> StringValue.of(a + b))
     );
 
-    public static final Operator<Integer> MINUS_OPERATOR = Operator.operator(
+    /**
+     * Binary subtraction operator implementation. Can calculate result when the second operand is:
+     * * {@link Integer} - subtracts number from the current value. Returns {@link IntValue}.
+     * * {@link Double} - subtracts number from the current value. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Integer> MINUS_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a - b)),
             operator(Double.class, (a, b) -> DoubleValue.of(a - b))
     );
 
-    public static final Operator<Integer> MULTIPLY_OPERATOR = Operator.operator(
+    /**
+     * Binary multiplication operator implementation. Can calculate result when the second operand is:
+     * * {@link Integer} - multiplies current value by the number. Returns {@link IntValue}.
+     * * {@link Double} - multiplies current value by the number. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Integer> MULTIPLY_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a * b)),
             operator(Double.class, (a, b) -> DoubleValue.of(a * b))
     );
 
-    public static final Operator<Integer> DIVIDE_OPERATOR = Operator.operator(
+    /**
+     * Binary division operator implementation. Can calculate result when the second operand is:
+     * * {@link Integer} - divides current value by the number. Returns {@link IntValue}.
+     * * {@link Double} - divides current value by the number. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Integer> DIVIDE_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a / b)),
             operator(Double.class, (a, b) -> DoubleValue.of(a / b))
     );
 
-    public static final Operator<Integer> POWER_OPERATOR = Operator.operator(
+    /**
+     * Binary power operator implementation. Can calculate result when the second operand is:
+     * * {@link Integer} - elevates current value by the number. Returns {@link IntValue}.
+     * * {@link Double} - elevates current value by the number. Returns {@link DoubleValue}.
+     */
+    public static final BinaryOperator<Integer> POWER_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of((int) Math.pow(a, b))),
             operator(Double.class, (a, b) -> DoubleValue.of(Math.pow(a, b)))
     );
 
-    public static final Operator<Integer> REMAINDER_OPERATOR = Operator.operator(
+    /**
+     * Binary power operator implementation. Can calculate result only when the second operand is {@link Integer}.
+     * Remainder is equivalent to java '%' operator.
+     * Returns {@link IntValue}.
+     */
+    public static final BinaryOperator<Integer> REMAINDER_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a % b))
     );
 
-    public static final Operator<Integer> LEFT_SHIFT_OPERATOR = Operator.operator(
+    /**
+     * Binary left shift operator implementation. Can calculate result only when the second operand is {@link Integer}.
+     * Remainder is equivalent to java '<<' operator.
+     * Returns {@link IntValue}.
+     */
+    public static final BinaryOperator<Integer> LEFT_SHIFT_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a << b))
     );
 
-    public static final Operator<Integer> RIGHT_SHIFT_OPERATOR = Operator.operator(
+    /**
+     * Binary right shift operator implementation. Can calculate result only when the second operand is {@link Integer}.
+     * Remainder is equivalent to java '>>' operator.
+     * Returns {@link IntValue}.
+     */
+    public static final BinaryOperator<Integer> RIGHT_SHIFT_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a >> b))
     );
 
-    public static final Operator<Integer> BITWISE_AND_OPERATOR = Operator.operator(
+    /**
+     * Binary bitwise and operator implementation. Can calculate result only when the second operand is {@link Integer}.
+     * Is equivalent to java '&' operator.
+     * Returns {@link IntValue}.
+     */
+    public static final BinaryOperator<Integer> BITWISE_AND_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a & b))
     );
 
-    public static final Operator<Integer> BITWISE_OR_OPERATOR = Operator.operator(
+    /**
+     * Binary bitwise or operator implementation. Can calculate result only when the second operand is {@link Integer}.
+     * Is equivalent to java '|' operator.
+     * Returns {@link IntValue}.
+     */
+    public static final BinaryOperator<Integer> BITWISE_OR_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a | b))
     );
 
-    public static final Operator<Integer> BITWISE_XOR_OPERATOR = Operator.operator(
+    /**
+     * Binary bitwise xor operator implementation. Can calculate result only when the second operand is {@link Integer}.
+     * Is equivalent to java '^' operator.
+     * Returns {@link IntValue}.
+     */
+    public static final BinaryOperator<Integer> BITWISE_XOR_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> IntValue.of(a ^ b))
     );
 

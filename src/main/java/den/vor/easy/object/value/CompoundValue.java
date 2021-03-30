@@ -9,5 +9,9 @@
 
 package den.vor.easy.object.value;
 
+/**
+ * Base class for values that encapsulate multiple other values.
+ * @param <T> type of underlying object
+ */
 public abstract class CompoundValue<T> extends Value<T> {
 }

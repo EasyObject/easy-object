@@ -9,7 +9,14 @@
 
 package den.vor.easy.object.random;
 
+/**
+ * Interface for classes that can are basically producers of {@link CustomRandom}.
+ */
 public interface RandomProvider {
 
+    /**
+     * Create new or return existing instance of {@link CustomRandom}.
+     * @return random instance
+     */
     CustomRandom getRandom();
 }

@@ -47,7 +47,7 @@ public class ElFactory<T> extends Factory<T, Value<T>> {
     }
 
     public static ElFactory<Object> factory(String expression) {
-        return new ElFactory<>(expression, Object.class);
+        return factory(expression, Object.class);
     }
 
     @Override

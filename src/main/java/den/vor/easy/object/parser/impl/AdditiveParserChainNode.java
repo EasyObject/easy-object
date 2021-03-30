@@ -17,6 +17,11 @@ import den.vor.easy.object.parser.ast.Expression;
 import static den.vor.easy.object.parser.TokenType.MINUS;
 import static den.vor.easy.object.parser.TokenType.PLUS;
 
+/**
+ * Chain node that parses binary '+' and '-' operator tokens.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link BinaryExpression} for details.
+ */
 public class AdditiveParserChainNode extends ParserChainNode {
 
     @Override
@@ -25,11 +30,11 @@ public class AdditiveParserChainNode extends ParserChainNode {
 
         while (true) {
             if (tokenHolder.match(PLUS)) {
-                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operation.PLUS);
+                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operator.PLUS);
                 continue;
             }
             if (tokenHolder.match(MINUS)) {
-                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operation.MINUS);
+                result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operator.MINUS);
                 continue;
             }
             break;

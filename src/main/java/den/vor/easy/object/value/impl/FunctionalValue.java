@@ -14,9 +14,23 @@ import den.vor.easy.object.value.Value;
 import java.util.List;
 import java.util.function.BiFunction;
 
+/**
+ * Represents a callable value.
+ * @param <T> type of expected context
+ */
 public class FunctionalValue<T> extends Value<Object> {
 
+    /**
+     * Function that is used to calculate the result.
+     * First argument - invocation context, value on which method is called. For functions is expected to be null.
+     * Second argument - list of method arguments.
+     */
     private final BiFunction<Value<T>, List<Value<?>>, Value<?>> function;
+
+    /**
+     * Flag that indicates whether function result may vary between invocations with same arguments.
+     * Idempotent functions call may be calculated on the compile time.
+     */
     private boolean idempotent;
 
     public FunctionalValue(BiFunction<Value<T>, List<Value<?>>, Value<?>> function) {

@@ -13,14 +13,26 @@ package den.vor.easy.object.random.impl;
 import den.vor.easy.object.random.CustomRandom;
 import den.vor.easy.object.random.RandomProvider;
 
+/**
+ * Random provider that encapsulates a custom random and always returns it.
+ */
 public class SingletonRandomProvider implements RandomProvider {
 
     private final CustomRandom random;
 
+    /**
+     * Creates a new singleton random provider instance.
+     * Calls {@link RandomProvider#getRandom()} and saves the result.
+     * @param randomProvider provider to get custom random from
+     */
     public SingletonRandomProvider(RandomProvider randomProvider) {
         this.random = randomProvider.getRandom();
     }
 
+    /**
+     * Creates a new singleton random provider instance.
+     * @param random random instance to save
+     */
     public SingletonRandomProvider(CustomRandom random) {
         this.random = random;
     }

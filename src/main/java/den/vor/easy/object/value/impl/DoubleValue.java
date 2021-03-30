@@ -11,11 +11,19 @@ package den.vor.easy.object.value.impl;
 
 import den.vor.easy.object.value.NumberValue;
 import den.vor.easy.object.value.Value;
+import den.vor.easy.object.value.operator.impl.DateOperations;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 import static den.vor.easy.object.value.operator.impl.DoubleOperations.*;
 
+/**
+ * Value that encapsulates {@link Double}.
+ * Supports the following arithmetical operations: addition, subtraction, multiplication, division, powering.
+ * Supports unary plus and minus operators.
+ * See {@link den.vor.easy.object.value.operator.impl.DoubleOperations} for implementation details.
+ */
 public class DoubleValue extends NumberValue<Double> {
 
     private final Double value;
@@ -24,6 +32,10 @@ public class DoubleValue extends NumberValue<Double> {
         this.value = value;
     }
 
+    /**
+     * Wraps the given value with {@linkplain DoubleValue}.
+     * @param value value to wrap
+     */
     public static DoubleValue of(Double value) {
         return new DoubleValue(value);
     }
@@ -31,13 +43,6 @@ public class DoubleValue extends NumberValue<Double> {
     @Override
     public Double getValue() {
         return value;
-    }
-
-    @Override
-    public String toString() {
-        return "DoubleValue{" +
-                "value=" + value +
-                '}';
     }
 
     @Override
@@ -73,6 +78,13 @@ public class DoubleValue extends NumberValue<Double> {
     @Override
     public Value<?> plus() {
         return this;
+    }
+
+    @Override
+    public String toString() {
+        return "DoubleValue{" +
+                "value=" + value +
+                '}';
     }
 
     @Override

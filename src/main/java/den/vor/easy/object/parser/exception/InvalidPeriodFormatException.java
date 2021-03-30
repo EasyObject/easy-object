@@ -7,18 +7,21 @@
  * limitations under the License.
  */
 
-package den.vor.easy.object.parser.exception.runtime;
+package den.vor.easy.object.parser.exception;
 
-public class NotCallableException extends InterpreterRuntimeException {
+/**
+ * Exception that is thrown when {@link den.vor.easy.object.bean.Period} format is not correct.
+ * Example: {@code 1d3m.4}
+ */
+public class InvalidPeriodFormatException extends ELException {
 
     private final String name;
 
-    public NotCallableException(String name) {
+    public InvalidPeriodFormatException(String name) {
         this.name = name;
     }
 
-    @Override
-    public String getUserMessage() {
-        return name + " is not callable";
+    public String getName() {
+        return name;
     }
 }

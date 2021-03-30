@@ -26,15 +26,30 @@ import java.util.function.Function;
 
 import static java.util.stream.Collectors.toMap;
 
+/**
+ * Factory that generates objects represented by {@link MapValue}.
+ */
 public class ObjectFactory extends CompoundFactory<Map<ScalarValue<?>, Value<?>>, MapValue> {
 
     private final Map<StringValue, Factory<?, ?>> factories = new HashMap<>();
 
+    /**
+     * Add a new field to the factory.
+     * @param key name of the field
+     * @param factory factory that will generate the value of the field
+     * @return ObjectFactory instance
+     */
     public ObjectFactory and(String key, Factory<?, ?> factory) {
         factories.put(StringValue.of(key), factory);
         return this;
     }
 
+    /**
+     * Add a new constant field to the factory.
+     * @param key name of the field
+     * @param value value of the field
+     * @return ObjectFactory instance
+     */
     public ObjectFactory and(String key, Value<?> value) {
         return and(key, new ConstFactory<>(value));
     }

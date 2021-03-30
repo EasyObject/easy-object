@@ -17,15 +17,21 @@ import den.vor.easy.object.value.impl.TimeValue;
 
 import java.time.LocalTime;
 
+/**
+ * Factory for {@link LocalTime} type.
+ */
 public class TimeFactory extends ComparableFactory<LocalTime, TimeValue> {
 
-    public static final LocalTime MIN = LocalTime.MIN;
-    public static final LocalTime MAX = LocalTime.MAX;
-
     public TimeFactory() {
-        this(MIN, MAX);
+        this(LocalTime.MIN, LocalTime.MAX);
     }
 
+    /**
+     * Creates a new factory instance.
+     *
+     * @param min lower inclusive bound for returned values
+     * @param max upper inclusive bound for returned values
+     */
     public TimeFactory(LocalTime min, LocalTime max) {
         super(min, max);
     }

@@ -13,18 +13,32 @@ import den.vor.easy.object.bean.Period;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.PeriodValue;
 import den.vor.easy.object.value.impl.StringValue;
-import den.vor.easy.object.value.operator.Operator;
+import den.vor.easy.object.value.operator.BinaryOperator;
 import den.vor.easy.object.value.operator.util.TimeUtil;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
-import static den.vor.easy.object.value.operator.OperatorImpl.operator;
+import static den.vor.easy.object.value.operator.BinaryOperatorImpl.operator;
 
+/**
+ * Class that contains operator implementation for {@link PeriodValue}.
+ */
 public class PeriodOperations {
 
-    public static final Operator<Period> PLUS_OPERATOR_REGISTRY = Operator.operator(
+    /**
+     * Binary addition operator implementation. Can calculate result when the second operand is:
+     * * {@link Period} - sums both periods time intervals. Returns {@link PeriodValue}.
+     * * {@link LocalTime} - adds current period to the time.
+     * See {@link TimeUtil#addPeriodToTime(LocalTime, Period)} for details. Returns {@link LocalTime}.
+     * * {@link LocalDateTime} - adds current period to the time.
+     * See {@link TimeUtil#addPeriodToDateTime(LocalDateTime, Period)} for details. Returns {@link LocalDateTime}.
+     * * {@link LocalDate} - adds current period to the time.
+     * See {@link TimeUtil#addPeriodToDate(LocalDate, Period)} for details. Returns {@link LocalDate}.
+     * * {@link String} - converts current value to string and adds the second operand. Returns {@link StringValue}.
+     */
+    public static final BinaryOperator<Period> PLUS_OPERATOR = BinaryOperator.operator(
             operator(Period.class, PeriodOperations::addPeriods),
             operator(LocalTime.class, (p, t) -> TimeUtil.addPeriodToTime(t, p)),
             operator(LocalDateTime.class, (p, t) -> TimeUtil.addPeriodToDateTime(t, p)),
@@ -32,11 +46,19 @@ public class PeriodOperations {
             operator(String.class, (a, b) -> StringValue.of(a + b))
     );
 
-    public static final Operator<Period> MINUS_OPERATOR_REGISTRY = Operator.operator(
+    /**
+     * Binary subtraction operator implementation. Can calculate result only when the second operand is {@link Period}.
+     * Subtracts time intervals of the second operand from the first operand's. Returns {@link PeriodValue}.
+     */
+    public static final BinaryOperator<Period> MINUS_OPERATOR = BinaryOperator.operator(
             operator(Period.class, PeriodOperations::subtractPeriods)
     );
 
-    public static final Operator<Period> MULTIPLY_OPERATOR_REGISTRY = Operator.operator(
+    /**
+     * Binary subtraction operator implementation. Can calculate result only when the second operand is {@link Integer}.
+     * Multiplies time intervals of the first operand by the second operand. Returns {@link PeriodValue}.
+     */
+    public static final BinaryOperator<Period> MULTIPLY_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, PeriodOperations::multiply)
     );
 

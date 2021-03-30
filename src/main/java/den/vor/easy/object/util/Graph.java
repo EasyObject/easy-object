@@ -13,10 +13,26 @@ import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+/**
+ * Represents a directed graph. Main purpose of this class is to calculate graph traversal order that follows the rules:
+ * All nodes, that the next node points to, must be already visited.
+ * Class is used to determine in which order object fields should be generated.
+ * @param <T> type of vertex
+ */
 public class Graph<T> {
 
+    /**
+     * Map that represents a graph. Keys are vertexes, values - adjacent nodes.
+     */
     private final Map<T, ? extends Collection<T>> nodes;
+    /**
+     * Predicate that allows to ignore some connections in a graph.
+     * All edges are tested using the predicate and ignored, if it returns {@code true}.
+     */
     private final Predicate<T> ignoreConnection;
+    /**
+     * Calculated vertex traversal order. It's cached on the first query to reduce total computations.
+     */
     private List<T> order;
 
     public Graph(Map<T, ? extends Collection<T>> nodes, Predicate<T> ignoreConnection) {
@@ -36,6 +52,16 @@ public class Graph<T> {
         return order;
     }
 
+    /**
+     * Calculates valid traversal order or throws an exception, if it doesn't exist.
+     * Algorithm description:
+     * Spins in the loop, on each iteration finds resolvable vertexes and removes them from the temporary collection.
+     * If the temporary collection is empty, algorithm is finished.
+     * If on any iteration can't find a resolvable vertex, throws an exception.
+     * Naive algorithm complexity: {@code O(n^3)} where n is the number of vertexes.
+     * @return traversal order
+     * @throws RuntimeException if can't find a traversal order
+     */
     private List<T> calculateOrder() {
         List<Vertex<T>> vertices = buildVertexes(nodes);
         List<T> vertexOrder = new ArrayList<>();

@@ -20,6 +20,10 @@ import den.vor.easy.object.value.impl.NullValue;
 
 import java.util.List;
 
+/**
+ * Class for evaluating string expressions.
+ * Is used by {@link den.vor.easy.object.factory.impl.ElFactory} and references in all factories.
+ */
 public class ExpressionEvaluator {
 
     public static final NotExistingVarVisitor NOT_EXISTING_VAR_VISITOR = new NotExistingVarVisitor();
@@ -27,6 +31,14 @@ public class ExpressionEvaluator {
     private final MapValue constParams;
     private final List<FieldRef> dependencies;
 
+    /**
+     * Creates an expression evaluator with the specified string and constant parameters.
+     * String is split into tokens using {@link Lexer}.
+     * Tokens are parsed into {@link Expression} tree using {@link Parser}.
+     * Tree is optimized with {@link den.vor.easy.object.parser.visitors.OptimizationVisitor}s.
+     * @param expression expression to evaluate
+     * @param constParams parameters that do not change between evaluations.
+     */
     public ExpressionEvaluator(String expression, MapValue constParams) {
         TokenHolder tokenHolder = new Lexer(expression).tokenize();
         Expression parsedExpression = new Parser(tokenHolder).parse();
@@ -47,11 +59,20 @@ public class ExpressionEvaluator {
         this(expression, MapValue.emptyMap());
     }
 
+    /**
+     * Evaluates the expression tree using provided context.
+     * @param context expression evaluation context
+     * @return evaluation result
+     */
     public Value<?> evaluate(Value<?> context) {
         Variables variables = new Variables(constParams, context);
         return expression.eval(variables);
     }
 
+    /**
+     * Evaluates the expression tree with empty context.
+     * @return evaluation result
+     */
     public Value<?> evaluate() {
         return evaluate(NullValue.NULL);
     }

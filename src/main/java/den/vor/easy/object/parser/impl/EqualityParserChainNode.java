@@ -16,9 +16,14 @@ import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.EQEQ;
 import static den.vor.easy.object.parser.TokenType.EXCLEQ;
-import static den.vor.easy.object.parser.ast.ConditionalExpression.Operation.EQUALS;
-import static den.vor.easy.object.parser.ast.ConditionalExpression.Operation.NOT_EQUALS;
+import static den.vor.easy.object.parser.ast.ConditionalExpression.Operator.EQUALS;
+import static den.vor.easy.object.parser.ast.ConditionalExpression.Operator.NOT_EQUALS;
 
+/**
+ * Chain node that parses logical binary comparison operators, such as '==' and '!='.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link ConditionalExpression} for details.
+ */
 public class EqualityParserChainNode extends ParserChainNode {
 
     @Override

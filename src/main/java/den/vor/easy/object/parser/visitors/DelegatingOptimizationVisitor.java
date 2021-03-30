@@ -14,6 +14,10 @@ import den.vor.easy.object.parser.ast.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * AST nodes visitor, skeletal implementation of an optimization visitor.
+ * For each expression it visits child nodes and replaces original expression with a new one if any child node changed.
+ */
 public abstract class DelegatingOptimizationVisitor extends AbstractOptimizationVisitor {
 
     @Override
@@ -21,7 +25,7 @@ public abstract class DelegatingOptimizationVisitor extends AbstractOptimization
         Expression leftVisited = expression.getLeft().accept(this);
         Expression rightVisited = expression.getRight().accept(this);
         if (leftVisited != expression.getLeft() || rightVisited != expression.getRight()) {
-            return new BinaryExpression(leftVisited, rightVisited, expression.getOperation());
+            return new BinaryExpression(leftVisited, rightVisited, expression.getOperator());
         }
         return expression;
     }
@@ -31,7 +35,7 @@ public abstract class DelegatingOptimizationVisitor extends AbstractOptimization
         Expression leftVisited = expression.getLeft().accept(this);
         Expression rightVisited = expression.getRight().accept(this);
         if (leftVisited != expression.getLeft() || rightVisited != expression.getRight()) {
-            return new ConditionalExpression(leftVisited, rightVisited, expression.getOperation());
+            return new ConditionalExpression(leftVisited, rightVisited, expression.getOperator());
         }
         return expression;
     }
@@ -40,7 +44,7 @@ public abstract class DelegatingOptimizationVisitor extends AbstractOptimization
     public Expression visit(UnaryExpression expression) {
         Expression visitedExpression = expression.getExpression().accept(this);
         if (visitedExpression != expression.getExpression()) {
-            return new UnaryExpression(visitedExpression, expression.getOperation());
+            return new UnaryExpression(visitedExpression, expression.getOperator());
         }
         return expression;
     }

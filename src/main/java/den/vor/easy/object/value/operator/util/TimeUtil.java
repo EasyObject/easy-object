@@ -18,8 +18,17 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 
+/**
+ * Utility class that provides arithmetical operations with time values.
+ */
 public class TimeUtil {
 
+    /**
+     * Adds a period to a time. Result is trimmed to be less than one day.
+     * @param time time to add period to
+     * @param period period to add
+     * @return addition result
+     */
     public static TimeValue addPeriodToTime(LocalTime time, Period period) {
         LocalTime sum = time
                 .plusHours(period.getHours())
@@ -30,6 +39,12 @@ public class TimeUtil {
         return TimeValue.of(sum);
     }
 
+    /**
+     * Adds a period to a dateTime.
+     * @param dateTime dateTime to add period to
+     * @param period period to add
+     * @return addition result
+     */
     public static DateTimeValue addPeriodToDateTime(LocalDateTime dateTime, Period period) {
         LocalDateTime sum = dateTime
                 .plusYears(period.getYears())
@@ -44,8 +59,14 @@ public class TimeUtil {
         return DateTimeValue.of(sum);
     }
 
-    public static DateValue addPeriodToDate(LocalDate dateTime, Period period) {
-        LocalDate sum = dateTime
+    /**
+     * Adds a period to a date. Time intervals less than a day are ignored.
+     * @param date date to add period to
+     * @param period period to add
+     * @return addition result
+     */
+    public static DateValue addPeriodToDate(LocalDate date, Period period) {
+        LocalDate sum = date
                 .plusYears(period.getYears())
                 .plusWeeks(period.getWeeks())
                 .plusMonths(period.getMonths())
@@ -54,6 +75,12 @@ public class TimeUtil {
         return DateValue.of(sum);
     }
 
+    /**
+     * Subtracts a period from a time. Result is trimmed to be less than one day.
+     * @param time time to subtract period from
+     * @param period period to subtract
+     * @return subtraction result
+     */
     public static TimeValue subtractPeriodFromTime(LocalTime time, Period period) {
         LocalTime result = time
                 .minusHours(period.getHours())
@@ -64,6 +91,12 @@ public class TimeUtil {
         return TimeValue.of(result);
     }
 
+    /**
+     * Subtracts a period from a dateTime.
+     * @param dateTime dateTime to subtract period from
+     * @param period period to subtract
+     * @return subtraction result
+     */
     public static DateTimeValue subtractPeriodFromDateTime(LocalDateTime dateTime, Period period) {
         LocalDateTime result = dateTime
                 .minusYears(period.getYears())
@@ -78,8 +111,14 @@ public class TimeUtil {
         return DateTimeValue.of(result);
     }
 
-    public static DateValue subtractPeriodFromDate(LocalDate dateTime, Period period) {
-        LocalDate result = dateTime
+    /**
+     * Subtracts a period from a date. Time intervals less than a day are ignored.
+     * @param date date to subtract period from
+     * @param period period to subtract
+     * @return subtraction result
+     */
+    public static DateValue subtractPeriodFromDate(LocalDate date, Period period) {
+        LocalDate result = date
                 .minusYears(period.getYears())
                 .minusWeeks(period.getWeeks())
                 .minusMonths(period.getMonths())

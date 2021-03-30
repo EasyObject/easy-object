@@ -10,20 +10,33 @@
 package den.vor.easy.object.value.operator.impl;
 
 import den.vor.easy.object.bean.Period;
-import den.vor.easy.object.value.operator.Operator;
+import den.vor.easy.object.value.operator.BinaryOperator;
 import den.vor.easy.object.value.operator.util.TimeUtil;
 
 import java.time.LocalDate;
 
-import static den.vor.easy.object.value.operator.OperatorImpl.operator;
+import static den.vor.easy.object.value.operator.BinaryOperatorImpl.operator;
 
+/**
+ * Class that contains operator implementation for {@link den.vor.easy.object.value.impl.DateValue}.
+ */
 public class DateOperations {
 
-    public static final Operator<LocalDate> PLUS_OPERATOR = Operator.operator(
+    /**
+     * Binary addition is valid only when another operand is {@link Period}.
+     * Returns {@link den.vor.easy.object.value.impl.DateValue}.
+     * See {@link TimeUtil#addPeriodToDate} for implementation details.
+     */
+    public static final BinaryOperator<LocalDate> PLUS_OPERATOR = BinaryOperator.operator(
             operator(Period.class, TimeUtil::addPeriodToDate)
     );
 
-    public static final Operator<LocalDate> MINUS_OPERATOR = Operator.operator(
+    /**
+     * Binary subtraction is valid only when another operand is {@link Period}.
+     * Returns {@link den.vor.easy.object.value.impl.DateValue}.
+     * See {@link TimeUtil#subtractPeriodFromDate} for implementation details.
+     */
+    public static final BinaryOperator<LocalDate> MINUS_OPERATOR = BinaryOperator.operator(
             operator(Period.class, TimeUtil::subtractPeriodFromDate)
     );
 

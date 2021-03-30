@@ -22,6 +22,9 @@ import java.util.List;
 import static den.vor.easy.object.parser.ExpressionConstants.PARENT_REF;
 import static den.vor.easy.object.parser.ExpressionConstants.THIS_REF;
 
+/**
+ * Visitor that replaces {@link VariableMapAccessExpression} with {@link ContextVariableAccessExpression} if possible.
+ */
 public class ContextVariableAccessVisitor extends AbstractOptimizationVisitor {
 
     private final Variables variables;
@@ -30,6 +33,12 @@ public class ContextVariableAccessVisitor extends AbstractOptimizationVisitor {
         this.variables = variables;
     }
 
+    /**
+     * If all keys of {@link VariableMapAccessExpression} are instance of {@link ValueExpression},
+     * evaluates them and creates {@link ContextVariableAccessExpression} for better performance.
+     * @param expression expression to visit
+     * @return original or optimized expression
+     */
     @Override
     public Expression visit(VariableMapAccessExpression expression) {
         List<Expression> keys = expression.getKeys();

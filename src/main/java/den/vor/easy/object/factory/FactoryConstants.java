@@ -11,6 +11,9 @@ package den.vor.easy.object.factory;
 
 import den.vor.easy.object.value.impl.StringValue;
 
+/**
+ * Class that contains constants required for {@link Factory} and it's child classes.
+ */
 public class FactoryConstants {
 
     public static final StringValue COUNT_STRING_VALUE = StringValue.of("count");

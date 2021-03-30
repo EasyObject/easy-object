@@ -17,12 +17,17 @@ import den.vor.easy.object.value.Value;
 import java.util.List;
 import java.util.function.Function;
 
-public class MappingFactory<T, R, P extends Value<R>> extends Factory<T, Value<T>> {
+/**
+ * Factory that applies a mapping function to a values of provided factory.
+ * @param <T> specifies the return type of a mapping function ({@linkplain Value<T>}).
+ * @param <P> return type of the original factory
+ */
+public class MappingFactory<T, P extends Value<?>> extends Factory<T, Value<T>> {
 
-    private Factory<R, P> factory;
+    private Factory<?, P> factory;
     private Function<P, ? extends Value<T>> mappingFunction;
 
-    public MappingFactory(Factory<R, P> factory,
+    public MappingFactory(Factory<?, P> factory,
                           Function<P, ? extends Value<T>> mappingFunction) {
         this.factory = factory;
         this.mappingFunction = mappingFunction;

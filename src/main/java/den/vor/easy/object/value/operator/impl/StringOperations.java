@@ -10,17 +10,31 @@
 package den.vor.easy.object.value.operator.impl;
 
 import den.vor.easy.object.value.impl.StringValue;
-import den.vor.easy.object.value.operator.Operator;
+import den.vor.easy.object.value.operator.BinaryOperator;
 
-import static den.vor.easy.object.value.operator.OperatorImpl.operator;
+import static den.vor.easy.object.value.operator.BinaryOperatorImpl.operator;
 
+/**
+ * Class that contains operator implementation for {@link StringValue}.
+ */
 public class StringOperations {
 
-    public static final Operator<String> PLUS_OPERATOR = Operator.operator(
+    /**
+     * Binary addition operator implementation. Works with the second operand of any type.
+     * Converts the second operand to String and appends to first operand.
+     * Returns {@link StringValue}.
+     */
+    public static final BinaryOperator<String> PLUS_OPERATOR = BinaryOperator.operator(
             operator(Object.class, (a, b) -> StringValue.of(a + b))
     );
 
-    public static final Operator<String> MULTIPLY_OPERATOR = Operator.operator(
+    /**
+     * Binary multiplication operator implementation.
+     * Can calculate result only when the second operand is {@link Integer}.
+     * Repeats the first operand times, specified by the second operand.
+     * Returns {@link StringValue}.
+     */
+    public static final BinaryOperator<String> MULTIPLY_OPERATOR = BinaryOperator.operator(
             operator(Integer.class, (a, b) -> StringValue.of(a.repeat(b)))
     );
 

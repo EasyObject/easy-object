@@ -10,21 +10,36 @@
 package den.vor.easy.object.value.operator.impl;
 
 import den.vor.easy.object.value.impl.BooleanValue;
-import den.vor.easy.object.value.operator.Operator;
+import den.vor.easy.object.value.operator.BinaryOperator;
 
-import static den.vor.easy.object.value.operator.OperatorImpl.operator;
+import static den.vor.easy.object.value.operator.BinaryOperatorImpl.operator;
 
+/**
+ * Class that contains operator implementation for {@link BooleanValue}.
+ */
 public class BooleanOperations {
 
-    public static final Operator<Boolean> AND_OPERATOR = Operator.operator(
+    /**
+     * Logical 'and' operator is valid when another operand is also boolean. Returns {@link BooleanValue}.
+     Is equivalent to java boolean and-ing
+     */
+    public static final BinaryOperator<Boolean> AND_OPERATOR = BinaryOperator.operator(
             operator(Boolean.class, (a, b) -> BooleanValue.of(a && b))
     );
 
-    public static final Operator<Boolean> OR_OPERATOR = Operator.operator(
+    /**
+     * Logical 'or' operator is valid when another operand is also boolean. Returns {@link BooleanValue}.
+     * Is equivalent to java boolean or-ing
+     */
+    public static final BinaryOperator<Boolean> OR_OPERATOR = BinaryOperator.operator(
             operator(Boolean.class, (a, b) -> BooleanValue.of(a || b))
     );
 
-    public static final Operator<Boolean> XOR_OPERATOR = Operator.operator(
+    /**
+     * Logical 'xor' operator is valid when another operand is also boolean. Returns {@link BooleanValue}.
+     * Is equivalent to java boolean xor-ing
+     */
+    public static final BinaryOperator<Boolean> XOR_OPERATOR = BinaryOperator.operator(
             operator(Boolean.class, (a, b) -> BooleanValue.of(a ^ b))
     );
 

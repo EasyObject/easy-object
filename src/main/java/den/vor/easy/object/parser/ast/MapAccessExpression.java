@@ -18,9 +18,18 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
+/**
+ * Expression that traverses nested maps by the specified keys.
+ */
 public class MapAccessExpression implements Expression {
 
+    /**
+     * Expressions to use to traverse map.
+     */
     private final List<Expression> keys;
+    /**
+     * Expression that is used as a starting point for traversal.
+     */
     private final Expression value;
 
     public MapAccessExpression(Expression value, List<Expression> keys) {
@@ -28,6 +37,13 @@ public class MapAccessExpression implements Expression {
         this.value = value;
     }
 
+    /**
+     * Evaluated {@code expression}, then evaluates {@code keys} one by one and traverses {@code expression} using them.
+     * Requires all keys to be {@link ScalarValue}.
+     *
+     * @param variables variables to use during the evaluation
+     * @return
+     */
     @Override
     public Value<?> eval(Variables variables) {
         Value<?> result = value.eval(variables);

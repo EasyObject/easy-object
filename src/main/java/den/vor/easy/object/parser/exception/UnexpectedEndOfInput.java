@@ -9,16 +9,15 @@
 
 package den.vor.easy.object.parser.exception;
 
-public class UnexpectedEndOfInput extends ParserException {
+/**
+ * Exception that is thrown when {@link den.vor.easy.object.parser.Lexer} unexpectedly reaches the end on expression.
+ * Example: {@code "a} (quotes do not close).
+ */
+public class UnexpectedEndOfInput extends ELException {
 
     private final char expectedChar;
 
     public UnexpectedEndOfInput(char expectedChar) {
         this.expectedChar = expectedChar;
-    }
-
-    @Override
-    public String getUserMessage() {
-        return "Expected " + expectedChar + ", got end of input";
     }
 }

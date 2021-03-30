@@ -11,6 +11,10 @@ package den.vor.easy.object.parser.visitors;
 
 import den.vor.easy.object.parser.ast.*;
 
+/**
+ * Skeletal implementation of {@link OptimizationVisitor}.
+ * Just returns original expressions.
+ */
 public abstract class AbstractOptimizationVisitor implements OptimizationVisitor {
 
     @Override

@@ -41,7 +41,7 @@ class BinaryExpressionTest {
         doReturn(secondValue).when(secondExpression).eval(variables);
 
         BinaryExpression binaryExpression = new BinaryExpression(firstExpression, secondExpression,
-                BinaryExpression.Operation.PLUS);
+                BinaryExpression.Operator.PLUS);
 
         doReturn(resultValue).when(firstValue).plus(secondValue);
 

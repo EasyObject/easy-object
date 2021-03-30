@@ -16,6 +16,11 @@ import den.vor.easy.object.parser.ast.Expression;
 
 import static den.vor.easy.object.parser.TokenType.POW;
 
+/**
+ * Chain node that parses binary '**' operator tokens.
+ * More high-precedence tokens must be parsed in the later chain nodes.
+ * See {@link BinaryExpression} for details.
+ */
 public class PowerParserChainNode extends ParserChainNode {
 
     @Override
@@ -23,7 +28,7 @@ public class PowerParserChainNode extends ParserChainNode {
         Expression result = getNext().parse(tokenHolder);
 
         while (tokenHolder.match(POW)) {
-            result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operation.POW);
+            result = new BinaryExpression(result, getNext().parse(tokenHolder), BinaryExpression.Operator.POW);
         }
 
         return result;

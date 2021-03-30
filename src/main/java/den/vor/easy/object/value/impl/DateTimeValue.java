@@ -15,6 +15,11 @@ import den.vor.easy.object.value.operator.impl.DateTimeOperations;
 
 import java.time.LocalDateTime;
 
+/**
+ * Value that encapsulates {@link LocalDateTime}.
+ * Supports addition and subtraction operation. See {@link DateTimeOperations} for details.
+ * Uses default comparable operators implementation.
+ */
 public class DateTimeValue extends ComparableValue<LocalDateTime> {
 
     private final LocalDateTime value;
@@ -23,6 +28,10 @@ public class DateTimeValue extends ComparableValue<LocalDateTime> {
         this.value = value;
     }
 
+    /**
+     * Wraps the given value with {@linkplain DateTimeValue}.
+     * @param value value to wrap
+     */
     public static DateTimeValue of(LocalDateTime value) {
         return new DateTimeValue(value);
     }

@@ -22,6 +22,10 @@ import java.util.List;
 
 import static den.vor.easy.object.parser.TokenType.*;
 
+/**
+ * Chain node that parses literals, map and array access, method and function calls.
+ * By default is the last node in the chain.
+ */
 public class LiteralParserChainNode extends ParserChainNode {
 
     @Override

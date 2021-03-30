@@ -23,6 +23,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+/**
+ * Formatter that transforms values into string in SQL DML format.
+ */
 public class SqlFormatter implements Formatter<String> {
 
     public static final String DEFAULT_DELIMITER = ",";
@@ -70,10 +73,22 @@ public class SqlFormatter implements Formatter<String> {
         return format(List.of(value));
     }
 
+    /**
+     * Determines how to handle nested objects.
+     */
     public interface NestedFormat {
+
+        /**
+         * Format a list of values with a specified table name.
+         * @return formatted string
+         */
         String format(String tableName, List<Value<?>> values);
     }
 
+    /**
+     * Nested format that transforms nested objects into a separate table that can be joined with an original one.
+     * Currently supports joining on "id" field only.
+     */
     public static class JoinTableNestedFormat implements NestedFormat {
 
         public String format(String tableName, List<Value<?>> values) {
@@ -199,6 +214,9 @@ public class SqlFormatter implements Formatter<String> {
         }
     }
 
+    /**
+     * Nested format that transforms nested values into json and writes them to the original table.
+     */
     public static class JsonNestedFormat implements NestedFormat {
 
         private final ObjectMapper objectMapper = new ObjectMapper();

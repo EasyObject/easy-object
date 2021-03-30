@@ -66,7 +66,7 @@ class LogicalAndParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = logicalAndParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.AND);
+                ConditionalExpression.Operator.AND);
 
         verify(tokenHolder, times(2)).match(TokenType.AMPAMP);
         verify(next, times(2)).parse(tokenHolder);
@@ -84,7 +84,7 @@ class LogicalAndParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = conditionalExpression.getLeft();
 
         ConditionalExpression leftBinaryExpression = assertConditionalExpressionWithChildren(left, firstResult,
-                secondResult, ConditionalExpression.Operation.AND);
+                secondResult, ConditionalExpression.Operator.AND);
 
         assertConditionalExpressionChildren(conditionalExpression, leftBinaryExpression, thirdResult);
 

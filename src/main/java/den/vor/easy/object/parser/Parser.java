@@ -12,8 +12,14 @@ package den.vor.easy.object.parser;
 import den.vor.easy.object.parser.ast.Expression;
 import den.vor.easy.object.parser.impl.*;
 
+/**
+ * Class that parses a collection of {@link Token} into an {@link Expression} tree.
+ */
 public final class Parser {
 
+    /**
+     * Chain of concrete parsers. {@linkplain Parser#parse()} delegates to it.
+     */
     private ParserChain parserChain;
     private TokenHolder tokenHolder;
 
@@ -35,6 +41,10 @@ public final class Parser {
                 .andThen(new LiteralParserChainNode());
     }
 
+    /**
+     * Parses collection of tokens into expression tree.
+     * @return parsed expression tree
+     */
     public Expression parse() {
         return parserChain.parse(tokenHolder);
     }

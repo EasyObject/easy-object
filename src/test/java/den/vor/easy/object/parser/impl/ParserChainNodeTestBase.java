@@ -20,11 +20,11 @@ abstract class ParserChainNodeTestBase {
     protected BinaryExpression assertBinaryExpressionWithChildren(Expression expression,
                                                                   Expression left,
                                                                   Expression right,
-                                                                  BinaryExpression.Operation operation) {
+                                                                  BinaryExpression.Operator operator) {
         BinaryExpression binaryExpression = assertBinaryExpression(expression);
         assertBinaryExpressionChildren(binaryExpression, left, right);
-        assertEquals(operation, binaryExpression.getOperation(), () -> "Expected " + binaryExpression +
-                " to have " + operation + " operation, actual=" + binaryExpression.getOperation());
+        assertEquals(operator, binaryExpression.getOperator(), () -> "Expected " + binaryExpression +
+                " to have " + operator + " operation, actual=" + binaryExpression.getOperator());
         return binaryExpression;
     }
 
@@ -51,12 +51,12 @@ abstract class ParserChainNodeTestBase {
 
     protected UnaryExpression assertUnaryExpressionWithChild(Expression expression,
                                                              Expression child,
-                                                             UnaryExpression.Operation operation) {
+                                                             UnaryExpression.Operator operator) {
         UnaryExpression unaryExpression = assertUnaryExpression(expression);
         assertEquals(child, unaryExpression.getExpression(), () -> "Expected " + child +
                 " to be the child in " + unaryExpression + ", got " + unaryExpression.getExpression());
-        assertEquals(operation, unaryExpression.getOperation(), () -> "Expected " + unaryExpression +
-                " to have " + operation + " operation, actual=" + unaryExpression.getOperation());
+        assertEquals(operator, unaryExpression.getOperator(), () -> "Expected " + unaryExpression +
+                " to have " + operator + " operation, actual=" + unaryExpression.getOperator());
         return unaryExpression;
     }
 
@@ -70,11 +70,11 @@ abstract class ParserChainNodeTestBase {
     protected ConditionalExpression assertConditionalExpressionWithChildren(Expression expression,
                                                                             Expression left,
                                                                             Expression right,
-                                                                            ConditionalExpression.Operation operation) {
+                                                                            ConditionalExpression.Operator operator) {
         ConditionalExpression conditionalExpression = assertConditionalExpression(expression);
         assertConditionalExpressionChildren(conditionalExpression, left, right);
-        assertEquals(operation, conditionalExpression.getOperation(), () -> "Expected " + conditionalExpression +
-                " to have " + operation + " operation, actual=" + conditionalExpression.getOperation());
+        assertEquals(operator, conditionalExpression.getOperator(), () -> "Expected " + conditionalExpression +
+                " to have " + operator + " operation, actual=" + conditionalExpression.getOperator());
         return conditionalExpression;
     }
 

@@ -9,6 +9,11 @@
 
 package den.vor.easy.object.value;
 
+/**
+ * Value that can encapsulate any object. Does not support any operations.
+ * Due to performance reasons should be avoided if possible.
+ * @param <T> type of encapsulated object.
+ */
 public class ConstValue<T> extends Value<T> {
 
     private final T value;

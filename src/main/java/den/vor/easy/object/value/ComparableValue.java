@@ -11,6 +11,11 @@ package den.vor.easy.object.value;
 
 import den.vor.easy.object.value.impl.BooleanValue;
 
+/**
+ * Base class for values that encapsulate {@link Comparable} objects.
+ * Provides basic implementation of comparison operators. See {@link ComparisonAware} for details.
+ * @param <T>
+ */
 public abstract class ComparableValue<T extends Comparable<? super T>> extends ScalarValue<T> {
 
     @Override

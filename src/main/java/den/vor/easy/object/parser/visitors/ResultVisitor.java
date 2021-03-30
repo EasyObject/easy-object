@@ -12,6 +12,10 @@ package den.vor.easy.object.parser.visitors;
 
 import den.vor.easy.object.parser.ast.*;
 
+/**
+ * AST nodes visitor that produces some result.
+ * @param <T> type of result produced by a visitor
+ */
 public interface ResultVisitor<T> {
 
     T visit(BinaryExpression s);

@@ -12,7 +12,6 @@ package den.vor.easy.object.parser.impl;
 import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.TokenType;
-import den.vor.easy.object.parser.ast.BinaryExpression;
 import den.vor.easy.object.parser.ast.ConditionalExpression;
 import den.vor.easy.object.parser.ast.Expression;
 import org.junit.jupiter.api.BeforeEach;
@@ -67,7 +66,7 @@ class LogicalOrParserChainNodeTest extends ParserChainNodeTestBase {
         Expression expression = logicalOrParserChainNode.parse(tokenHolder);
 
         assertConditionalExpressionWithChildren(expression, firstResult, secondResult,
-                ConditionalExpression.Operation.OR);
+                ConditionalExpression.Operator.OR);
 
         verify(tokenHolder, times(2)).match(TokenType.BARBAR);
         verify(next, times(2)).parse(tokenHolder);
@@ -85,7 +84,7 @@ class LogicalOrParserChainNodeTest extends ParserChainNodeTestBase {
         Expression left = conditionalExpression.getLeft();
 
         ConditionalExpression leftBinaryExpression = assertConditionalExpressionWithChildren(left, firstResult,
-                secondResult, ConditionalExpression.Operation.OR);
+                secondResult, ConditionalExpression.Operator.OR);
 
         assertConditionalExpressionChildren(conditionalExpression, leftBinaryExpression, thirdResult);
 
