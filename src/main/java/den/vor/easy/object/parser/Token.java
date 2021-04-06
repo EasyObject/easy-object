@@ -29,6 +29,10 @@ public class Token {
         this.text = text;
     }
 
+    public Token(TokenType type) {
+        this(type, "");
+    }
+
     public TokenType getType() {
         return type;
     }
