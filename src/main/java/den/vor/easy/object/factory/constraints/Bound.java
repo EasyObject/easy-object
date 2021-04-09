@@ -14,7 +14,7 @@ package den.vor.easy.object.factory.constraints;
  *
  * @param <T> type of bound value
  */
-public final class Bound<T> {
+public class Bound<T> {
 
     private final T value;
     private final boolean inclusive;

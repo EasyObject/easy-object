@@ -121,6 +121,28 @@ public class Period {
 
     @Override
     public String toString() {
-        return years + "-" + months + "-" + days + "T" + hours + ":" + minutes + ":" + seconds + ":" + nanos;
+        StringBuilder stringBuilder = new StringBuilder();
+        if (years != 0) {
+            stringBuilder.append(years).append("y");
+        }
+        if (months != 0) {
+            stringBuilder.append(months).append("m");
+        }
+        if (days != 0) {
+            stringBuilder.append(days).append("d");
+        }
+        if (hours != 0) {
+            stringBuilder.append(hours).append("h");
+        }
+        if (minutes != 0) {
+            stringBuilder.append(minutes).append("M");
+        }
+        if (seconds != 0) {
+            stringBuilder.append(seconds).append("s");
+        }
+        if (nanos != 0) {
+            stringBuilder.append(nanos).append("n");
+        }
+        return stringBuilder.toString();
     }
 }
