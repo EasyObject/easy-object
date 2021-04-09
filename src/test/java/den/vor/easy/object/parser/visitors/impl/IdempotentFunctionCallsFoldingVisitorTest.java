@@ -205,6 +205,4 @@ class IdempotentFunctionCallsFoldingVisitorTest {
         assertEquals(expectedValue, actual, () -> "Expected " + expression + " to have " + expectedValue +
                 " inside. Got " + actual);
     }
-
-
 }

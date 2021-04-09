@@ -66,7 +66,7 @@ class ConstantsTest {
         double value = 2.5;
 
         Value<?> result = intFunction.invoke(null, List.of(DoubleValue.of(value)));
-        assertEquals((int)value, result.getValue(),
+        assertEquals((int) value, result.getValue(),
                 () -> "Expected function to return passed int=" + value + ", got " + result.getValue());
     }
 
