@@ -34,8 +34,9 @@ public class ExpressionSimplifierVisitor extends AbstractOptimizationVisitor {
      */
     @Override
     public Expression visit(TernaryExpression expression) {
-        if (isValue(expression.getCondition())) {
-            Value<?> value = expression.getCondition().eval(variables);
+        Expression condition = expression.getCondition();
+        if (isValue(condition)) {
+            Value<?> value = condition.eval(variables);
             Boolean result = value.as(Boolean.class);
             if (Boolean.TRUE.equals(result)) {
                 return expression.getThenExpression();

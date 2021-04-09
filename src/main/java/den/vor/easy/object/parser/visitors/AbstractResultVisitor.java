@@ -11,6 +11,7 @@ package den.vor.easy.object.parser.visitors;
 
 import den.vor.easy.object.parser.ast.*;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -90,5 +91,4 @@ public abstract class AbstractResultVisitor<T> implements ResultVisitor<List<T>>
     private List<T> concat(Collection<List<T>> lists) {
         return lists.stream().flatMap(Collection::stream).collect(toList());
     }
-
 }

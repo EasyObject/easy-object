@@ -29,11 +29,12 @@ public abstract class NumberValue<T extends Number & Comparable<T>> extends Comp
         if (!(second instanceof Number)) {
             throw new UnsupportedOperationException();
         }
-        if (getValue().getClass().isInstance(second)) {
-            return getValue().compareTo((T) second);
+        T thisValue = getValue();
+        if (thisValue.getClass().isInstance(second)) {
+            return thisValue.compareTo((T) second);
         }
         Double secondDouble = ((Number) second).doubleValue();
-        Double thisDouble = getValue().doubleValue();
+        Double thisDouble = thisValue.doubleValue();
         return thisDouble.compareTo(secondDouble);
     }
 }

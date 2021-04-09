@@ -29,7 +29,7 @@ public class Constants {
      * Throws {@link UnsupportedOperationException} for all other argument types.
      */
     public static final FunctionalValue<Integer> INT = new FunctionalValue<>((c, args) -> {
-        if (args.size() != 1) {
+        if (c != null || args.size() != 1) {
             throw new RuntimeException();
         }
         Value<?> param = args.get(0);
@@ -51,11 +51,11 @@ public class Constants {
      * Function that does not accept any arguments and returns current date time.
      */
     public static final FunctionalValue<LocalDateTime> NOW = new FunctionalValue<>((c, args) -> {
-        if (!args.isEmpty()) {
+        if (c != null || !args.isEmpty()) {
             throw new RuntimeException();
         }
         return DateTimeValue.of(LocalDateTime.now());
-    }, true);
+    }, false);
 
     private Constants() {
         // This is a class with static members only. There is no need to create instances of this class
