@@ -9,6 +9,8 @@
 
 package den.vor.easy.object.util;
 
+import den.vor.easy.object.exception.impl.DependencyGraphNotResolvableException;
+
 import java.util.*;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
@@ -60,7 +62,7 @@ public class Graph<T> {
      * If on any iteration can't find a resolvable vertex, throws an exception.
      * Naive algorithm complexity: {@code O(n^3)} where n is the number of vertexes.
      * @return traversal order
-     * @throws RuntimeException if can't find a traversal order
+     * @throws DependencyGraphNotResolvableException if can't find a traversal order
      */
     private List<T> calculateOrder() {
         List<Vertex<T>> vertices = buildVertexes(nodes);
@@ -73,10 +75,8 @@ public class Graph<T> {
                     .collect(Collectors.toList());
 
             if (resolvable.isEmpty()) {
-                //TODO change exception
-                throw new RuntimeException("Resolved: " + vertexOrder + ", not resolved: [" + vertices.stream()
-                        .map(v -> "(" + v.key + " - " + v.adjacent + ")")
-                        .collect(Collectors.joining(", ")) + "]");
+                List<T> notResolved = vertices.stream().map(v -> v.key).collect(Collectors.toList());
+                throw new DependencyGraphNotResolvableException(vertexOrder, notResolved);
             }
 
             vertexOrder.addAll(resolvable.stream().map(v -> v.key).collect(Collectors.toList()));

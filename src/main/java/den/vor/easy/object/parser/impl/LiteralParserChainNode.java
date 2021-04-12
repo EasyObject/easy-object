@@ -13,7 +13,7 @@ import den.vor.easy.object.parser.ParserChainNode;
 import den.vor.easy.object.parser.Token;
 import den.vor.easy.object.parser.TokenHolder;
 import den.vor.easy.object.parser.ast.*;
-import den.vor.easy.object.parser.exception.UnexpectedTokenException;
+import den.vor.easy.object.parser.exception.impl.UnexpectedTokenException;
 import den.vor.easy.object.parser.util.PeriodParser;
 import den.vor.easy.object.value.impl.*;
 

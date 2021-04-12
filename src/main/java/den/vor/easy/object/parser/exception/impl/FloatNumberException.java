@@ -7,12 +7,14 @@
  * limitations under the License.
  */
 
-package den.vor.easy.object.parser.exception;
+package den.vor.easy.object.parser.exception.impl;
+
+import den.vor.easy.object.parser.exception.ExpressionLanguageException;
 
 /**
  * Exception that is thrown by {@link den.vor.easy.object.parser.Lexer} when a floating point number contains two dots.
  * Example: {@code 1.2.3}.
  */
-public class FloatNumberException extends ELException {
+public class FloatNumberException extends ExpressionLanguageException {
 
 }

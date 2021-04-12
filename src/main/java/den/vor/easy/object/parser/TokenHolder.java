@@ -9,7 +9,7 @@
 
 package den.vor.easy.object.parser;
 
-import den.vor.easy.object.parser.exception.ExpectedAnotherTokenException;
+import den.vor.easy.object.parser.exception.impl.ExpectedAnotherTokenException;
 
 import java.util.List;
 

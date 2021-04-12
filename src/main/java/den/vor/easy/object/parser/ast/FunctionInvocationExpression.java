@@ -9,6 +9,7 @@
 
 package den.vor.easy.object.parser.ast;
 
+import den.vor.easy.object.parser.exception.impl.FunctionalValueExpectedException;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.FunctionalValue;
@@ -40,12 +41,13 @@ public class FunctionInvocationExpression implements Expression {
      * Evaluates {@code expression} and {@code args}, then calls the function using evaluated arguments.
      * @param params variables to use during the evaluation
      * @return function invocation result
+     * @throws FunctionalValueExpectedException if expression is evaluated not to {@linkplain FunctionalValue}
      */
     @Override
     public Value<?> eval(Variables params) {
         Value<?> value = expression.eval(params);
         if (!(value instanceof FunctionalValue)) {
-            throw new RuntimeException();
+            throw new FunctionalValueExpectedException(value);
         }
         FunctionalValue<?> functionalValue = (FunctionalValue<?>) value;
         List<Value<?>> argValues = args.stream().map(a -> a.eval(params)).collect(Collectors.toList());

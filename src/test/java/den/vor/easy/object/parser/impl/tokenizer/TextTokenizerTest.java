@@ -12,13 +12,12 @@ package den.vor.easy.object.parser.impl.tokenizer;
 
 import den.vor.easy.object.parser.InputHolder;
 import den.vor.easy.object.parser.TokenType;
-import den.vor.easy.object.parser.exception.UnexpectedEndOfInput;
+import den.vor.easy.object.parser.exception.impl.UnexpectedEndOfInputException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
 
 class TextTokenizerTest extends TokenizerTestBase {
 
@@ -100,7 +99,7 @@ class TextTokenizerTest extends TokenizerTestBase {
     void shouldThrowException_whenQuotesAreNotClosed() {
         InputHolder inputHolder = new InputHolder("'");
 
-        assertThrows(UnexpectedEndOfInput.class, () -> textTokenizer.tokenize(inputHolder));
+        assertThrows(UnexpectedEndOfInputException.class, () -> textTokenizer.tokenize(inputHolder));
     }
 
 }

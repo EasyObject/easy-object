@@ -9,6 +9,8 @@
 
 package den.vor.easy.object.parser.ast;
 
+import den.vor.easy.object.parser.exception.impl.UnexpectedFunctionContextException;
+import den.vor.easy.object.parser.exception.impl.WrongNumberOfFunctionArgumentsException;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.*;
 import org.junit.jupiter.api.Test;
@@ -32,14 +34,15 @@ class ConstantsTest {
     void int_shouldThrowException_whenIntFunctionHasNotOneArgument() {
         FunctionalValue<Integer> intFunction = Constants.INT;
 
-        assertThrows(RuntimeException.class, () -> intFunction.invoke(null, List.of(of(1), of(2))));
+        assertThrows(WrongNumberOfFunctionArgumentsException.class,
+                () -> intFunction.invoke(null, List.of(of(1), of(2))));
     }
 
     @Test
     void int_shouldThrowException_whenIntFunctionGetsContext() {
         FunctionalValue<Integer> intFunction = Constants.INT;
 
-        assertThrows(RuntimeException.class, () -> intFunction.invoke(of(1), List.of(of(2))));
+        assertThrows(UnexpectedFunctionContextException.class, () -> intFunction.invoke(of(1), List.of(of(2))));
     }
 
     @Test
@@ -94,14 +97,14 @@ class ConstantsTest {
     void now_shouldThrowException_whenThereAreArguments() {
         FunctionalValue<LocalDateTime> now = Constants.NOW;
 
-        assertThrows(RuntimeException.class, () -> now.invoke(null, List.of(of(1))));
+        assertThrows(WrongNumberOfFunctionArgumentsException.class, () -> now.invoke(null, List.of(of(1))));
     }
 
     @Test
     void now_shouldThrowException_whenThereIsContext() {
         FunctionalValue<LocalDateTime> now = Constants.NOW;
 
-        assertThrows(RuntimeException.class, () -> now.invoke(of(1), List.of()));
+        assertThrows(UnexpectedFunctionContextException.class, () -> now.invoke(of(1), List.of()));
     }
 
     @Test
