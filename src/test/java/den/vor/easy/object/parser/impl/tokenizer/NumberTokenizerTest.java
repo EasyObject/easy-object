@@ -11,8 +11,8 @@ package den.vor.easy.object.parser.impl.tokenizer;
 
 import den.vor.easy.object.parser.InputHolder;
 import den.vor.easy.object.parser.TokenType;
-import den.vor.easy.object.parser.exception.FloatNumberException;
-import den.vor.easy.object.parser.exception.InvalidPeriodFormatException;
+import den.vor.easy.object.parser.exception.impl.FloatNumberException;
+import den.vor.easy.object.parser.exception.impl.InvalidPeriodFormatException;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;

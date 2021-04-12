@@ -28,7 +28,6 @@ public abstract class Value<T> implements OperationAware, ComparisonAware {
 
     /**
      * Get the encapsulated value.
-     * @return
      */
     @JsonValue
     public abstract T getValue();

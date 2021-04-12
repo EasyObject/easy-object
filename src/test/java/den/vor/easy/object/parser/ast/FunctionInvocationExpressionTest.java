@@ -9,7 +9,7 @@
 
 package den.vor.easy.object.parser.ast;
 
-import com.sun.xml.fastinfoset.stax.events.EventBase;
+import den.vor.easy.object.parser.exception.impl.FunctionalValueExpectedException;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.FunctionalValue;
@@ -49,7 +49,7 @@ class FunctionInvocationExpressionTest {
                 new FunctionInvocationExpression(expression, Collections.emptyList());
         doReturn(value).when(expression).eval(variables);
 
-        assertThrows(RuntimeException.class, () -> functionInvocationExpression.eval(variables));
+        assertThrows(FunctionalValueExpectedException.class, () -> functionInvocationExpression.eval(variables));
         verify(expression, only()).eval(variables);
     }
 

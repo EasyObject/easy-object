@@ -13,7 +13,7 @@ import den.vor.easy.object.parser.InputHolder;
 import den.vor.easy.object.parser.Token;
 import den.vor.easy.object.parser.TokenType;
 import den.vor.easy.object.parser.Tokenizer;
-import den.vor.easy.object.parser.exception.UnexpectedEndOfInput;
+import den.vor.easy.object.parser.exception.impl.UnexpectedEndOfInputException;
 
 /**
  * Tokenizer for strings.
@@ -34,7 +34,7 @@ public class TextTokenizer implements Tokenizer {
 
     /**
      * Parses the next part of input. Returns {@link TokenType#TEXT} token type.
-     * @throws UnexpectedEndOfInput if the closing quote not found
+     * @throws UnexpectedEndOfInputException if the closing quote not found
      * @param inputHolder holder of the input string
      * @return next token
      */
@@ -46,7 +46,7 @@ public class TextTokenizer implements Tokenizer {
         char current = inputHolder.peek();
         while (true) {
             if (!inputHolder.hasMoreCharacters()) {
-                throw new UnexpectedEndOfInput('\'');
+                throw new UnexpectedEndOfInputException('\'');
             }
             if (current == '\\') {
                 current = inputHolder.next();

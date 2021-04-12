@@ -9,6 +9,7 @@
 
 package den.vor.easy.object.parser.visitors.impl;
 
+import den.vor.easy.object.parser.exception.impl.ScalarValueExpectedException;
 import den.vor.easy.object.parser.ast.Expression;
 import den.vor.easy.object.parser.ast.ValueExpression;
 import den.vor.easy.object.parser.ast.VariableMapAccessExpression;
@@ -36,7 +37,7 @@ public class ConstArgsPropagationVisitor extends AbstractOptimizationVisitor {
         if (firstKey instanceof ValueExpression) {
             Value<?> firstKeyValue = ((ValueExpression) firstKey).getValue();
             if (!(firstKeyValue instanceof ScalarValue)) {
-                throw new RuntimeException();
+                throw new ScalarValueExpectedException(firstKeyValue);
             }
             Value<?> variable = variables.getNullableConst(((ScalarValue<?>) firstKeyValue).toStringValue());
             if (variable == null) {

@@ -9,9 +9,11 @@
 
 package den.vor.easy.object.parser.exception;
 
+import den.vor.easy.object.exception.EasyObjectException;
+
 /**
  * Basic exception for all expression language exceptions.
  */
-public abstract class ELException extends RuntimeException {
+public abstract class ExpressionLanguageException extends EasyObjectException {
 
 }

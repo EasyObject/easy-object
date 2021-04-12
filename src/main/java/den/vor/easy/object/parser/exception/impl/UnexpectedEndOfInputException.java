@@ -7,17 +7,26 @@
  * limitations under the License.
  */
 
-package den.vor.easy.object.parser.exception;
+package den.vor.easy.object.parser.exception.impl;
+
+import den.vor.easy.object.parser.exception.ExpressionLanguageException;
 
 /**
  * Exception that is thrown when {@link den.vor.easy.object.parser.Lexer} unexpectedly reaches the end on expression.
  * Example: {@code "a} (quotes do not close).
  */
-public class UnexpectedEndOfInput extends ELException {
+public class UnexpectedEndOfInputException extends ExpressionLanguageException {
 
     private final char expectedChar;
 
-    public UnexpectedEndOfInput(char expectedChar) {
+    public UnexpectedEndOfInputException(char expectedChar) {
         this.expectedChar = expectedChar;
+    }
+
+    @Override
+    public String toString() {
+        return "UnexpectedEndOfInputException{" +
+                "expectedChar=" + expectedChar +
+                '}';
     }
 }

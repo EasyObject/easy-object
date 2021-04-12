@@ -9,6 +9,7 @@
 
 package den.vor.easy.object.parser.ast;
 
+import den.vor.easy.object.parser.exception.impl.ScalarValueExpectedException;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
@@ -45,13 +46,14 @@ public class MethodInvocationExpression implements Expression {
      * Evaluates {@code expression}, {@code method} and {@code args}, then calls the method.
      * @param params variables to use during the evaluation
      * @return method invocation result
+     * @throws ScalarValueExpectedException if method key resolved to non-scalar value
      */
     @Override
     public Value<?> eval(Variables params) {
         Value<?> value = expression.eval(params);
         Value<?> methodKey = method.eval(params);
         if (!(methodKey instanceof ScalarValue)) {
-            throw new RuntimeException();
+            throw new ScalarValueExpectedException(methodKey);
         }
         FunctionalValue<?> methodValue = value.getMethod((ScalarValue<?>) methodKey);
         List<Value<?>> argValues = args.stream().map(a -> a.eval(params)).collect(Collectors.toList());

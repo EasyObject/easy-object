@@ -38,10 +38,6 @@ class OperatorTestHelper {
                 expected.getValue() + ", got - " + value);
     }
 
-    <T extends Exception> T verifyThrows(Class<T> exceptionClass) {
-        return assertThrows(exceptionClass, () -> function.apply(left, right));
-    }
-
     public OperatorTestHelper withLeft(Value<?> left) {
         this.left = left;
         return this;

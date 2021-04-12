@@ -13,8 +13,8 @@ import den.vor.easy.object.parser.InputHolder;
 import den.vor.easy.object.parser.Token;
 import den.vor.easy.object.parser.TokenType;
 import den.vor.easy.object.parser.Tokenizer;
-import den.vor.easy.object.parser.exception.FloatNumberException;
-import den.vor.easy.object.parser.exception.InvalidPeriodFormatException;
+import den.vor.easy.object.parser.exception.impl.FloatNumberException;
+import den.vor.easy.object.parser.exception.impl.InvalidPeriodFormatException;
 
 /**
  * Tokenizer for number and period tokens.

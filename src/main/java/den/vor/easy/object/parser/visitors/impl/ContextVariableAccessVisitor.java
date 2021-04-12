@@ -10,6 +10,7 @@
 package den.vor.easy.object.parser.visitors.impl;
 
 
+import den.vor.easy.object.parser.exception.impl.ScalarValueExpectedException;
 import den.vor.easy.object.parser.ast.*;
 import den.vor.easy.object.parser.visitors.AbstractOptimizationVisitor;
 import den.vor.easy.object.value.ScalarValue;
@@ -59,7 +60,7 @@ public class ContextVariableAccessVisitor extends AbstractOptimizationVisitor {
         for (; processed < keys.size(); processed++) {
             Value<?> value = keys.get(processed).eval(variables);
             if (!(value instanceof ScalarValue<?>)) {
-                throw new RuntimeException();
+                throw new ScalarValueExpectedException(value);
             }
             ScalarValue<?> scalarValue = (ScalarValue<?>) value;
             if (!(scalarValue instanceof StringValue)) {

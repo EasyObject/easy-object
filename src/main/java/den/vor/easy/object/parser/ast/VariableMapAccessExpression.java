@@ -10,6 +10,7 @@
 package den.vor.easy.object.parser.ast;
 
 
+import den.vor.easy.object.parser.exception.impl.ScalarValueExpectedException;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
@@ -93,17 +94,17 @@ public class VariableMapAccessExpression implements Expression {
         return !thisEscaped && THIS_REF.equals(string);
     }
 
-    private Value<?> getByKeyOrThrow(Value<?> result, ScalarValue<?> scalarValue) {
-        if (result == null) {
-            throw new RuntimeException();
+    private Value<?> getByKeyOrThrow(Value<?> base, ScalarValue<?> scalarValue) {
+        if (base == null) {
+            throw new NullPointerException("Expected base not to be null");
         }
-        result = result.get(scalarValue);
-        return result;
+        base = base.get(scalarValue);
+        return base;
     }
 
     private ScalarValue<?> getScalarValue(Value<?> value) {
         if (!(value instanceof ScalarValue<?>)) {
-            throw new RuntimeException();
+            throw new ScalarValueExpectedException(value);
         }
         return (ScalarValue<?>) value;
     }

@@ -9,6 +9,8 @@
 
 package den.vor.easy.object.parser.ast;
 
+import den.vor.easy.object.parser.exception.impl.UnexpectedFunctionContextException;
+import den.vor.easy.object.parser.exception.impl.WrongNumberOfFunctionArgumentsException;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.*;
 
@@ -26,11 +28,17 @@ public class Constants {
 
     /**
      * Function that accepts a single argument. If it is double or string, parses to integer. Returns integer as is.
-     * Throws {@link UnsupportedOperationException} for all other argument types.
+     * Throws:
+     * * {@link UnsupportedOperationException} for all other argument types.
+     * * {@link UnexpectedFunctionContextException} if non-null context provided
+     * * {@link WrongNumberOfFunctionArgumentsException} if number of args != 1
      */
     public static final FunctionalValue<Integer> INT = new FunctionalValue<>((c, args) -> {
-        if (c != null || args.size() != 1) {
-            throw new RuntimeException();
+        if (c != null) {
+            throw new UnexpectedFunctionContextException(null, c);
+        }
+        if (args.size() != 1) {
+            throw new WrongNumberOfFunctionArgumentsException(1, args.size());
         }
         Value<?> param = args.get(0);
         if (param instanceof IntValue) {
@@ -49,10 +57,16 @@ public class Constants {
 
     /**
      * Function that does not accept any arguments and returns current date time.
+     * Throws:
+     * * {@link UnexpectedFunctionContextException} if non-null context provided
+     * * {@link WrongNumberOfFunctionArgumentsException} if number of args != 1
      */
     public static final FunctionalValue<LocalDateTime> NOW = new FunctionalValue<>((c, args) -> {
-        if (c != null || !args.isEmpty()) {
-            throw new RuntimeException();
+        if (c != null) {
+            throw new UnexpectedFunctionContextException(null, c);
+        }
+        if (!args.isEmpty()) {
+            throw new WrongNumberOfFunctionArgumentsException(0, args.size());
         }
         return DateTimeValue.of(LocalDateTime.now());
     }, false);

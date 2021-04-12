@@ -7,14 +7,15 @@
  * limitations under the License.
  */
 
-package den.vor.easy.object.parser.exception;
+package den.vor.easy.object.parser.exception.impl;
 
 import den.vor.easy.object.parser.Token;
+import den.vor.easy.object.parser.exception.ExpressionLanguageException;
 
 /**
  * Exception that is thrown when {@link den.vor.easy.object.parser.ParserChain} doesn't know how to parse a token.
  */
-public class UnexpectedTokenException extends ELException {
+public class UnexpectedTokenException extends ExpressionLanguageException {
 
     private final Token token;
 

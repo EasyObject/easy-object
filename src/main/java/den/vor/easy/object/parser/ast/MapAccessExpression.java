@@ -10,6 +10,7 @@
 package den.vor.easy.object.parser.ast;
 
 
+import den.vor.easy.object.parser.exception.impl.ScalarValueExpectedException;
 import den.vor.easy.object.parser.visitors.ResultVisitor;
 import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
@@ -42,19 +43,19 @@ public class MapAccessExpression implements Expression {
      * Requires all keys to be {@link ScalarValue}.
      *
      * @param variables variables to use during the evaluation
-     * @return
+     * @return variable access result
+     * @throws ScalarValueExpectedException if any key is not a {@linkplain ScalarValue}
      */
     @Override
     public Value<?> eval(Variables variables) {
         Value<?> result = value.eval(variables);
         for (Expression key : keys) {
             Value<?> keyValue = key.eval(variables);
-            if (keyValue instanceof ScalarValue) {
-                ScalarValue<?> scalarValue = (ScalarValue<?>) keyValue;
-                result = result.get(scalarValue);
-            } else {
-                throw new RuntimeException();
+            if (!(keyValue instanceof ScalarValue)) {
+                throw new ScalarValueExpectedException(keyValue);
             }
+            ScalarValue<?> scalarValue = (ScalarValue<?>) keyValue;
+            result = result.get(scalarValue);
         }
         return result;
     }
