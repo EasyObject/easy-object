@@ -18,7 +18,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 /**
- * Value that encapsulates {@link List<Value>}.
+ * Value that encapsulates {@link List}.
  * Does not support any arithmetical or comparison operations.
  *
  * @param <T> type of value in each list entry

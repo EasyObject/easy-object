@@ -19,7 +19,7 @@ import java.util.function.Function;
 
 /**
  * Factory that applies a mapping function to a values of provided factory.
- * @param <T> specifies the return type of a mapping function ({@linkplain Value<T>}).
+ * @param <T> specifies the return type of a mapping function ({@linkplain Value}).
  * @param <P> return type of the original factory
  */
 public class MappingFactory<T, P extends Value<?>> extends Factory<T, Value<T>> {

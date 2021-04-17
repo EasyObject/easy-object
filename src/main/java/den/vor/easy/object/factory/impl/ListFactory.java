@@ -11,6 +11,7 @@ package den.vor.easy.object.factory.impl;
 
 import den.vor.easy.object.factory.Factory;
 import den.vor.easy.object.factory.Generator;
+import den.vor.easy.object.factory.LengthFactory;
 import den.vor.easy.object.ref.FieldRef;
 import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.ListValue;
@@ -20,26 +21,25 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 /**
- * Factory that generates a list of values. Length of list is controlled by {@link ListFactory#lengthFactory},
+ * Factory that generates a list of values. Length of list is controlled by {@link LengthFactory#getLengthFactory()},
  * elements generated - by {@link ListFactory#elementFactory}
  *
  * @param <T> type of elements in the list
  */
-public class ListFactory<T> extends Factory<List<T>, ListValue<T>> {
+public class ListFactory<T> extends LengthFactory<List<T>, ListValue<T>> {
 
     private Factory<T, ? extends Value<T>> elementFactory;
-    private Factory<Integer, ? extends Value<Integer>> lengthFactory;
 
     public ListFactory(Factory<T, ? extends Value<T>> elementFactory,
                        Factory<Integer, ? extends Value<Integer>> lengthFactory) {
+        super(lengthFactory);
         this.elementFactory = elementFactory;
-        this.lengthFactory = lengthFactory;
     }
 
     @Override
     public Generator<ListValue<T>> getGenerator() {
         Generator<? extends Value<T>> generator = elementFactory.getGenerator();
-        Generator<? extends Value<Integer>> lengthGenerator = lengthFactory.getGenerator();
+        Generator<? extends Value<Integer>> lengthGenerator = getLengthFactory().getGenerator();
         return context -> {
             List<Value<T>> values = Stream.generate(() -> generator.getNext(context))
                     .limit(lengthGenerator.getNext(context).getValue())
@@ -49,12 +49,7 @@ public class ListFactory<T> extends Factory<List<T>, ListValue<T>> {
     }
 
     @Override
-    public List<FieldRef> getDependencies() {
-        List<FieldRef> dependencies = elementFactory.getDependencies().stream()
-                .filter(s -> s.getParentLinks() != 0)
-                .map(FieldRef::getReferenceForParentFactory)
-                .collect(Collectors.toList());
-        dependencies.addAll(lengthFactory.getDependencies());
-        return dependencies;
+    protected List<FieldRef> getNestedFactoriesDependencies() {
+        return elementFactory.getDependencies();
     }
 }

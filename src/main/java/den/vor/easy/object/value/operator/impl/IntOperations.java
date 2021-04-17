@@ -84,7 +84,7 @@ public class IntOperations {
 
     /**
      * Binary left shift operator implementation. Can calculate result only when the second operand is {@link Integer}.
-     * Remainder is equivalent to java '<<' operator.
+     * Remainder is equivalent to java {@code <<} operator.
      * Returns {@link IntValue}.
      */
     public static final BinaryOperator<Integer> LEFT_SHIFT_OPERATOR = BinaryOperator.operator(
@@ -93,7 +93,7 @@ public class IntOperations {
 
     /**
      * Binary right shift operator implementation. Can calculate result only when the second operand is {@link Integer}.
-     * Remainder is equivalent to java '>>' operator.
+     * Remainder is equivalent to java {@code >>} operator.
      * Returns {@link IntValue}.
      */
     public static final BinaryOperator<Integer> RIGHT_SHIFT_OPERATOR = BinaryOperator.operator(
@@ -102,7 +102,7 @@ public class IntOperations {
 
     /**
      * Binary bitwise and operator implementation. Can calculate result only when the second operand is {@link Integer}.
-     * Is equivalent to java '&' operator.
+     * Is equivalent to java {@code &} operator.
      * Returns {@link IntValue}.
      */
     public static final BinaryOperator<Integer> BITWISE_AND_OPERATOR = BinaryOperator.operator(

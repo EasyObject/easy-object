@@ -31,7 +31,7 @@ public abstract class SequenceConstraint<T extends Comparable<? super T>> {
     }
 
     /**
-     * Applies constraint on given {@link SequenceConstraintsValues<T>}.
+     * Applies constraint on given {@link SequenceConstraintsValues}.
      */
     public abstract SequenceConstraintsValues<T> apply(SequenceConstraintsValues<T> constraintsValues, T value);
 

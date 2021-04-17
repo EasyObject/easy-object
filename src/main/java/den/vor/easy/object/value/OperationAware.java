@@ -76,7 +76,7 @@ public interface OperationAware {
     }
 
     /**
-     * Binary '<<' operator. EL code example: {@code 1 << 2}.
+     * Binary {@code <<} operator. EL code example: {@code 1 << 2}.
      * This method is called on the left operand with the right operand as an argument.
      * @param value right operand
      * @return left shift result
@@ -86,7 +86,7 @@ public interface OperationAware {
     }
 
     /**
-     * Binary '>>' operator. EL code example: {@code 1 >> 2}.
+     * Binary {@code >>} operator. EL code example: {@code 1 >> 2}.
      * This method is called on the left operand with the right operand as an argument.
      * @param value right operand
      * @return right shift result
@@ -96,7 +96,7 @@ public interface OperationAware {
     }
 
     /**
-     * Logical '&&' operator. EL code example: {@code true && false}.
+     * Logical {@code &&} operator. EL code example: {@code true && false}.
      * This method is called on the left operand with the right operand as an argument.
      * @param value right operand
      * @return logical and result
@@ -126,7 +126,7 @@ public interface OperationAware {
     }
 
     /**
-     * Bitwise '&' operator. EL code example: {@code 1 & 2}.
+     * Bitwise {@code &} operator. EL code example: {@code 1 & 2}.
      * This method is called on the left operand with the right operand as an argument.
      * @param value right operand
      * @return bitwise and result

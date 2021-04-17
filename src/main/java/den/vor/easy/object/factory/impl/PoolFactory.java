@@ -26,7 +26,7 @@ import java.util.stream.Stream;
  * If you need an infinite TTL use {@link den.vor.easy.object.factory.EnumFactory} for better performance.
  *
  * PoolFactory is lock-free
- * @param <T>
+ * @param <T> type of underlying value
  */
 public class PoolFactory<T> extends Factory<T, Value<T>> {
 

@@ -24,7 +24,7 @@ import static den.vor.easy.object.factory.FactoryConstants.COUNT_STRING_VALUE;
  * Base class for all factories.
  * Represents an object that prepares a {@link Generator} to generate a sequence of values.
  * @param <T> type of generated values
- * @param <R> corresponding wrapper type that extends {@link Value<T>}
+ * @param <R> corresponding wrapper type that extends {@link Value}
  */
 public abstract class Factory<T, R extends Value<T>> {
 

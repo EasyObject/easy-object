@@ -17,7 +17,7 @@ import den.vor.easy.object.parser.ast.Expression;
 import static den.vor.easy.object.parser.TokenType.AMP;
 
 /**
- * Chain node that parses bitwise '&' operator tokens.
+ * Chain node that parses bitwise {@code &} operator tokens.
  * More high-precedence tokens must be parsed in the later chain nodes.
  * See {@link BinaryExpression} for details.
  */

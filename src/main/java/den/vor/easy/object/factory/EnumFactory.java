@@ -16,7 +16,7 @@ import den.vor.easy.object.value.Value;
  * Factory that returns an object randomly chosen from some relatively small set.
  *
  * @param <T> type of underlying value
- * @param <R> generated type, must extend {@link Value<T>}
+ * @param <R> generated type, must extend {@link Value}
  */
 public class EnumFactory<T, R extends Value<T>> extends Factory<T, R> {
 

@@ -122,9 +122,17 @@ public interface CustomRandom {
 
     /**
      * Returns a random value from the array with an uniform distribution.
-     * @return random list member
+     * @return random array member
      */
     default <T> T next(T[] array) {
+        return array[nextInt(array.length)];
+    }
+
+    /**
+     * Returns a random character from the array with an uniform distribution.
+     * @return random array member
+     */
+    default char next(char[] array) {
         return array[nextInt(array.length)];
     }
 

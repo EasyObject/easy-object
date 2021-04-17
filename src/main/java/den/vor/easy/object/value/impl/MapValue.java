@@ -15,11 +15,10 @@ import den.vor.easy.object.value.Value;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
- * Value that encapsulates {@link Map<Value>}.
+ * Value that encapsulates {@link Map}.
  * Does not support any arithmetical or comparison operations.
  */
 public class MapValue extends CompoundValue<Map<ScalarValue<?>, Value<?>>> {

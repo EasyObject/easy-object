@@ -26,7 +26,6 @@ repositories {
 
 ext.versions = [
         apacheRng: '1.2',
-        cache: '3.8.1',
         hamcrest: '2.2',
         junit : '5.7.0',
         mockitoJunit: '3.6.0',
@@ -56,8 +55,8 @@ test.finalizedBy(jacocoTestReport)
 
 dependencies {
     compile("org.apache.commons:commons-rng-core:${versions.apacheRng}")
-    compile("org.ehcache:ehcache:${versions.cache}")
     compile("com.fasterxml.jackson.core:jackson-databind:${versions.jackson}")
+    compile("org.slf4j:slf4j-api:1.7.30")
 
     testCompile("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
     testCompile("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
@@ -72,6 +71,11 @@ sonarqube {
         property "sonar.organization", "easyobject"
         property "sonar.host.url", "https://sonarcloud.io"
     }
+}
+
+java {
+    withSourcesJar()
+    withJavadocJar()
 }
 
 file("sonar-project.properties").withReader {

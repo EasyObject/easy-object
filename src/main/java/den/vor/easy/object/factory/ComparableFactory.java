@@ -28,7 +28,7 @@ import java.util.stream.Collectors;
 /**
  * Base class for factories that generate a {@link Comparable} values.
  * @param <T> type of generated values
- * @param <R> corresponding wrapper type that extends {@link Value<T>}
+ * @param <R> corresponding wrapper type that extends {@link Value}
  */
 public abstract class ComparableFactory<T extends Comparable<? super T>, R extends Value<T>> extends Factory<T, R> {
 
@@ -77,7 +77,7 @@ public abstract class ComparableFactory<T extends Comparable<? super T>, R exten
     protected abstract T cast(Value<?> value);
 
     /**
-     * Add a '<' constraint in a form of expression.
+     * Add a {@code <} constraint in a form of expression.
      * See {@link LtConstraint}
      * @param expression expression to evaluate for each object to get a constraint value
      * @return ComparableFactory instance
@@ -88,7 +88,7 @@ public abstract class ComparableFactory<T extends Comparable<? super T>, R exten
     }
 
     /**
-     * Add a '<=' constraint in a form of expression.
+     * Add a {@code <=} constraint in a form of expression.
      * See {@link LeConstraint}
      * @param expression expression to evaluate for each object to get a constraint value
      * @return ComparableFactory instance
@@ -99,7 +99,7 @@ public abstract class ComparableFactory<T extends Comparable<? super T>, R exten
     }
 
     /**
-     * Add a '>' constraint in a form of expression.
+     * Add a {@code >} constraint in a form of expression.
      * See {@link GtConstraint}
      * @param expression expression to evaluate for each object to get a constraint value
      * @return ComparableFactory instance
@@ -110,7 +110,7 @@ public abstract class ComparableFactory<T extends Comparable<? super T>, R exten
     }
 
     /**
-     * Add a '>=' constraint in a form of expression.
+     * Add a {@code >=} constraint in a form of expression.
      * See {@link GeConstraint}
      * @param expression expression to evaluate for each object to get a constraint value
      * @return ComparableFactory instance

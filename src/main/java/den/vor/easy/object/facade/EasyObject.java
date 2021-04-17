@@ -11,17 +11,24 @@ package den.vor.easy.object.facade;
 
 import den.vor.easy.object.enums.impl.CollectionEnumValuesProvider;
 import den.vor.easy.object.enums.impl.EnumEnumValuesProvider;
+import den.vor.easy.object.enums.impl.FileEnumValuesProvider;
+import den.vor.easy.object.exception.impl.UniqueElementsGenerationException;
 import den.vor.easy.object.factory.EnumFactory;
 import den.vor.easy.object.factory.Factory;
 import den.vor.easy.object.factory.impl.*;
+import den.vor.easy.object.value.ScalarValue;
 import den.vor.easy.object.value.Value;
+import den.vor.easy.object.value.impl.IntValue;
+import den.vor.easy.object.value.impl.StringValue;
 
 import java.math.BigInteger;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
 import java.util.function.Supplier;
 
@@ -215,6 +222,90 @@ public class EasyObject {
     }
 
     /**
+     * Creates a factory that generates {@link java.util.Set} values.
+     * Elements are created by the {@code elementFactory}, set size is determined by {@code length}.
+     * Due to the difficulty of generating unique values, factory generates up to {@code length * 10} values.
+     * If it doesn't find enough unique values among them, it throws {@link UniqueElementsGenerationException}.
+     *
+     * @param elementFactory factory that is used to generate list elements
+     * @param length         list length
+     * @return list factory instance
+     */
+    public static <T> SetFactory<T> isSet(Factory<T, ? extends Value<T>> elementFactory, int length) {
+        return new SetFactory<>(elementFactory, isConst(of(length)));
+    }
+
+    /**
+     * Creates a factory that generates {@link java.util.Set} values.
+     * Elements are created by the {@code elementFactory}, set size is determined by {@code lengthFactory}.
+     * Due to the difficulty of generating unique values, factory generates up to {@code length * 10} values.
+     * If it doesn't find enough unique values among them, it throws {@link UniqueElementsGenerationException}.
+     *
+     * @param elementFactory factory that is used to generate set elements
+     * @param lengthFactory  factory that is used to generate set length
+     * @return set factory instance
+     */
+    public static <T> SetFactory<T> isSet(Factory<T, ? extends Value<T>> elementFactory,
+                                          Factory<Integer, ? extends Value<Integer>> lengthFactory) {
+        return new SetFactory<>(elementFactory, lengthFactory);
+    }
+
+    /**
+     * Creates a factory that generates {@link java.util.Set} values.
+     * Elements are created by the {@code elementFactory}, set size is determined by {@code lengthFactory}.
+     * Due to the difficulty of generating unique values,
+     * factory generates up to {@code length * triesPerElement} values.
+     * If it doesn't find enough unique values among them, it throws {@link UniqueElementsGenerationException}.
+     *
+     * @param elementFactory  factory that is used to generate set elements
+     * @param lengthFactory   factory that is used to generate set length
+     * @param triesPerElement coefficient that will be multiplied by required set size to determine how many values
+     *                        are generated to pick unique
+     * @return set factory instance
+     */
+    public static <T> SetFactory<T> isSet(Factory<T, ? extends Value<T>> elementFactory,
+                                          Factory<Integer, ? extends Value<Integer>> lengthFactory,
+                                          int triesPerElement) {
+        return new SetFactory<>(elementFactory, lengthFactory, triesPerElement);
+    }
+
+    /**
+     * Creates a factory that generates {@link java.util.Map} values.
+     * Keys are created by the {@code keyFactory}, values by {@code valueFactory},
+     * and the size is determined by {@code length}.
+     * <p>
+     * If duplicate keys are generated, only the latest is preserved. Other will be discarded, making map smaller.
+     *
+     * @param keyFactory   factory that is used to generate map keys
+     * @param valueFactory factory that is used to generate map values
+     * @param length       map size
+     * @return map factory instance
+     */
+    public static <K, V> MapFactory<K, V> isMap(Factory<?, ? extends ScalarValue<K>> keyFactory,
+                                                Factory<?, ? extends Value<V>> valueFactory,
+                                                int length) {
+        return new MapFactory<>(keyFactory, valueFactory, isConst(of(length)));
+    }
+
+    /**
+     * Creates a factory that generates {@link java.util.Map} values.
+     * Keys are created by the {@code keyFactory}, values by {@code valueFactory},
+     * and the size is determined by {@code length}.
+     * <p>
+     * If duplicate keys are generated, only the latest is preserved. Other will be discarded, making map smaller.
+     *
+     * @param keyFactory    factory that is used to generate map keys
+     * @param valueFactory  factory that is used to generate map values
+     * @param lengthFactory factory that is used to generate set length
+     * @return map factory instance
+     */
+    public static <K, V> MapFactory<K, V> isMap(Factory<?, ? extends ScalarValue<K>> keyFactory,
+                                                Factory<?, ? extends Value<V>> valueFactory,
+                                                Factory<Integer, ? extends Value<Integer>> lengthFactory) {
+        return new MapFactory<>(keyFactory, valueFactory, lengthFactory);
+    }
+
+    /**
      * Creates a factory that generates values using the provided factory and maps them to another type using provided
      * mapping function.
      * Usage example: {@code isMapped(isInt(), IntValue::toStringValue)} to generate numeric strings.
@@ -313,7 +404,7 @@ public class EasyObject {
      *
      * @param supplier supplier to get values from
      * @param <T>      type of generated values
-     * @param <R>      corresponding wrapper type that extends {@link Value<T>}
+     * @param <R>      corresponding wrapper type that extends {@link Value}
      * @return supplier factory instance.
      */
     public static <T, R extends Value<T>> SupplierFactory<T, R> fromSupplier(Supplier<R> supplier) {
@@ -356,6 +447,7 @@ public class EasyObject {
 
     /**
      * Creates a factory that generates UUIDv4 values.
+     *
      * @return UUIDv4 factory instance
      */
     public static UUIDFactory isUUID() {
@@ -366,12 +458,35 @@ public class EasyObject {
      * Creates a factory that returns random elements from the collection with equal probability.
      *
      * @param collection source of values
-     * @param <T> type of wrapped values
-     * @param <R> corresponding wrapper type that extends {@link Value<T>}
+     * @param <T>        type of wrapped values
+     * @param <R>        corresponding wrapper type that extends {@link Value}
      * @return enum factory instance
      */
     public static <T, R extends Value<T>> EnumFactory<T, R> isEnum(Collection<R> collection) {
         return new EnumFactory<>(new CollectionEnumValuesProvider<>(collection));
+    }
+
+    /**
+     * Creates a factory that returns random elements from the file with equal probability.
+     * Each line is considered to be a separate value. If you need to specify the delimiter,
+     * see {@link EasyObject#isEnum(Path, String)} instead.
+     *
+     * @param path path of the file, that holds enum values
+     * @return enum factory instance
+     */
+    public static EnumFactory<String, StringValue> isEnum(Path path) {
+        return new EnumFactory<>(new FileEnumValuesProvider(path));
+    }
+
+    /**
+     * Creates a factory that returns random elements from the file with equal probability.
+     * File lines will be joined and then split by the provided delimiter.
+     *
+     * @param path path of the file, that holds enum values
+     * @return enum factory instance
+     */
+    public static EnumFactory<String, StringValue> isEnum(Path path, String delimiter) {
+        return new EnumFactory<>(new FileEnumValuesProvider(path));
     }
 
     /**
@@ -380,11 +495,89 @@ public class EasyObject {
      * logical operations in the expression language.
      *
      * @param enumClass enum to take values from
-     * @param <T> type of enum values
+     * @param <T>       type of enum values
      * @return enum factory instance
      */
     public static <T extends Enum<T>> EnumFactory<T, ?> isEnum(Class<T> enumClass) {
         return new EnumFactory<>(new EnumEnumValuesProvider<>(enumClass));
+    }
+
+    /**
+     * Creates a factory that returns objects' indexes.
+     * Indexes are guaranteed to be unique in the scope of one generation.
+     *
+     * @param startingValue initial index
+     * @param step          step between two generated indexes.
+     * @return index factory instance
+     */
+    public static Factory<Integer, IntValue> isIndex(int startingValue, int step) {
+        AtomicInteger index = new AtomicInteger(startingValue);
+        return fromSupplier(() -> IntValue.of(index.getAndAdd(step)));
+    }
+
+    /**
+     * Creates a factory that returns objects' indexes. Increment is 1.
+     * Indexes are guaranteed to be unique in the scope of one generation.
+     *
+     * @param startingValue initial index
+     * @return index factory instance
+     */
+    public static Factory<Integer, IntValue> isIndex(int startingValue) {
+        return isIndex(startingValue, 1);
+    }
+
+    /**
+     * Creates a factory that returns objects' indexes. Starts at 0, increment is 1.
+     * Indexes are guaranteed to be unique in the scope of one generation.
+     *
+     * @return index factory instance
+     */
+    public static Factory<Integer, IntValue> isIndex() {
+        return isIndex(0);
+    }
+
+    /**
+     * Creates a factory that returns strings that contain specified characters.
+     *
+     * @param chars  characters that will be used in strings
+     * @param length string length
+     * @return string factory instance
+     */
+    public static Factory<String, StringValue> isString(char[] chars, int length) {
+        return new StringFactory(chars, isConst(IntValue.of(length)));
+    }
+
+    /**
+     * Creates a factory that returns strings that contain specified characters.
+     *
+     * @param chars         characters that will be used in strings
+     * @param lengthFactory factory that determines the length of the strings.
+     * @return string factory instance
+     */
+    public static Factory<String, StringValue> isString(char[] chars, IntFactory lengthFactory) {
+        return new StringFactory(chars, lengthFactory);
+    }
+
+    /**
+     * Creates a factory that returns strings that contain specified characters.
+     *
+     * @param chars  characters that will be used in strings
+     * @param length string length
+     * @return string factory instance
+     */
+    public static Factory<String, StringValue> isString(String chars, int length) {
+        return new StringFactory(chars, isConst(IntValue.of(length)));
+    }
+
+    /**
+     * Creates a factory that returns strings that contain specified characters.
+     *
+     * @param chars         characters that will be used in strings
+     * @param lengthFactory factory that determines the length of the strings.
+     * @return string factory instance
+     */
+    public static Factory<String, StringValue> isString(String chars, IntFactory lengthFactory) {
+        return new StringFactory(chars, lengthFactory);
     }
 
     private EasyObject() {

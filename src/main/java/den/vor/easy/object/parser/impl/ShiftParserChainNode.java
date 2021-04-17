@@ -20,7 +20,7 @@ import static den.vor.easy.object.parser.ast.BinaryExpression.Operator.LEFT_SHIF
 import static den.vor.easy.object.parser.ast.BinaryExpression.Operator.RIGHT_SHIFT;
 
 /**
- * Chain node that parses binary '>>' and '<<' operator tokens.
+ * Chain node that parses binary {@code >>} and {@code <<} operator tokens.
  * More high-precedence tokens must be parsed in the later chain nodes.
  * See {@link BinaryExpression} for details.
  */

@@ -20,7 +20,7 @@ import static java.util.Map.entry;
 
 /**
  * Tokenizer for operator tokens.
- * Requires the next character to be one of ^?+-*()[]{}=<>!&|,:.%\/.
+ * Requires the next character to be one of {@code ^?+-*()[]{}=<>!&|,:.%\/}.
  */
 public class OperatorTokenizer implements Tokenizer {
 
@@ -71,7 +71,7 @@ public class OperatorTokenizer implements Tokenizer {
     }
 
     /**
-     * Supports the next character if it's one of ^?+-*()[]{}=<>!&|,:.%\/.
+     * Supports the next character if it's one of {@code ^?+-*()[]{}=<>!&|,:.%\/}.
      * See {@link OperatorTokenizer#OPERATOR_CHARS}.
      * @param next next character
      * @return true if the character is supportable, false otherwise

@@ -18,7 +18,7 @@ import den.vor.easy.object.parser.ast.Expression;
 import static den.vor.easy.object.parser.TokenType.AMPAMP;
 
 /**
- * Chain node that parses logical binary '&&' operator tokens.
+ * Chain node that parses logical binary {@code &&} operator tokens.
  * More high-precedence tokens must be parsed in the later chain nodes.
  * See {@link ConditionalExpression} for details.
  */
