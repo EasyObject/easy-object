@@ -14,7 +14,6 @@ import den.vor.easy.object.value.Value;
 import den.vor.easy.object.value.impl.MapValue;
 import org.junit.jupiter.api.Test;
 
-import static den.vor.easy.object.facade.EasyObject.*;
 import static den.vor.easy.object.facade.ValueFacade.of;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
