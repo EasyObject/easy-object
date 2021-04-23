@@ -14,7 +14,6 @@ import com.den.vor.easy.object.parser.ast.*;
 import com.den.vor.easy.object.parser.visitors.AbstractOptimizationVisitor;
 import com.den.vor.easy.object.value.Value;
 import com.den.vor.easy.object.value.impl.FunctionalValue;
-import den.vor.easy.object.parser.ast.*;
 
 import java.util.Collection;
 

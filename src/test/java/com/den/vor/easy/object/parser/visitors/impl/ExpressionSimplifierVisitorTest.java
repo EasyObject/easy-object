@@ -14,7 +14,6 @@ import com.den.vor.easy.object.parser.ast.TernaryExpression;
 import com.den.vor.easy.object.parser.ast.ValueExpression;
 import com.den.vor.easy.object.parser.ast.Variables;
 import com.den.vor.easy.object.value.Value;
-import den.vor.easy.object.parser.ast.*;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

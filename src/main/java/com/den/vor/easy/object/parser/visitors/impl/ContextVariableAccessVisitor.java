@@ -15,7 +15,6 @@ import com.den.vor.easy.object.parser.ast.*;
 import com.den.vor.easy.object.parser.exception.impl.ScalarValueExpectedException;
 import com.den.vor.easy.object.parser.visitors.AbstractOptimizationVisitor;
 import com.den.vor.easy.object.value.Value;
-import den.vor.easy.object.parser.ast.*;
 import com.den.vor.easy.object.value.ScalarValue;
 import com.den.vor.easy.object.value.impl.StringValue;
 

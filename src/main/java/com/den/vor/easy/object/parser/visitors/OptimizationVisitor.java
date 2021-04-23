@@ -11,7 +11,6 @@ package com.den.vor.easy.object.parser.visitors;
 
 import com.den.vor.easy.object.parser.ExpressionEvaluator;
 import com.den.vor.easy.object.parser.ast.*;
-import den.vor.easy.object.parser.ast.*;
 
 /**
  * Interface for an optimization AST nodes visitor.

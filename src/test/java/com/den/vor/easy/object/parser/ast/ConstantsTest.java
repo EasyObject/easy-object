@@ -13,7 +13,6 @@ import com.den.vor.easy.object.parser.exception.impl.UnexpectedFunctionContextEx
 import com.den.vor.easy.object.parser.exception.impl.WrongNumberOfFunctionArgumentsException;
 import com.den.vor.easy.object.value.Value;
 import com.den.vor.easy.object.value.impl.*;
-import den.vor.easy.object.value.impl.*;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -43,7 +42,8 @@ class ConstantsTest {
     void int_shouldThrowException_whenIntFunctionGetsContext() {
         FunctionalValue<Integer> intFunction = Constants.INT;
 
-        assertThrows(UnexpectedFunctionContextException.class, () -> intFunction.invoke(IntValue.of(1), List.of(IntValue.of(2))));
+        assertThrows(UnexpectedFunctionContextException.class,
+                () -> intFunction.invoke(IntValue.of(1), List.of(IntValue.of(2))));
     }
 
     @Test

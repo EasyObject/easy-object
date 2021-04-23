@@ -20,7 +20,6 @@ import com.den.vor.easy.object.value.Value;
 import com.den.vor.easy.object.value.impl.IntValue;
 import com.den.vor.easy.object.enums.impl.CollectionEnumValuesProvider;
 import com.den.vor.easy.object.enums.impl.EnumEnumValuesProvider;
-import den.vor.easy.object.factory.impl.*;
 import com.den.vor.easy.object.value.ScalarValue;
 import com.den.vor.easy.object.value.impl.StringValue;
 

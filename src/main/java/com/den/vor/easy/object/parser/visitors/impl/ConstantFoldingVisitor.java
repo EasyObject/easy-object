@@ -12,7 +12,6 @@ package com.den.vor.easy.object.parser.visitors.impl;
 
 import com.den.vor.easy.object.parser.ast.*;
 import com.den.vor.easy.object.parser.visitors.AbstractOptimizationVisitor;
-import den.vor.easy.object.parser.ast.*;
 
 /**
  * AST nodes visitor that folds constant expressions, if they can be calculated on the compile time.
