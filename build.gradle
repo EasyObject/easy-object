@@ -54,15 +54,15 @@ jacocoTestReport {
 test.finalizedBy(jacocoTestReport)
 
 dependencies {
-    compile("org.apache.commons:commons-rng-core:${versions.apacheRng}")
-    compile("com.fasterxml.jackson.core:jackson-databind:${versions.jackson}")
-    compile("org.slf4j:slf4j-api:1.7.30")
+    implementation("org.apache.commons:commons-rng-core:${versions.apacheRng}")
+    implementation("com.fasterxml.jackson.core:jackson-databind:${versions.jackson}")
+    implementation("org.slf4j:slf4j-api:1.7.30")
 
-    testCompile("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
-    testCompile("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
-    testCompile("org.junit.jupiter:junit-jupiter-params:${versions.junit}")
-    testCompile("org.mockito:mockito-junit-jupiter:${versions.mockitoJunit}")
-    testCompile("org.hamcrest:hamcrest-core:${versions.hamcrest}")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:${versions.junit}")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:${versions.junit}")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:${versions.junit}")
+    testImplementation("org.mockito:mockito-junit-jupiter:${versions.mockitoJunit}")
+    testImplementation("org.hamcrest:hamcrest-core:${versions.hamcrest}")
 }
 
 sonarqube {
